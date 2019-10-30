@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/goods-details/index",
     "pages/start/start",
+    "pages/goods-details/index",
     "pages/classification/index",
     "pages/choiceness/index",
     "pages/finder/index",
