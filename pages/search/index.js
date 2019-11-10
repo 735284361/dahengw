@@ -69,8 +69,7 @@ Page({
                   if (res.data.code === 0) {
                     if (res.data.data.length < pageSize) {
                       goods[i].numberReputation = res.data.data.length;
-                      console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
-                      goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
+                      goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
                       goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
                       goods[i].starpic = starscore.picStr(goods[i].starscore)
                     }
@@ -80,8 +79,7 @@ Page({
                   }
                   else if (res.data.code === 700) {
                     goods[i].numberReputation = 0;
-                    //console.log('goods:', i, 'reputationNum:', goods[i].numberReputation)
-                    goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberReputation) * 5
+                    goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
                     goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
                     goods[i].starpic = starscore.picStr(goods[i].starscore)
                   }

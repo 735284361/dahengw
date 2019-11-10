@@ -139,5 +139,9 @@
     <wxc-button type="danger" value="重新授权登录" bindclick="relogin"></wxc-button>
   </view>
 
+  <view class="my-item" style='border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;'>
+    <wxc-button type="danger" value="支付" bindclick="pay"></wxc-button>
+  </view>
+
   <view style="height:12rpx;width:100%;"></view>
 </view>

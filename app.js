@@ -53,17 +53,17 @@ App({
     //   }
     // })
     // 获取砍价设置
+    // wx.request({
+    //   url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/kanjia/list',
+    //   data: {},
+    //   success: function (res) {
+    //     if (res.data.code == 0) {
+    //       that.globalData.kanjiaList = res.data.data.result;
+    //     }
+    //   }
+    // })
     wx.request({
-      url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/kanjia/list',
-      data: {},
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.globalData.kanjiaList = res.data.data.result;
-        }
-      }
-    })
-    wx.request({
-      url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/category/all',
+      url: that.globalData.domain + that.globalData.vDomain + '/shop/category/list',
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
@@ -113,10 +113,10 @@ App({
     console.log(categoryId)
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
+      url: that.globalData.domain + that.globalData.vDomain + '/shop/goods/list',
       data: {
         page: that.globalData.page,
-        pageSize: that.globalData.pageSize,
+        per_page: that.globalData.pageSize,
         categoryId: categoryId
       },
       success: function (res) {
@@ -134,14 +134,10 @@ App({
         var temp;
         for (var i = 0; i < res.data.data.length; i++) {
           temp = res.data.data[i];
-          temp.minPrice = temp.minPrice.toFixed(2);
-          temp.originalPrice = temp.originalPrice.toFixed(2);
+          temp.minPrice = parseInt(temp.price).toFixed(2);
+          temp.originalPrice = parseInt(temp.line_price).toFixed(2);
           goods.push(temp);
         }
-
-
-        console.log('goods----------------------')
-        console.log(goods)
 
         var goodsName = []; //获取全部商品名称，做为智能联想输入库
         for (var i = 0; i < goods.length; i++) {
@@ -152,7 +148,7 @@ App({
         var page = that.globalData.page;
         var pageSize = that.globalData.pageSize;
         for (let i = 0; i < goods.length; i++) {
-          goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
+          goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
           goods[i].starpic = starscore.picStr(goods[i].starscore)
           
@@ -161,12 +157,11 @@ App({
         console.log('getGoodsReputation----------------------')
         console.log(that.globalData.goods)
 
-
         wx.request({
-          url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/list',
+          url: that.globalData.domain + that.globalData.vDomain + '/shop/goods/list',
           data: {
             page: that.globalData.page,
-            pageSize: that.globalData.pageSize,
+            per_page: that.globalData.pageSize,
             categoryId: categoryId
           },
           success: function (res) {
@@ -184,7 +179,7 @@ App({
               typeStr = categories[i].type;
               goodsTemp = [];
               for (let j = 0; j < goods.length; j++) {
-                if (goods[j].categoryId === id) {
+                if (goods[j].category_id === id) {
                   goodsTemp.push(goods[j])
                 }
               }
@@ -220,14 +215,14 @@ App({
   },
   globalData:{
     page: 1, //初始加载商品时的页面号
-    pageSize: 10000, //初始加载时的商品数，设置为10000保证小商户能加载完全部商品
+    pageSize:10000,
     categories: [],
     goods: [],
-    hotGoods: ['桔', '火龙果', '香蕉', '酸奶', '甘蔗'], //自定义热门搜索商品
+    hotGoods: ['鸡爪', '糯米蛋', '鸭脖', '鸡尖', '牛肉'], //自定义热门搜索商品
     goodsName: [],
     goodsList: [],
     onLoadStatus: true,
-    activeCategoryId: null,
+    activeCategoryId: 1,
     shopLogo: null,
 
     globalBGColor: '#00afb4',
@@ -235,12 +230,13 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    // domain: "http://daheng.test/",// 商城后台域名
-    domain: "http://dh.raohouhai.com/",// 商城后台域名
+    domain: "http://daheng.test/",// 商城后台域名
+    picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
+    // domain: "http://dh.raohouhai.com/",// 商城后台域名
     subDomain: "raohouhai",// 商城后台个性域名tgg
     vDomain: "api/v1",// 商城后台个性域名tgg
     version: "2.0.6",
-    shareProfile: '   一流的服务，做超新鲜的水果' // 首页转发的时候术语
+    shareProfile: '重庆地道美味，麻辣鲜香' // 首页转发的时候术语
   }
   // 根据自己需要修改下单时候的模板消息内容设置，可增加关闭订单、收货时候模板消息提醒
 })

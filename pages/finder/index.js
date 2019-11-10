@@ -133,7 +133,7 @@ Page({
 
 
         for (let i = 0; i < goods.length; i++) {
-          goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
+          goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
           goods[i].starpic = starscore.picStr(goods[i].starscore)
         }

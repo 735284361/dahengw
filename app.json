@@ -1,12 +1,11 @@
 {
   "pages": [
     "pages/start/start",
-    "pages/goods-details/index",
+    "pages/ucenter/index/index",
     "pages/classification/index",
     "pages/choiceness/index",
     "pages/finder/index",
-    "pages/goods-details-bk/index",
-    "pages/ucenter/index/index",
+    "pages/goods-details/index",
     "pages/search/index",
     "pages/shop-cart/index",
     "pages/to-pay-order/index",
@@ -15,13 +14,15 @@
     "pages/ucenter/order-list/index",
     "pages/order-details/index",
     "pages/wuliu/index",
+    "pages/authorize/index",
     "pages/ucenter/mycoupons/index",
     "pages/notice/show",
     "pages/recharge/index",
     "pages/withdraw/index",
     "pages/kanjia/index",
-    "pages/authorize/index",
     "pages/ucenter/feedback/feedback",
+    "pages/ucenter/footprint/footprint",
+    "templates/canvas-clock/index",
     "pages/ucenter/location/location"
   ],
   "window": {

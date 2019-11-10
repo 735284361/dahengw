@@ -43,7 +43,7 @@ Page({
     })
     that.getRecommendTitlePicStr();
     wx.setNavigationBarTitle({
-      title: '大亨精选',
+      title: '大亨推荐',
     })
     that.getBanners();
     that.getNotice();
@@ -128,9 +128,9 @@ Page({
   },
   getRecommendTitlePicStr: function () {
     var that = this;
-    //  获取商城名称
+    //  获取商品推荐图片
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
       data: {
         key: 'finderRecommendTtile'
       },
@@ -155,7 +155,7 @@ Page({
     var goods = app.globalData.goods
     var recommendGoods = []
     for (let i = 0; i < goods.length; i++) {
-      if (goods[i].recommendStatus === 1) {
+      if (goods[i].recommend_status === 10) {
         recommendGoods.push(goods[i])
       }
     }
@@ -181,10 +181,7 @@ Page({
   getBanners: function () {
     var that = this
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/banner/list',
-      data: {
-        key: 'mallName'
-      },
+      url: app.globalData.domain + app.globalData.vDomain + '/banner/list',
       success: function (res) {
         console.log("请求banners返回代码", res.data.code)
         if (res.data.code === 0) {

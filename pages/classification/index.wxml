@@ -40,8 +40,8 @@
         </view>
         <view>
           <view class="goods" wx:for="{{goodsListCurrent.goods}}" wx:key="id" wx:for-item="item" data-id='{{item.id}}' bindtap="toDetailsTap">
-            <image class="pic" src="{{item.pic}}">
-              <image class='fresh-tag' src="/images/goodsDescription/fresh.png"></image>
+            <image class="pic" src="{{item.pic_url}}">
+              <!-- <image class='fresh-tag' src="/images/goodsDescription/fresh.png"></image> -->
             </image>
             <view class="name ellipsis">{{item.name}}</view>
             <view class='soldInfo'>
@@ -50,8 +50,8 @@
               </view>
             </view>
             <view class='soldInfo'>
-              <wxc-label class="sold" wx:if="{{item.numberOrders == 0}}" type='fill'>新品上市</wxc-label>
-              <wxc-label class="sold" wx:if="{{item.numberOrders != 0}}">已售{{item.numberOrders}}份</wxc-label>
+              <wxc-label class="sold" wx:if="{{item.number_sells == 0}}" type='fill'>新品上市</wxc-label>
+              <wxc-label class="sold" wx:if="{{item.number_sells != 0}}">已售{{item.number_sells}}份</wxc-label>
               <wxc-label class='star' style='position:absolute;left:380rpx;' type='fill' type-color='none' text-color='#666666'>
                 <block wx:for="{{item.starpic}}" wx:key="{{item.id}}" wx:for-item="star">
                   <image class="img" src="{{star}}" style="width:20rpx;height:20rpx;"></image>

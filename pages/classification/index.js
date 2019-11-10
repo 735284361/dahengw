@@ -34,13 +34,14 @@ Page(Object.assign({},{
     wx.hideNavigationBarLoading() //完成停止加载
     wx.stopPullDownRefresh() //停止下拉刷新
   },
-  onLoad: function (options) {
+  onShow: function (options) {
     var that = this
     
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
     })
     that.setData({
+      picDomain: app.globalData.picDomain,
       categories: app.globalData.categories,
       goods: app.globalData.goods,
       goodsList: app.globalData.goodsList,
@@ -92,9 +93,9 @@ Page(Object.assign({},{
       }
     }
   },
-  onShow: function () {
-    var that = this
-  },
+  // onShow: function () {
+  //   var that = this
+  // },
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {
     //调用canvasClock函数  
@@ -151,7 +152,7 @@ Page(Object.assign({},{
       mask: true,
     });*/
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/category/all',
+      url: app.globalData.domain + app.globalData.vDomain + '/category/all',
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
@@ -181,10 +182,10 @@ Page(Object.assign({},{
     console.log(categoryId)
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
+      url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/list',
       data: {
         page: that.data.page,
-        pageSize: that.data.pageSize,
+        per_page: that.data.pageSize,
         categoryId: categoryId
       },
       success: function (res) {
@@ -213,10 +214,11 @@ Page(Object.assign({},{
         var page = that.data.page;
         var pageSize = that.data.pageSize;
         for (let i = 0; i < goods.length; i++) {
-          goods[i].starscore = (goods[i].numberGoodReputation / goods[i].numberOrders) * 5
+          goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
           goods[i].starpic = starscore.picStr(goods[i].starscore)
         }
+        debugger
         that.setData({
           goods: goods,
         });
@@ -225,10 +227,10 @@ Page(Object.assign({},{
 
 
         wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
+          url: app.globalData.domain + app.globalData.Domain + '/shop/goods/list',
           data: {
             page: that.data.page,
-            pageSize: that.data.pageSize,
+            per_page: that.data.pageSize,
             categoryId: categoryId
           },
           success: function (res) {
