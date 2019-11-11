@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/start/start",
+    "pages/goods-details/index",
     "pages/ucenter/index/index",
     "pages/classification/index",
     "pages/choiceness/index",
     "pages/finder/index",
-    "pages/goods-details/index",
     "pages/search/index",
     "pages/shop-cart/index",
     "pages/to-pay-order/index",

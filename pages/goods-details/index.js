@@ -50,8 +50,7 @@ Page({
     wx.request({
       url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/detail',
       data: {
-        // id: e.id
-        id:2
+        id: e.id
       },
       success: function (res) {
         var selectSizeTemp = "";
@@ -75,10 +74,9 @@ Page({
           buyNumMax: res.data.stores,
           buyNumber: (res.data.stores > 0) ? 1 : 0
         });
-        WxParse.wxParse('article', 'html', res.data.content, that, 5);
+        WxParse.wxParse('article', 'html', res.data.content.content, that, 5);
       }
     })
-    // this.reputation(e.id);
     // this.getDeliveryPrice();
     // this.getKanjiaInfo(e.id);
   },
@@ -425,23 +423,7 @@ Page({
       }
     }
   },
-  reputation: function (goodsId) {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/reputation',
-      data: {
-        goodsId: goodsId
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          //console.log(res.data);
-          that.setData({
-            reputation: res.data
-          });
-        }
-      }
-    })
-  },
+  
   getVideoSrc: function (videoId) {
     var that = this;
     wx.request({
