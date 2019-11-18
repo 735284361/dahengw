@@ -24,8 +24,8 @@
       </view>
     </view>
     <view class='userInfoMask'></view>
-    <wxc-button class='my-sign' wx:if="{{score_sign_continuous == 0}}" size="small" type="beauty" value="每日签到" bindclick="scoresign"></wxc-button>
-    <wxc-button class='my-sign' wx:if="{{score_sign_continuous > 0}}" size="small" type="secondary" value="已连续签到 {{score_sign_continuous}} 天" bindclick="scoresign"></wxc-button>
+    <!-- <wxc-button class='my-sign' wx:if="{{score_sign_continuous == 0}}" size="small" type="beauty" value="每日签到" bindclick="scoresign"></wxc-button>
+    <wxc-button class='my-sign' wx:if="{{score_sign_continuous > 0}}" size="small" type="secondary" value="已连续签到 {{score_sign_continuous}} 天" bindclick="scoresign"></wxc-button> -->
   </view>
 
   <view class='h-contents'>

@@ -1,4 +1,5 @@
 //index.js
+var request = require('../../utils/request.js');
 //获取应用实例
 var app = getApp()
 Page({
@@ -8,12 +9,10 @@ Page({
 
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
-    wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/update',
+    request.$post({
+      url: 'address/setDefault',
       data: {
-        token: wx.getStorageSync('token'),
-        id:id,
-        isDefault:'true'
+        id:id
       },
       success: (res) =>{
         wx.navigateBack({})
@@ -35,20 +34,15 @@ Page({
   
   onLoad: function () {
     console.log('onLoad')
-
-   
   },
   onShow : function () {
     this.initShippingAddress();
   },
   initShippingAddress: function () {
     var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/list',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: (res) =>{
+    request.$get({
+      url: 'address/list',
+      complete: (res) =>{
         if (res.data.code == 0) {
           that.setData({
             addressList:res.data.data
