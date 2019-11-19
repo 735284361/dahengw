@@ -111,7 +111,7 @@
       </view>
     </view>
 
-    <view class="item">
+    <view class="item no-border-bottom">
       <!-- <view hover-class="none" class="a">
         <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">推广二维码</text>
