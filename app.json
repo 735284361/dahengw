@@ -8,6 +8,7 @@
     "pages/classification/index",
     "pages/choiceness/index",
     "pages/finder/index",
+    "pages/distribution/index/index",
     "pages/search/index",
     "pages/shop-cart/index",
     "pages/to-pay-order/index",
@@ -23,7 +24,12 @@
     "pages/ucenter/feedback/feedback",
     "pages/ucenter/footprint/footprint",
     "templates/canvas-clock/index",
-    "pages/ucenter/location/location"
+    "pages/ucenter/location/location",
+    "pages/distribution/distrib-cms/distribCms",
+    "pages/distribution/withdrawal/withdrawal",
+    "pages/distribution/detail/detail",
+    "pages/distribution/member/member",
+    "pages/distribution/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -46,7 +52,7 @@
         "text": "精选"
       },
       {
-        "pagePath": "pages/finder/index",
+        "pagePath": "pages/distribution/index/index",
         "iconPath": "images/nav/fenxiao-off.png",
         "selectedIconPath": "images/nav/fenxiao-on.png",
         "text": "分销"
