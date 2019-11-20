@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
+var request = require('../../utils/request.js')
 
 Page({
   data: {
@@ -22,7 +23,6 @@ Page({
     var shopList = [];
     //立即购买下单
     if ("buyNow" === that.data.orderType) {
-      console.log('buyNow!!')
       var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       that.data.kjId = buyNowInfoMem.kjId;
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
@@ -54,17 +54,18 @@ Page({
     });
   },
 
-  getDistrictId: function (obj, aaa) {
-    if (!obj) {
-      return "";
-    }
-    if (!aaa) {
-      return "";
-    }
-    return aaa;
-  },
+  // getDistrictId: function (obj, aaa) {
+  //   if (!obj) {
+  //     return "";
+  //   }
+  //   if (!aaa) {
+  //     return "";
+  //   }
+  //   return aaa;
+  // },
 
   createOrder: function (e) {
+    debugger
     var that = this;
     wx.showLoading();
     var loginToken = wx.getStorageSync('token') // 用户登录 token
@@ -172,8 +173,8 @@ Page({
   },
   initShippingAddress: function () {
     var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/default',
+    request.$get({
+      url: 'address/default',
       data: {
         token: wx.getStorageSync('token')
       },
@@ -198,6 +199,7 @@ Page({
     var isNeedLogistics = 0;
     var allGoodsPrice = 0;
 
+    debugger
     for (let i = 0; i < goodsList.length; i++) {
       let carShopBean = goodsList[i];
       if (carShopBean.logistics) {
@@ -215,8 +217,9 @@ Page({
 
     }
     goodsJsonStr += "]";
+    console.log(goodsJsonStr)
     that.setData({
-      isNeedLogistics: isNeedLogistics,
+      isNeedLogistics: 1,//isNeedLogistics,
       goodsJsonStr: goodsJsonStr
     });
     that.createOrder();
@@ -263,7 +266,6 @@ Page({
       });
       return;
     }
-    //console.log("selIndex:" + selIndex);
     this.setData({
       youhuijine: this.data.coupons[selIndex].money,
       curCoupon: this.data.coupons[selIndex]

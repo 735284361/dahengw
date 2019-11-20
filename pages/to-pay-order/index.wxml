@@ -7,9 +7,9 @@
       <view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
         <view style='display: flex;flex-direction: row;'>
           <wxc-icon type='location' size='40' color='#666666' style='padding-left:30rpx;padding-top:20rpx;'></wxc-icon>
-          <view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+          <view class="name-tel">{{curAddressData.name}} {{curAddressData.phone}}</view>
         </view>
-        <view class="addr-text">{{curAddressData.address}}</view>
+        <view class="addr-text">{{curAddressData.detail_info}}</view>
       </view>
     </view>
     <view class="goods-list">

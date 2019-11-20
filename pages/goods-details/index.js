@@ -2,6 +2,7 @@
 //获取应用实例
 var app = getApp();
 var WxParse = require('../../templates/wxParse/wxParse.js');
+var request = require('../../utils/request.js');
 
 Page({
   data: {
@@ -50,7 +51,8 @@ Page({
     wx.request({
       url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/detail',
       data: {
-        id: e.id
+        // id: e.id
+        id:3
       },
       success: function (res) {
         var selectSizeTemp = "";
@@ -65,8 +67,8 @@ Page({
           });
         }
         that.data.goodsDetail = res.data;
-        // if (res.data.basicInfo.videoId) {
-        //   that.getVideoSrc(res.data.basicInfo.videoId);
+        // if (res.data.videoId) {
+        //   that.getVideoSrc(res.data.videoId);
         // }
         that.setData({
           goodsDetail: res.data,
@@ -176,15 +178,8 @@ Page({
       for (var j = 0; j < childs.length; j++) {
         if (childs[j].active) {
           curSelectNum++;
-
           var key = that.data.goodsDetail.properties[i].name;
           propertyCheckedArr[key] = childs[j].name;
-
-          var sku = skuArr.filter(p => {
-            return p.口味 == '麻辣' && p.重量 == '180g';
-          });
-          var asb;
-          console.log(sku);
 
           propertyChildIds = propertyChildIds + that.data.goodsDetail.properties[i].id + ":" + childs[j].id + ",";
           propertyChildNames = propertyChildNames + that.data.goodsDetail.properties[i].name + ":" + childs[j].name + "  ";
@@ -198,24 +193,23 @@ Page({
     // 计算当前价格
     if (canSubmit) {
       var skuArr = this.data.goodsDetail.sku_arr;
-      // wx.request({
-      //   url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/price',
-      //   data: {
-      //     id: that.data.goodsDetail.id,
-      //     attrs: propertyCheckedArr,
-      //     XDEBUG_SESSION_START: 18137
-      //   },
-      //   success: function (res) {
-      //     var sku = JSON.parse(res.data.sku)
-      //     that.setData({
-      //       selectSizePrice: sku.price,
-      //       propertyChildIds: propertyChildIds,
-      //       propertyChildNames: propertyChildNames,
-      //       buyNumMax: sku.stock,
-      //       buyNumber: (sku.stock > 0) ? 1 : 0
-      //     });
-      //   }
-      // }
+      request.$get({
+        url: 'shop/goods/price',
+        data: {
+          id: that.data.goodsDetail.id,
+          attrs: propertyCheckedArr
+        },
+        success: function (res) {
+          var sku = res.data.sku
+          that.setData({
+            selectSizePrice: sku.price,
+            propertyChildIds: propertyChildIds,
+            propertyChildNames: propertyChildNames,
+            buyNumMax: sku.stock,
+            buyNumber: (sku.stock > 0) ? 1 : 0
+          });
+        }
+      })
     }
 
 
@@ -325,19 +319,19 @@ Page({
   bulidShopCarInfo: function () {
     // 加入购物车
     var shopCarMap = {};
-    shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
-    shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
-    shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    shopCarMap.goodsId = this.data.goodsDetail.id;
+    shopCarMap.pic = this.data.goodsDetail.pic_url;
+    shopCarMap.name = this.data.goodsDetail.name;
+    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸 
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
     shopCarMap.left = "";
     shopCarMap.active = true;
     shopCarMap.number = this.data.buyNumber;
-    shopCarMap.logisticsType = this.data.goodsDetail.basicInfo.logisticsId;
+    shopCarMap.logisticsType = this.data.goodsDetail.logisticsId;
     shopCarMap.logistics = this.data.goodsDetail.logistics;
-    shopCarMap.weight = this.data.goodsDetail.basicInfo.weight;
+    shopCarMap.weight = this.data.goodsDetail.weight;
 
     var shopCarInfo = this.data.shopCarInfo;
     if (!shopCarInfo.shopNum) {
@@ -370,19 +364,19 @@ Page({
 	 */
   buliduBuyNowInfo: function () {
     var shopCarMap = {};
-    shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
-    shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
-    shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    shopCarMap.goodsId = this.data.goodsDetail.id;
+    shopCarMap.pic = this.data.goodsDetail.pic_url;
+    shopCarMap.name = this.data.goodsDetail.name;
+    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸 
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
     shopCarMap.left = "";
     shopCarMap.active = true;
     shopCarMap.number = this.data.buyNumber;
-    shopCarMap.logisticsType = this.data.goodsDetail.basicInfo.logisticsId;
+    shopCarMap.logisticsType = this.data.goodsDetail.logisticsId;
     shopCarMap.logistics = this.data.goodsDetail.logistics;
-    shopCarMap.weight = this.data.goodsDetail.basicInfo.weight;
+    shopCarMap.weight = this.data.goodsDetail.weight;
 
     var buyNowInfo = {};
     if (!buyNowInfo.shopNum) {
@@ -413,8 +407,8 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: this.data.goodsDetail.basicInfo.name,
-      path: '/pages/goods-details/index?id=' + this.data.goodsDetail.basicInfo.id + '&inviter_id=' + wx.getStorageSync('uid'),
+      title: this.data.goodsDetail.name,
+      path: '/pages/goods-details/index?id=' + this.data.goodsDetail.id + '&inviter_id=' + wx.getStorageSync('uid'),
       success: function (res) {
         // 转发成功
       },
@@ -424,87 +418,87 @@ Page({
     }
   },
   
-  getVideoSrc: function (videoId) {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/media/video/detail',
-      data: {
-        videoId: videoId
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            videoMp4Src: res.data.fdMp4
-          });
-        }
-      }
-    })
-  },
-  getKanjiaInfo: function (gid) {
-    var that = this;
-    if (!app.globalData.kanjiaList || app.globalData.kanjiaList.length == 0) {
-      that.setData({
-        curGoodsKanjia: null
-      });
-      return;
-    }
-    let curGoodsKanjia = app.globalData.kanjiaList.find(ele => {
-      return ele.goodsId == gid
-    });
-    if (curGoodsKanjia) {
-      that.setData({
-        curGoodsKanjia: curGoodsKanjia
-      });
-    } else {
-      that.setData({
-        curGoodsKanjia: null
-      });
-    }
-  },
-  goKanjia: function () {
-    var that = this;
-    if (!that.data.curGoodsKanjia) {
-      return;
-    }
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/join',
-      data: {
-        kjid: that.data.curGoodsKanjia.id,
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          //console.log(res.data);
-          wx.navigateTo({
-            url: "/pages/kanjia/index?kjId=" + res.data.kjId + "&joiner=" + res.data.uid + "&id=" + res.data.goodsId
-          })
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.data.msg,
-            showCancel: false
-          })
-        }
-      }
-    })
-  },
-  getDeliveryPrice: function () {
-    var that = this
-    //  获取关于我们Title
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
-      data: {
-        key: 'shopDeliveryPrice'
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          var shopDeliveryPrice = parseFloat(parseFloat(res.data.value).toFixed(2))
-          that.setData({
-            shopDeliveryPrice: shopDeliveryPrice
-          })
-          //console.log('配送起步价：', shopDeliveryPrice, res.data.value)
-        }
-      }
-    })
-  }
+  // getVideoSrc: function (videoId) {
+  //   var that = this;
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/media/video/detail',
+  //     data: {
+  //       videoId: videoId
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           videoMp4Src: res.data.fdMp4
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
+  // getKanjiaInfo: function (gid) {
+  //   var that = this;
+  //   if (!app.globalData.kanjiaList || app.globalData.kanjiaList.length == 0) {
+  //     that.setData({
+  //       curGoodsKanjia: null
+  //     });
+  //     return;
+  //   }
+  //   let curGoodsKanjia = app.globalData.kanjiaList.find(ele => {
+  //     return ele.goodsId == gid
+  //   });
+  //   if (curGoodsKanjia) {
+  //     that.setData({
+  //       curGoodsKanjia: curGoodsKanjia
+  //     });
+  //   } else {
+  //     that.setData({
+  //       curGoodsKanjia: null
+  //     });
+  //   }
+  // },
+  // goKanjia: function () {
+  //   var that = this;
+  //   if (!that.data.curGoodsKanjia) {
+  //     return;
+  //   }
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/join',
+  //     data: {
+  //       kjid: that.data.curGoodsKanjia.id,
+  //       token: wx.getStorageSync('token')
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         //console.log(res.data);
+  //         wx.navigateTo({
+  //           url: "/pages/kanjia/index?kjId=" + res.data.kjId + "&joiner=" + res.data.uid + "&id=" + res.data.goodsId
+  //         })
+  //       } else {
+  //         wx.showModal({
+  //           title: '错误',
+  //           content: res.data.msg,
+  //           showCancel: false
+  //         })
+  //       }
+  //     }
+  //   })
+  // },
+  // getDeliveryPrice: function () {
+  //   var that = this
+  //   //  获取关于我们Title
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+  //     data: {
+  //       key: 'shopDeliveryPrice'
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         var shopDeliveryPrice = parseFloat(parseFloat(res.data.value).toFixed(2))
+  //         that.setData({
+  //           shopDeliveryPrice: shopDeliveryPrice
+  //         })
+  //         //console.log('配送起步价：', shopDeliveryPrice, res.data.value)
+  //       }
+  //     }
+  //   })
+  // }
 })
