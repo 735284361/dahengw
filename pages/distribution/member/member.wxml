@@ -1,0 +1,25 @@
+
+<view class="container">
+  <view class="main">
+    <!-- 人员盒子 -->
+    <view class="mbr-item" wx:for="{{distribMemberList}}" wx:key="id" wx:for-item="item" data-id="{{item.id}}">
+      <!-- 主要信息 -->
+      <view class="main-box">
+        <view class="left-img">
+          <image class="pic" src="{{item.imgSrc}}"></image>
+        </view>
+        <view class="right-info">
+          <view class="top"> 成员：{{item.name}}</view>
+          <view class="btm">注册时间：{{item.registerTime}}</view>
+        </view>
+      </view>
+      <!-- 订单信息 -->
+      <view class="main-btm">
+        <view class="btm-left">消费{{item.expense}}</view>
+        <view class="btm-right">{{item.orderNum}}个订单</view>
+      </view>
+    </view>  
+    <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+    <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://s10.mogucdn.com/mlcdn/c45406/171018_8gj08gbl9fj6igb380dec9k1ifhe2_32x32.png"></wxc-loadmore>
+  </view>
+</view>

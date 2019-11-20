@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的资产",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "usingComponents": {
+    "wxc-button": "../../../dist/packages/@minui/wxc-button/dist/index"
+  }
+}

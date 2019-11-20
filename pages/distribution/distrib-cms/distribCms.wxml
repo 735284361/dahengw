@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="w-header cms-box" style="background:{{globalBGColor}}">
+    <view class="left">
+      <text class="txt">分销佣金</text>
+      <text>{{acomunt}}</text>元
+    </view>
+    <view class="right">
+      <wxc-button plain="{{true}}" type="beauty" size="small" value="提现明细" btnStyle="border:1px solid #fff;color:#fff;" bindclick="withdrawDetail"></wxc-button>
+    </view>
+  </view>
+  <!-- 可提现 -->
+  <view class="cms-box margin-20">
+    <view class="left">可提现佣金</view>
+    <view class="right">{{canUseAcomunt}}元</view>
+  </view>
+  <!-- 已提现佣金 -->
+  <view class="cms-box margin-10">
+    <view class="left">已提现佣金</view>
+    <view class="right">{{hadUsedAcomutn}}元</view>
+  </view>
+  <!-- 待打款佣金 -->
+  <view class="cms-box margin-20">
+    <view class="left">待打款佣金</view>
+    <view class="right">{{waiting}}元</view>
+  </view>
+  <!-- 用户须知 -->
+  <view class="cms-box">
+    <wxc-list
+              class="item"
+              title="用户须知" mode="none">
+      </wxc-list>
+  </view>
+  <button type="warn" class="save-btn" bindclick="withdrawal" style="background:{{globalBGColor}}">我要提现</button>
+</view>
