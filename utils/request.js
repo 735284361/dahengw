@@ -1,3 +1,4 @@
+// const apiHttp = 'http://dh.raohouhai.com/api/v1/'
 const apiHttp = 'http://daheng.test/api/v1/'
 const header = {
   'content-type': 'application/x-www-form-urlencoded',
@@ -20,7 +21,6 @@ function request(url, method, data, complete, success, fail) {
           success(res)
         },
         fail: res => {
-          reject(res)
           fail(res)
         },
         complete: res => {
@@ -78,7 +78,7 @@ function request(url, method, data, complete, success, fail) {
             case 500:
               wx.showModal({
                 title: '提示',
-                content: '404 服务器内部错误',
+                content: '500 服务器内部错误',
                 showCancel: false
               })
               break

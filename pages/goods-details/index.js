@@ -51,8 +51,8 @@ Page({
     wx.request({
       url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/detail',
       data: {
-        // id: e.id
-        id:3
+        id: e.id
+        // id:3
       },
       success: function (res) {
         var selectSizeTemp = "";
@@ -170,7 +170,6 @@ Page({
     // 获取所有的选中规格尺寸数据
     var needSelectNum = that.data.goodsDetail.properties.length;
     var curSelectNum = 0;
-    var propertyChildIds = "";
     var propertyChildNames = "";
     var propertyCheckedArr = {};
     for (var i = 0; i < that.data.goodsDetail.properties.length; i++) {
@@ -181,7 +180,6 @@ Page({
           var key = that.data.goodsDetail.properties[i].name;
           propertyCheckedArr[key] = childs[j].name;
 
-          propertyChildIds = propertyChildIds + that.data.goodsDetail.properties[i].id + ":" + childs[j].id + ",";
           propertyChildNames = propertyChildNames + that.data.goodsDetail.properties[i].name + ":" + childs[j].name + "  ";
         }
       }
@@ -203,7 +201,7 @@ Page({
           var sku = res.data.sku
           that.setData({
             selectSizePrice: sku.price,
-            propertyChildIds: propertyChildIds,
+            propertyChildIds: res.data.id,
             propertyChildNames: propertyChildNames,
             buyNumMax: sku.stock,
             buyNumber: (sku.stock > 0) ? 1 : 0

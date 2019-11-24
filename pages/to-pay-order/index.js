@@ -9,8 +9,8 @@ Page({
     isNeedLogistics: 1, // 是否需要物流信息
     allGoodsPrice: 0,
     yunPrice: 0,
-    shipingFee:[], // 运费模板
     allGoodsAndYunPrice: 0,
+    shipingFee:0, // 运费模板
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
 
@@ -95,6 +95,7 @@ Page({
     if (!e) {
       postData.calculate = "true";
     }
+    console.log(postData)
     request.$post({
       url: 'order/create',
       method: 'POST',
@@ -221,22 +222,24 @@ Page({
   // 根据地址获取运费
   shippingFee:function() {
     var that = this;
+    that.processFee();
     request.$get({
       url: 'shop/shipping/fee',
       data: {
-        province: that.data.curAddressData.province
+        province: that.data.curAddressData.province,
+        total_fee: that.data.allGoodsPrice
       },
       success: (res) => {
         if (res.data.code === 0) {
           that.setData({
-            shipingFee: res.data.data
+            yunPrice: res.data.data,
+            allGoodsAndYunPrice: that.data.allGoodsAndYunPrice + res.data.data
           });
         } else {
           that.setData({
-            shipingFee: []
+            shipingFee: 0
           });
         }
-        that.processFee();
       }
     })
   },
@@ -261,16 +264,12 @@ Page({
       if (i > 0) {
         goodsJsonStrTmp = ",";
       }
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0}';
+      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildName":"' + carShopBean.label + '","propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0}';
       goodsJsonStr += goodsJsonStrTmp;
 
 
     }
     goodsJsonStr += "]";
-
-    if (allGoodsPrice <= that.data.shipingFee.full_amount) {
-      yunPrice = that.data.shipingFee.shipping_fee
-    }
 
     console.log(goodsJsonStr)
     that.setData({
@@ -278,7 +277,6 @@ Page({
       goodsJsonStr: goodsJsonStr,
       allGoodsPrice: allGoodsPrice,
       allGoodsAndYunPrice: allGoodsPrice + yunPrice,
-      yunPrice: yunPrice
     });
     // that.createOrder();
   },
