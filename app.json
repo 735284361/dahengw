@@ -29,7 +29,9 @@
     "pages/distribution/withdrawal/withdrawal",
     "pages/distribution/detail/detail",
     "pages/distribution/member/member",
-    "pages/distribution/order/order"
+    "pages/distribution/order/order",
+    "pages/distribution/financial-detail/financialDetail",
+    "pages/distribution/code/code"
   ],
   "window": {
     "backgroundTextStyle": "light",

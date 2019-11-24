@@ -224,7 +224,7 @@ page {
 .sale-info {
   width: 100%;
   height: 125rpx;
-  padding-top: 20rpx;
+  padding: 20rpx 0;
   margin-bottom: 20rpx;
   background-color: #FFF;
   display: flex;

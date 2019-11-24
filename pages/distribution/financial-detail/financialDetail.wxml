@@ -1,0 +1,125 @@
+<view class="container">
+  <view class="finBox">
+    <view class="search gray-28">
+      <view bindtap="clickSearch" class="ser-box">
+        <text class="{{isShowPanel ? 'gren-color':''}}">筛选</text>
+        <image class="sort {{isShowPanel ? 'asc':'desc'}}" src="{{isShowPanel ? sortAscImg : sortDescImg}}"></image>
+      </view>
+      
+    </view>
+    <view class="main">
+      <view class="time">
+        <view class="left">
+          <!-- <view>{{date}}</view> -->
+          <view class="section">
+            <!-- <view class="section__title">日期选择器</view> -->
+            <button class="wxc-btn" bindtap="checkedTime">
+              本月
+              <image class="sort desc" src="{{sortDescImg}}"></image>
+            </button>
+            <!-- <picker class="time-picker" mode="date" value="{{date}}" start="{{startDate}}" bindchange="bindDateChange">
+              <view>{{date}}</view>
+            </picker> -->
+            
+          </view>
+        </view>
+        <view class="right">
+          <view class="gray-28 bottom-10">
+            支出 <wxc-price class="price">{{financialDetail.spended}}</wxc-price>
+          </view>
+          <view class="gray-28">
+            收入 <wxc-price class="price">{{financialDetail.income}}</wxc-price>
+          </view>
+        </view>
+      </view>
+      <view class="f-content">
+        <view class="item" wx:for="{{financialDetail.detailData}}" wx:key="unique">
+          <view class="shop-name bottom-4">
+            <view class="info-left">{{item.shopName}}</view>
+            <view class="info-right">{{item.detail}}</view>
+          </view>
+          <view class="gray-24 bottom-4">{{item.type}}</view>
+          <view class="gray-24">{{item.time}}</view>
+        </view>
+      </view>
+
+    </view>
+    <!-- 筛选页 -->
+    <!-- <wxc-mask status="{{maskStatus}}" class="mask" toggle="maskTap">
+    </wxc-mask> -->
+    <view class="search-box" wx:if="{{isShowPanel}}">
+        <view style="display:block;padding:15rpx">
+          <text>快捷筛选</text>
+        </view>
+        <view class="label-box">
+          <!-- <wxc-label class="label" type="fill" type-color="#f4f4f4" text-color="#000">{{item.name}}</wxc-label> -->
+          <block wx:for="{{labels}}" wx:key="unique">
+            <view class="label {{item.isSelected ? '_isSelected' : ''}}" bindtap="checked" data-index="{{index}}" style="width: {{stv.width}}px">
+              {{item.name}}
+              <text class="triange" wx:if="{{item.isSelected}}"></text>
+              <wxc-icon type="right" class="label-icon" wx:if="{{item.isSelected}}" color="#fff"></wxc-icon>
+            </view>
+          </block>
+        </view>
+        <!-- 按钮 -->
+        <view class="ser-bottom">
+          <view class="btn">
+            <wxc-button size="large" class="reset" btn-style="width:100%;height:90rpx;line-height:90rpx;background:#ccc;" bindclick="reset">重置</wxc-button>
+          </view>
+          <view class="btn">
+            <wxc-button size="large" btn-style="width:100%;height:90rpx;background:#7bcbcc;color:#fff" class="confirm" bindclick="confirm">确定</wxc-button>
+          </view>
+        </view>
+    </view>
+    <view wx:if="{{openPicker}}" class="picker-box">
+      <view style="display:flex;width:100%;">
+        <view>
+          <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;" bindclick="bindMask" value="取消"></wxc-button>
+        </view>
+        <view>
+          <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;" bindclick="dateConfirm" value="确定"></wxc-button>
+        </view>
+      </view>
+      <!-- 时间 -->
+      <view class="picker-top">
+        <wxc-button class="start-time" plain="true" btn-style="background:#fff;" value="{{startTime}}" bindclick="showStartPicker"></wxc-button>
+        <text class="text">至</text>
+        <wxc-button class="end-time" plain="true" btn-style="background:#fff;" value="{{endTime}}" bindclick="showEndPicker"></wxc-button>
+      </view>
+      <!-- 清除 -->
+      <view class="del">
+        
+      </view> 
+      <!-- 日期选择器 -->
+      <view wx:if="{{showStartTime}}" class="date">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{startValue}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+      <view wx:if="{{showEndTime}}" class="date">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{endValue}}" bindchange="changeEndTime">
+          <picker-view-column>
+            <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}年</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}月</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view>
+     <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+  </view>
+  <view class="mask" wx:if="{{isShowPanel}}" bindtap="toggleMask"></view>
+  <wxc-mask status="{{statusMask}}" opacity="0.4" background-color="#ccc" bindtap="bindMask"></wxc-mask>
+</view>
