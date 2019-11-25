@@ -40,15 +40,18 @@
     </view> -->
     <view class="item">
       <navigator url="/pages/distribution/financial-detail/financialDetail" hover-class="none" class="a">
-        <wxc-icon type='after-sales' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+      <view class="iconfont icon-Money-Bag icon-style" style="color:#f4cd78;"></view>
+        <!-- <wxc-icon type='money2' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
         <text class="txt">资金流水</text>
       </navigator>
     </view>
 
     <view class="item">
       <navigator url="/pages/distribution/order/order" hover-class="none" class="a">
-        <wxc-icon type='search-square' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <view class="iconfont icon-orders icon-style" style="color:#47aaca;"></view>
+        <!-- <wxc-icon type='search-square' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
         <text class="txt">分销订单</text>
+        
       </navigator>
     </view>
 
@@ -65,14 +68,16 @@
 
     <view class="item">
       <navigator url="/pages/distribution/code/code" hover-class="none" class="a">
-        <wxc-icon type='search-square' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+      <view class="iconfont icon-code icon-style" style="color:#5ac780;"></view>
+        <!-- <wxc-icon type='code' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
         <text class="txt">推广二维码</text>
       </navigator>
     </view>
     
     <view class="item" >
       <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <view class="iconfont icon-group icon-style" style="color:#dea06d;"></view>
+        <!-- <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
         <text class="txt">我的团队</text>
       </navigator>
     </view>

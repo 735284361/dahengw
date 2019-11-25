@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="main">
+    <text class="saveBtn" wx:if="{{showSaveTip}}" bindtap="saveOrShare">保存并分享</text>
+    <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
+  </view>
+  <view class="tip">
+    <text class="margin-20">1、提示提示提示提示提示</text>
+    <text class="margin-20">2、提示提示提示提示提示</text>
+  </view>
+  <wxc-mask status="{{maskStatus}}" bindtap="toggleMask"></wxc-mask>
+</view>
