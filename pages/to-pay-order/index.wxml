@@ -7,9 +7,11 @@
       <view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
         <view style='display: flex;flex-direction: row;'>
           <wxc-icon type='location' size='40' color='#666666' style='padding-left:30rpx;padding-top:20rpx;'></wxc-icon>
-          <view class="name-tel">{{curAddressData.linkMan}} {{curAddressData.mobile}}</view>
+          <view class="name-tel">{{curAddressData.name}} {{curAddressData.phone}}</view>
         </view>
-        <view class="addr-text">{{curAddressData.address}}</view>
+        <view class="addr-text">
+          <text>{{curAddressData.province}} {{curAddressData.city}} {{curAddressData.county}} {{curAddressData.detail_info}}</text>
+        </view>
       </view>
     </view>
     <view class="goods-list">
@@ -76,7 +78,7 @@
       <view class="left-price">
         <view class="total">合计：¥ {{allGoodsAndYunPrice - youhuijine}}</view>
       </view>
-      <button class="to-pay-btn" formType="submit">提交订单</button>
+      <button class="to-pay-btn" formType="submit" onclick="createOrder">提交订单</button>
     </view>
   </form>
 </view>
