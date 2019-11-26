@@ -332,7 +332,7 @@ Page({
     this.setData({
       labels: this.data.labels
     });
-    this.toggleMask();
+    // this.toggleMask();
   },
   // 标签筛选
   confirm: function () {
@@ -344,6 +344,7 @@ Page({
       }
     }
     var selectedLabekIds = selectedLabelArr.join(","); // 选中标签ID
+    this.toggleMask();
   },
   // 切换蒙层
   toggleMask: function () {
