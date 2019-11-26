@@ -58,21 +58,22 @@
         </picker-view>
       </view>
     </view>
-    <view class="goods-info" wx:if="{{(isNeedLogistics > 0 && yunPrice > 0) || (!hasNoCoupons)}}">
-      <view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
+    <view class="goods-info">
+      <view class="row-box">
         <view class="row-label">商品金额</view>
         <view class="right-text">¥ {{allGoodsPrice}}</view>
       </view>
-      <view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
+      <view class="row-box">
         <view class="row-label">运费</view>
-        <view class="right-text">+ ¥ {{yunPrice}}</view>
+        <view class="right-text" wx:if="{{yunPrice > 0}}">+ ¥ {{yunPrice}}</view>
+        <view class="right-text" wx:else>包邮</view>
       </view>
       <view class="row-box" wx:if="{{!hasNoCoupons}}">
         <view class="row-label">优惠券</view>
         <view class="right-text">- ¥ {{youhuijine}}</view>
       </view>
     </view>
-    <view class="goods-info-no" wx:else >
+    <view class="goods-info-no">
     </view>
     <view class="jiesuan-box">
       <view class="left-price">

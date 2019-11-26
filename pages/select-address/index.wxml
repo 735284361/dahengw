@@ -6,7 +6,7 @@
           {{item.name}} {{item.phone}}
         </view>
         <view class="address-box">
-          {{item.detail_info}}
+          {{item.province}} {{item.city}} {{item.county}} {{item.detail_info}}
         </view>
       </view>
       <wxc-icon class="right-edit" type='edit' size='35' color='#999999' bindtap="editAddess" data-id="{{item.id}}"></wxc-icon>

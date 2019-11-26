@@ -103,10 +103,10 @@ Page({
       success: (res) => {
         wx.hideLoading();
         if (res.data.code == 0) {
-          // if (e && "buyNow" != that.data.orderType) {
-          //   // 清空购物车数据
-          //   wx.removeStorageSync('shopCarInfo');
-          // }
+          if (e && "buyNow" != that.data.orderType) {
+            // 清空购物车数据
+            wx.removeStorageSync('shopCarInfo');
+          }
           wx.requestPayment({
             timeStamp: String(res.data.data.timeStamp),
             nonceStr: res.data.data.nonceStr,
@@ -136,11 +136,11 @@ Page({
           })
         } else {
           console.log(res)
-          // wx.showModal({
-          //   title: '错误',
-          //   content: res.data.msg,
-          //   showCancel: false
-          // })
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+            showCancel: false
+          })
         }
       }
     })

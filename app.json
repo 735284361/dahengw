@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/start/start",
+    "pages/shop-cart/index",
     "pages/to-pay-order/index",
     "pages/goods-details/index",
+    "pages/start/start",
     "pages/ucenter/index/index",
     "pages/select-address/index",
     "pages/address-add/index",
@@ -11,7 +12,6 @@
     "pages/finder/index",
     "pages/distribution/index/index",
     "pages/search/index",
-    "pages/shop-cart/index",
     "pages/ucenter/order-list/index",
     "pages/order-details/index",
     "pages/wuliu/index",

@@ -48,11 +48,11 @@ Page({
         });
       }
     })
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/detail',
+    request.$get({
+      url: 'shop/goods/detail',
       data: {
         id: e.id
-        // id:3
+        // id:2
       },
       success: function (res) {
         var selectSizeTemp = "";
@@ -73,8 +73,8 @@ Page({
         that.setData({
           goodsDetail: res.data,
           selectSizePrice: res.data.price,
-          buyNumMax: res.data.stores,
-          buyNumber: (res.data.stores > 0) ? 1 : 0
+          buyNumMax: res.data.stock,
+          buyNumber: (res.data.stock > 0) ? 1 : 0
         });
         WxParse.wxParse('article', 'html', res.data.content.content, that, 5);
       }

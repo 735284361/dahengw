@@ -1,5 +1,6 @@
 //index.js
 var app = getApp()
+var request = require('../../utils/request.js')
 Page({
   data: {
     goodsList: {
@@ -36,7 +37,7 @@ Page({
   onLoad: function () {
     this.initEleWidth();
     //this.onShow();
-    this.getDeliveryPrice()
+    // this.getDeliveryPrice()
   },
   onShow: function () {
     var shopList = [];
@@ -202,13 +203,14 @@ Page({
       // 添加判断当前商品购买数量是否超过当前商品可购买库存
       var carShopBean = list[parseInt(index)];
       var carShopBeanStores = 0;
-      wx.request({
-        url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail',
+      request.$get({
+        url: 'shop/goods/goods_stock',
         data: {
-          id: carShopBean.goodsId
+          goods_id: carShopBean.goodsId,
+          property_id: carShopBean.propertyChildIds
         },
         success: function (res) {
-          carShopBeanStores = res.data.data.basicInfo.stores;
+          carShopBeanStores = res.data.data.stock;
           console.log(' currnet good id and stores is :', carShopBean.goodsId, carShopBeanStores)
           if (parseInt(e.detail.value) < carShopBeanStores) {
             list[parseInt(index)].number = parseInt(e.detail.value);
@@ -233,13 +235,14 @@ Page({
       // 添加判断当前商品购买数量是否超过当前商品可购买库存
       var carShopBean = list[parseInt(index)];
       var carShopBeanStores = 0;
-      wx.request({
-        url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail',
+      request.$get({
+        url: 'shop/goods/goods_stock',
         data: {
-          id: carShopBean.goodsId
+          goods_id: carShopBean.goodsId,
+          property_id: carShopBean.propertyChildIds
         },
         success: function (res) {
-          carShopBeanStores = res.data.data.basicInfo.stores;
+          carShopBeanStores = res.data.data.stock;
           console.log(' currnet good id and stores is :',carShopBean.goodsId, carShopBeanStores)
           if (list[parseInt(index)].number < carShopBeanStores) {
             list[parseInt(index)].number++;
@@ -339,85 +342,49 @@ Page({
         }
         let carShopBean = shopList[i];
         // 获取价格和库存
-        if (!carShopBean.propertyChildIds || carShopBean.propertyChildIds == "") {
-          wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail',
-            data: {
-              id: carShopBean.goodsId
-            },
-            success: function (res) {
-              doneNumber++;
-              if (res.data.data.properties) {
-                wx.showModal({
-                  title: '提示',
-                  content: res.data.data.basicInfo.name + ' 商品已失效，请重新购买',
-                  showCancel: false
-                })
-                isFail = true;
-                wx.hideLoading();
-                return;
-              }
-              if (res.data.data.basicInfo.stores < carShopBean.number) {
-                wx.showModal({
-                  title: '提示',
-                  content: res.data.data.basicInfo.name + ' 库存不足，请重新购买',
-                  showCancel: false
-                })
-                isFail = true;
-                wx.hideLoading();
-                return;
-              }
-              if (res.data.data.basicInfo.minPrice != carShopBean.price) {
-                wx.showModal({
-                  title: '提示',
-                  content: res.data.data.basicInfo.name + ' 价格有调整，请重新购买',
-                  showCancel: false
-                })
-                isFail = true;
-                wx.hideLoading();
-                return;
-              }
-              if (needDoneNUmber == doneNumber) {
-                that.navigateToPayOrder();
-              }
+        request.$get({
+          url: 'shop/goods/goods_stock',
+          data: {
+            goods_id: carShopBean.goodsId,
+            property_id: carShopBean.propertyChildIds
+          },
+          success: function (res) {
+            doneNumber++;
+            if (!res.data.data.is_online) {
+              wx.showModal({
+                title: '提示',
+                content: carShopBean.name + ' 商品已失效，请重新购买',
+                showCancel: false
+              })
+              isFail = true;
+              wx.hideLoading();
+              return;
             }
-          })
-        } else {
-          wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/price',
-            data: {
-              goodsId: carShopBean.goodsId,
-              propertyChildIds: carShopBean.propertyChildIds
-            },
-            success: function (res) {
-              doneNumber++;
-              if (res.data.data.stores < carShopBean.number) {
-                wx.showModal({
-                  title: '提示',
-                  content: carShopBean.name + ' 库存不足，请重新购买',
-                  showCancel: false
-                })
-                isFail = true;
-                wx.hideLoading();
-                return;
-              }
-              if (res.data.data.price != carShopBean.price) {
-                wx.showModal({
-                  title: '提示',
-                  content: carShopBean.name + ' 价格有调整，请重新购买',
-                  showCancel: false
-                })
-                isFail = true;
-                wx.hideLoading();
-                return;
-              }
-              if (needDoneNUmber == doneNumber) {
-                that.navigateToPayOrder();
-              }
+            if (res.data.data.stock < carShopBean.number) {
+              wx.showModal({
+                title: '提示',
+                content: carShopBean.name + ' 库存不足，请重新购买',
+                showCancel: false
+              })
+              isFail = true;
+              wx.hideLoading();
+              return;
             }
-          })
-        }
-
+            if (res.data.data.price != carShopBean.price) {
+              wx.showModal({
+                title: '提示',
+                content: carShopBean.name + ' 价格有调整，请重新购买',
+                showCancel: false
+              })
+              isFail = true;
+              wx.hideLoading();
+              return;
+            }
+            if (needDoneNUmber == doneNumber) {
+              that.navigateToPayOrder();
+            }
+          }
+        })
       }
     }
   },
@@ -462,27 +429,27 @@ Page({
             if (res.data.data.properties) {
               wx.showModal({
                 title: '提示',
-                content: res.data.data.basicInfo.name + ' 商品已失效，请重新购买',
+                content: res.data.data.name + ' 商品已失效，请重新购买',
                 showCancel: false
               })
               isFail = true;
               wx.hideLoading();
               return;
             }
-            if (res.data.data.basicInfo.stores < carShopBean.number) {
+            if (res.data.data.stores < carShopBean.number) {
               wx.showModal({
                 title: '提示',
-                content: res.data.data.basicInfo.name + ' 库存不足，请重新购买',
+                content: res.data.data.name + ' 库存不足，请重新购买',
                 showCancel: false
               })
               isFail = true;
               wx.hideLoading();
               return;
             }
-            if (res.data.data.basicInfo.minPrice != carShopBean.price) {
+            if (res.data.data.minPrice != carShopBean.price) {
               wx.showModal({
                 title: '提示',
-                content: res.data.data.basicInfo.name + ' 价格有调整，请重新购买',
+                content: res.data.data.name + ' 价格有调整，请重新购买',
                 showCancel: false
               })
               isFail = true;
@@ -538,23 +505,23 @@ Page({
       url: "/pages/to-pay-order/index"
     })
   },
-  getDeliveryPrice:function() {
-    var that = this
-    //  获取关于我们Title
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
-      data: {
-        key: 'shopDeliveryPrice'
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          var shopDeliveryPrice = parseFloat(parseFloat(res.data.data.value).toFixed(2))
-          that.setData({
-            shopDeliveryPrice: shopDeliveryPrice
-          })
-          console.log('配送起步价：',shopDeliveryPrice,res.data.data.value)
-        }
-      }
-    })
-  }
+  // getDeliveryPrice:function() {
+  //   var that = this
+  //   //  获取关于我们Title
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+  //     data: {
+  //       key: 'shopDeliveryPrice'
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         var shopDeliveryPrice = parseFloat(parseFloat(res.data.data.value).toFixed(2))
+  //         that.setData({
+  //           shopDeliveryPrice: shopDeliveryPrice
+  //         })
+  //         console.log('配送起步价：',shopDeliveryPrice,res.data.data.value)
+  //       }
+  //     }
+  //   })
+  // }
 })
