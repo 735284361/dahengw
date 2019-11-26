@@ -1,4 +1,10 @@
 {
   "navigationBarTitleText": "分销订单",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "wxc-abnor": "../../dist/packages/@minui/wxc-loadmore/dist/index",
+    "wxc-loading": "../../../dist/packages/@minui/wxc-loading/dist/index",
+    "wxc-badge": "../../../dist/packages/@minui/wxc-badge/dist/index",
+    "wxc-price": "../../../dist/packages/@minui/wxc-price/dist/index"
+  }
 }

@@ -2,9 +2,6 @@ const app = getApp();
 
 Page({
   data: {
-    canCarry: 0,
-    hadCarry: 0,
-    carring: 0,
     amount: 0,
     commission: 0,
     distribCommission: 203.18, //分销佣金
@@ -40,7 +37,7 @@ Page({
 
     var userInfo = wx.getStorageSync('userInfo')
     if (userInfo) {
-      that.setData({
+      this.setData({
         userInfo: userInfo,
       })
     }
@@ -78,9 +75,6 @@ Page({
         console.log(res)
         if (res.data.code == 0) {
           that.setData({
-            canCarry: 10,
-            hadCarry: 12,
-            carring: 13,
             amount: 1200,
             commission: 2000,
             distribCommission: 203.18,
@@ -98,12 +92,6 @@ Page({
       url: "/pages/authorize/index"
     })
     this.onLoad()
-  },
-  // 提现
-  withdraw: function () {
-    wx.navigateTo({
-      url: "/pages/distribution/withdrawal/withdrawal"
-    })
   }
 
 

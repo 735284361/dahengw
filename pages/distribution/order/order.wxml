@@ -1,6 +1,6 @@
 <view class="stv-container">
   <view class="tab-bar">
-    <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="toggleTab" class="tab {{curTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
+    <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
       {{item}}
       <!-- <wxc-badge wx:if='{{orderList[index].orderList.length>0}}' class="message__badge {{activeTab==index?'active':''}}">{{orderList[index].orderList.length}}</wxc-badge>
       <view class="{{tabClass[index]}}"></view> -->
@@ -11,9 +11,9 @@
   <view class="scroll-view">
     <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
 
-    <swiper class="orderListSwiper" style="width: 100%; height: 100%; overflow: visible;" current='{{curTab}}' bindchange="swiperchange">
+    <swiper class="orderListSwiper" style="width: 100%; height: 100%; overflow: visible;" current='{{activeTab}}' bindchange="swiperchange">
 
-      <view wx:if="{{totalList.length === 0}}">
+      <view wx:if="{{orderList.length === 0}}">
         <view wx:for="{{tabs}}" wx:key="unique">
           <swiper-item class="one-scene">
             <scroll-view style="height:100%" scroll-y>
@@ -26,7 +26,7 @@
       </view>
 
       <view wx:else>
-        <view wx:for-items="{{totalList}}" wx:key="id">
+        <view wx:for-items="{{orderList}}" wx:key="id">
           <swiper-item style="overflow: visible;border-radius: 50%;" class="one-scene">
             <scroll-view style="height:100%" scroll-y>
               <view wx:if="{{item.isnull}}" class="no-order">

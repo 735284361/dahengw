@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "推广",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "wxc-mask": "../../dist/packages/@minui/wxc-mask/dist/index"
+  }
+}

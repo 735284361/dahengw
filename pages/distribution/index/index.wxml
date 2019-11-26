@@ -15,34 +15,6 @@
     <view class='userInfoMask'></view>
   </view>
 
-  <view class='h-contents'>
-    <view class='a-item'>
-      <wxc-icon type='purse' size='{{iconSize-10}}' color='#69C3AA' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-      <view class='my'>
-        可提现:
-        <view style='padding:0 10rpx;color: #69C3AA;font-weight: bold;'> {{canCarry}} </view>
-      </view>
-    </view>
-    <view class='a-item'>
-      <wxc-icon type='yen' size='{{iconSize-10}}' color='#666666' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-      <view class='my'>
-        已提现:
-        <view style='padding: 0 10rpx;color: #666666;font-weight: bold;'> {{hadCarry}} </view>
-      </view>
-    </view>
-    <view class='a-item'>
-      <wxc-icon type='after-sales' size='{{iconSize-10}}' color='#FF5777' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-      <view class='my'>
-        提现中:
-        <view style='padding: 0 10rpx;color: #FF5777;font-weight: bold;'> {{carring}} </view>
-      </view>
-    </view>
-    <view class='a-item-no-right-border'>
-      <!-- <wxc-button type="info" size="small" value="充值" bindclick="recharge"></wxc-button> -->
-      <view style='height:8rpx;'> </view>
-      <wxc-button type="info" size="small" value="提现" bindclick="withdraw"></wxc-button>
-    </view>
-  </view>
   <!-- 销售额 -->
     <view class="sale-info">
       <view class="s-box">
@@ -56,7 +28,7 @@
     </view>
 
   <view class="user-menu">
-    <view class="item">
+    <!-- <view class="item">
       <navigator url="/pages/distribution/distrib-cms/distribCms" hover-class="none" class="a">
         <wxc-icon type='feedback' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">分销佣金</text>
@@ -65,20 +37,25 @@
           <text>元</text>
         </view>
       </navigator>
+    </view> -->
+    <view class="item">
+      <navigator url="/pages/distribution/financial-detail/financialDetail" hover-class="none" class="a">
+      <view class="iconfont icon-Money-Bag icon-style" style="color:#f4cd78;"></view>
+        <!-- <wxc-icon type='money2' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
+        <text class="txt">资金流水</text>
+      </navigator>
     </view>
 
     <view class="item">
       <navigator url="/pages/distribution/order/order" hover-class="none" class="a">
-        <wxc-icon type='address' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+        <view class="iconfont icon-orders icon-style" style="color:#47aaca;"></view>
+        <!-- <wxc-icon type='search-square' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
         <text class="txt">分销订单</text>
-        <view class='price-box'>
-          <text class="count">{{distribOrder}}</text>
-          <text>元</text>
-        </view>
+        
       </navigator>
     </view>
 
-    <view class="item no-border-right">
+    <!-- <view class="item no-border-right">
       <navigator url="/pages/distribution/detail/detail" hover-class="none" class="a">
         <wxc-icon type='location' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
         <text class="txt">提现明细</text>
@@ -87,35 +64,25 @@
           <text>元</text>
         </view>
       </navigator>
-    </view>
+    </view> -->
 
-    <view class="item" >
-      <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">我的团队</text>
-        <view class='price-box'>
-          <text class="count">{{distribMember}}</text>
-          <text>人</text>
-        </view>
+    <view class="item">
+      <navigator url="/pages/distribution/code/code" hover-class="none" class="a">
+      <view class="iconfont icon-code icon-style" style="color:#5ac780;"></view>
+        <!-- <wxc-icon type='code' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
+        <text class="txt">推广二维码</text>
       </navigator>
     </view>
     
-    <view class="item">
-      <view hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">推广二维码</text>
-        <view class='price-box' style="height:24rpx">
-          <!-- <text class="count">{{distribCommission}}</text>
-          <text>元</text> -->
-        </view>
-      </view>
+    <view class="item" >
+      <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
+        <view class="iconfont icon-group icon-style" style="color:#dea06d;"></view>
+        <!-- <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon> -->
+        <text class="txt">我的团队</text>
+      </navigator>
     </view>
-
-    <view class="item no-border-bottom">
-      <!-- <view hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">推广二维码</text>
-      </view> -->
-    </view>
+    
+    <view class="item"></view>
+    <view class="item no-border-bottom"></view>
   </view>
 </view>

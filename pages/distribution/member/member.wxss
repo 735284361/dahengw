@@ -9,22 +9,22 @@
   width: 100%;
 }
 .mbr-item {
-  padding: 10rpx 20rpx;
+  padding: 6rpx 20rpx;
   background: #fff;
-  margin-bottom: 8rpx;
+  margin-bottom: 4rpx;
 }
 .mbr-item .main-box {
-  border-bottom: 1px solid #EFEFEF;
-  height: 140rpx;
+  border-bottom: 1rpx solid #EFEFEF;
+  height: 100rpx;
   display: flex;
 }
 .left-img {
-  width:130rpx;
-  height: 130rpx;
+  width:90rpx;
+  height: 90rpx;
 }
 .left-img .pic{
-  width: 130rpx;
-  height: 130rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 .right-info {
   display: flex;
@@ -33,14 +33,16 @@
   width: 100%;
   height: inherit;
   justify-content: center;
+  font-size: 24rpx;
 }
 .right-info .top {
-  margin-bottom: 30rpx;
+  margin-bottom: 10rpx;
 }
 .main-btm {
   height: 30rpx;
   padding:10rpx 20rpx;
   line-height: 30rpx;
+  font-size: 28rpx;
 }
 .btm-left, .btm-right{
   display: inline-block;

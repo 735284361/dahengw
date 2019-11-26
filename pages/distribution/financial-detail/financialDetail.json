@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "我的资金流水",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "wxc-price": "../../dist/packages/@minui/wxc-price/dist/index",
+    "wxc-label": "../../dist/packages/@minui/wxc-label/dist/index",
+    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
+    "wxc-mask": "../../dist/packages/@minui/wxc-mask/dist/index",
+    "wxc-button": "../../dist/packages/@minui/wxc-button/dist/index",
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index"
+  }
+}
