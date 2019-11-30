@@ -186,6 +186,7 @@
 }
 .picker-box {
   width:100%;
+  height: 860rpx;
   /* height:796rpx; */
   border:1px solid #ccc;
   position: absolute;
@@ -214,7 +215,11 @@
 .start-time, .end-time {
   height: 100%;
   width: 178rpx;
+  text-align: center;
   border-bottom: 1px solid #ccc;
+}
+.border-bottom {
+  border-bottom: 1px solid #7bcbcc;
 }
 .picker-box .picker-top .text {
   margin: 0 38rpx;
@@ -223,6 +228,7 @@
   width: 100%;
   height: 62rpx;
   border-bottom: 1px solid #ccc;
+  text-align: right;
 }
 .picker-box .date {
    padding: 0 50rpx;

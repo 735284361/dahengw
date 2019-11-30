@@ -72,50 +72,58 @@
         </view>
     </view>
     <view wx:if="{{openPicker}}" class="picker-box">
-      <view style="display:flex;width:100%;">
-        <view style="width:100%;text-align:left;">
-          <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;" bindclick="bindMask" value="取消"></wxc-button>
+      <view style="padding:0 40rpx;">
+        <view style="display:flex;width:100%;">
+          <view style="width:100%;text-align:left;">
+            <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;" bindclick="bindMask" value="取消"></wxc-button>
+          </view>
+          <view style="width:100%;text-align:right;">
+            <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;" bindclick="dateConfirm" value="确定"></wxc-button>
+          </view>
         </view>
-        <view style="width:100%;text-align:right;">
-          <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;" bindclick="dateConfirm" value="确定"></wxc-button>
+        <!-- 时间 -->
+        <view class="picker-top">
+          <!-- <wxc-button class="start-time" plain="true" btn-style="background:#fff;" value="{{startTime}}" bindclick="showStartPicker"></wxc-button> -->
+          <view class="start-time {{startBottom ? 'border-bottom' :''}}" bindtap="showStartPicker"  data-start="{{startTime}}">
+            {{startTime}}
+          </view>
+          <text class="text">至</text>
+          <!-- <wxc-button class="end-time" plain="true" btn-style="background:#fff;" value="{{endTime}}" bindclick="showEndPicker"></wxc-button> -->
+          <view class="end-time {{!startBottom ? 'border-bottom' : ''}}" bindtap="showEndPicker" data-end="{{endTime}}">
+            {{endTime}}
+          </view>
         </view>
-      </view>
-      <!-- 时间 -->
-      <view class="picker-top">
-        <wxc-button class="start-time" plain="true" btn-style="background:#fff;" value="{{startTime}}" bindclick="showStartPicker"></wxc-button>
-        <text class="text">至</text>
-        <wxc-button class="end-time" plain="true" btn-style="background:#fff;" value="{{endTime}}" bindclick="showEndPicker"></wxc-button>
-      </view>
-      <!-- 清除 -->
-      <view class="del">
-        
-      </view> 
-      <!-- 日期选择器 -->
-      <view wx:if="{{showStartTime}}" class="date">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{startValue}}" bindchange="bindChange">
-          <picker-view-column>
-            <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
-          </picker-view-column>
-        </picker-view>
-      </view>
-      <view wx:if="{{showEndTime}}" class="date">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{endValue}}" bindchange="changeEndTime">
-          <picker-view-column>
-            <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}年</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}月</view>
-          </picker-view-column>
-          <picker-view-column>
-            <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
-          </picker-view-column>
-        </picker-view>
+        <!-- 清除 -->
+        <view class="del">
+          <wxc-icon type="delete" bindtap="clearDate"></wxc-icon>
+        </view> 
+        <!-- 日期选择器 -->
+        <view wx:if="{{showStartTime}}" class="date">
+          <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{startValue}}" bindchange="bindChange">
+            <picker-view-column>
+              <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
+        <view wx:if="{{showEndTime}}" class="date">
+          <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{endValue}}" bindchange="changeEndTime">
+            <picker-view-column>
+              <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}年</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}月</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
       </view>
     </view>
      <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>

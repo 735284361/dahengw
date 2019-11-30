@@ -1,0 +1,15 @@
+<view class="container">
+  <form>
+    <view class="form-box">
+    <!-- 图标 -->
+      <view class="aplay-icon">
+        <view  class="iconfont icon-apply" style="color:#7bcbcc;"></view>
+      </view>
+      <!-- 按钮 -->
+      <view>
+        <button class='btn' bindtap="appliAgent">申请代理</button>
+        <text class="tip">请点击申请代理</text>
+      </view>
+    </view>
+  </form>
+</view>

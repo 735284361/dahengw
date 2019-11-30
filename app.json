@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/shop-cart/index",
+    "pages/apply-agent/index",
     "pages/to-pay-order/index",
     "pages/goods-details/index",
     "pages/start/start",

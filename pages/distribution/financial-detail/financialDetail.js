@@ -93,7 +93,8 @@ Page({
     endTime: "",
     showStartTime: true,
     showEndTime: false,
-    statusMask: "hide"
+    statusMask: "hide",
+    startBottom: true
   },
 
   /**
@@ -195,7 +196,6 @@ Page({
         item.time = this.formateTime(item.time);
       }
     }
-    console.log(data)
     
     this.setData({
       financialDetail: {
@@ -257,23 +257,39 @@ Page({
       labels:this.data.labels
     });
   },
-  showStartPicker: function () {
-    console.log("dfdfd")
+  showStartPicker: function (e) {
+    var val = e.currentTarget.dataset.start;
+    if (val == "开始时间") {
+      this.setData({
+        startValue: [curYear, curMonth, 0],
+        startTime: curYear + "-" + (curMonth + 1) + "-01",
+      })
+    }
+    console.log(val)
     this.setData({
       showStartTime: true,
-      showEndTime: false
-    })
+      showEndTime: false,
+      startBottom: true,
+      endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1]
+    });
   },
-  showEndPicker: function () {
+  showEndPicker: function (e) {
+    var val = e.currentTarget.dataset.end;
+    if (val == "结束时间") {
+      this.setData({
+        endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1],
+        endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate())
+      })
+    }
     this.setData({
       showStartTime: false,
-      showEndTime: true
+      showEndTime: true,
+      startBottom: false
     })
   },
   bindChange: function (e) {
     var val = e.detail.value;
     var mon = val[1] +1;
-    console.log(val[0])
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
@@ -299,7 +315,6 @@ Page({
   changeEndTime: function (e) {
     var val = e.detail.value;
     var mon = val[1] + 1;
-    console.log(val[1])
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
@@ -324,7 +339,6 @@ Page({
   },
   // 重置标签
   reset: function () {
-    console.log("fdfd")
     for (var i = 0; i < this.data.labels.length; i++) {
       this.data.labels[i].isSelected = false;
     }
@@ -371,6 +385,14 @@ Page({
     console.log(this.data.startValue)
     console.log(this.data.endValue)
     this.bindMask();
+  },
+  clearDate: function () {
+    this.setData({
+      startTime: '开始时间',
+      endTime: '结束时间',
+      showStartTime: false,
+      showEndTime: false
+    })
   }
 
 
