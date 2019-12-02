@@ -5,7 +5,7 @@ const curMonth = date.getMonth();
 const curDate = date.getDate();
 const months = []
 const days = {}
-const countDate = []
+const countDate = [], revs = []
 const countMon = []
 
 for (let i = 1990; i <= date.getFullYear(); i++) {
@@ -27,9 +27,10 @@ for (let i = 1; i <= date.getMonth()+1; i++) {
   countMon.push(i)
 }
 for (let i = 1; i <= date.getDate(); i++) {
-  countDate.push(i)
+  countDate.push(i);
+  revs.push(i);
 }
-
+revs.reverse();
 
 let app = getApp();
 Page({
@@ -87,7 +88,9 @@ Page({
     years: years,
     months: months,
     days: days[curMonth+1],
-    startValue: [curYear, curMonth,0],
+    startDays: [],
+    endDays: [],
+    startValue: [curYear, curMonth,revs.length-1],
     endValue: [],
     startTime: "",
     endTime: "",
@@ -104,7 +107,7 @@ Page({
     var res = wx.getSystemInfoSync()
     this.windowWidth = res.windowWidth;
     this.data.stv.windowWidth = res.windowWidth;
-    this.data.stv.width = (res.windowWidth-20) / 4;
+    this.data.stv.width = (res.windowWidth + 40) / 4;
     this.setData({ stv: this.data.stv });
   },
 
@@ -117,13 +120,14 @@ Page({
     // var mon = new Date().getMonth + 1;
     // var day = new Date().getDate();
     // var date = year + "-" + this.dealTimeToStr(mon) + this.dealTimeToStr(day);
-
     this.setData({
       endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate())-1],
       startTime: curYear + "-" + (curMonth + 1) + "-01",
       endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate()),
       months: countMon,
-      days: countDate
+      days: countDate,
+      startDays: revs,
+      endDays: countDate
     })
   },
 
@@ -293,23 +297,23 @@ Page({
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
-        days: days[mon]
+        startDays: days[mon]
       })
     } else {
       if (this.data.months[val[1]-1] != curMonth) {
         this.setData({
           months: countMon,
-          days: days[mon]
+          startDays: days[mon]
         })
       }else {
         this.setData({
           months: countMon,
-          days: countDate
+          startDays: revs
         })
       }
     }
     this.setData({
-      startTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.days[val[2]]
+      startTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.startDays[val[2]]
     });
   },
   changeEndTime: function (e) {
@@ -318,23 +322,23 @@ Page({
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
-        days: days[mon]
+        endDays: days[mon]
       })
     } else {
       if (this.data.months[val[1] - 1] != curMonth) {
         this.setData({
           months: countMon,
-          days: days[mon]
+          endDays: days[mon]
         })
       } else {
         this.setData({
           months: countMon,
-          days: countDate
+          endDays: countDate
         })
       }
     }
     this.setData({
-      endTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.days[val[2]]
+      endTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.endDays[val[2]]
     });
   },
   // 重置标签

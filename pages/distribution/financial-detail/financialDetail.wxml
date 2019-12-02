@@ -48,7 +48,7 @@
     <!-- <wxc-mask status="{{maskStatus}}" class="mask" toggle="maskTap">
     </wxc-mask> -->
     <view class="search-box" wx:if="{{isShowPanel}}">
-        <view style="display:block;padding:15rpx">
+        <view style="display:block;padding:15rpx;font-size:30rpx;">
           <text>快捷筛选</text>
         </view>
         <view class="label-box">
@@ -74,11 +74,11 @@
     <view wx:if="{{openPicker}}" class="picker-box">
       <view style="padding:0 40rpx;">
         <view style="display:flex;width:100%;">
-          <view style="width:100%;text-align:left;">
-            <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;" bindclick="bindMask" value="取消"></wxc-button>
+          <view class="btn" style="width:100%;text-align:left;">
+            <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;padding:0;" bindclick="bindMask" value="取消"></wxc-button>
           </view>
           <view style="width:100%;text-align:right;">
-            <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;" bindclick="dateConfirm" value="确定"></wxc-button>
+            <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;padding:0;" bindclick="dateConfirm" value="确定"></wxc-button>
           </view>
         </view>
         <!-- 时间 -->
@@ -101,13 +101,13 @@
         <view wx:if="{{showStartTime}}" class="date">
           <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{startValue}}" bindchange="bindChange">
             <picker-view-column>
-              <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}年</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}月</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{startDays}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
             </picker-view-column>
           </picker-view>
         </view>
@@ -120,7 +120,7 @@
               <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}月</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{days}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
+              <view wx:for="{{endDays}}"  wx:key="unique" style="line-height: 50px">{{item}}日</view>
             </picker-view-column>
           </picker-view>
         </view>

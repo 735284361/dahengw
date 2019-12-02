@@ -144,6 +144,7 @@
   height: 78rpx;
   text-align: center;
   line-height: 78rpx;
+  font-size: 28rpx;
   opacity: 0.7;
 }
 .search-box .label._isSelected {
@@ -157,6 +158,8 @@
   height: 0;
   border-style: solid;
   border-width: 26rpx;
+  font-size: 28rpx;
+  color: #000;
   border-color:transparent #057678 #057678 transparent;
 }
 .search-box .label .label-icon {
@@ -214,7 +217,7 @@
 }
 .start-time, .end-time {
   height: 100%;
-  width: 178rpx;
+  width: 232rpx;
   text-align: center;
   border-bottom: 1px solid #ccc;
 }
@@ -232,5 +235,6 @@
 }
 .picker-box .date {
    padding: 0 50rpx;
+   text-align: center;
 }
 
