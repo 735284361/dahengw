@@ -1,5 +1,5 @@
-// const apiHttp = 'http://dh.raohouhai.com/api/v1/'
-const apiHttp = 'http://daheng.test/api/v1/'
+const apiHttp = 'http://dh.raohouhai.com/api/v1/'
+// const apiHttp = 'http://daheng.test/api/v1/'
 const header = {
   'content-type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
