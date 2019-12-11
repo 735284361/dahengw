@@ -6,40 +6,25 @@
     </view>
     <!--<view class="order-status">
       <view class="icon-box">
-        <image wx:if="{{orderDetail.orderInfo.status==-1}}" class="icon" src="/images/order-details/icon-ddgb.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==0}}" class="icon" src="/images/order-details/icon-ddfk.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==1}}" class="icon" src="/images/order-details/icon-ddfh.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==2}}" class="icon" src="/images/order-details/icon-ddsh.png"></image>
-        <image wx:elif="{{orderDetail.orderInfo.status==3 || orderDetail.orderInfo.status==4}}" class="icon" src="/images/order-details/icon-jycg.png"></image>
+        <image wx:if="{{orderDetail.status==-1}}" class="icon" src="/images/order-details/icon-ddgb.png"></image>
+        <image wx:elif="{{orderDetail.status==0}}" class="icon" src="/images/order-details/icon-ddfk.png"></image>
+        <image wx:elif="{{orderDetail.status==1}}" class="icon" src="/images/order-details/icon-ddfh.png"></image>
+        <image wx:elif="{{orderDetail.status==2}}" class="icon" src="/images/order-details/icon-ddsh.png"></image>
+        <image wx:elif="{{orderDetail.status==3 || orderDetail.status==4}}" class="icon" src="/images/order-details/icon-jycg.png"></image>
       </view>
       <view class="right-text">
-        <view class="status red">{{orderDetail.orderInfo.statusStr}}</view>
+        <view class="status red">{{orderDetail.statusStr}}</view>
         <view class="des" hidden="true">请于11时59分59秒内付款，超时订单将自动关闭</view>
       </view>
     </view>-->
-    <block wx:if="{{orderDetail.logistics}}">
-      <view wx:if="{{orderDetail.logisticsTraces}}" class="wuliu-box">
-        <view class="icon-box">
-          <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
-        </view>
-        <view class="right-text" bindtap="wuliuDetailsTap" data-id="{{orderDetail.orderInfo.id}}">
-          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
-          <block wx:if="{{orderDetail.logisticsTraces}}">
-            <view class="wuliu-text">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptStation}}</view>
-            <view class="wuliu-date">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptTime}}</view>
-          </block>
-        </view>
-        <view class="arrow-right">
-          <image class="arrow" src="/images/order-details/arrow-right.png"></image>
-        </view>
-      </view>
-      <view wx:else class="wuliu-box">
+    <block wx:if="{{orderDetail.address}}">
+      <view class="wuliu-box">
         <view class="icon-box">
           <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
         </view>
         <view class="right-text">
-          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
-          <view class="wuliu-text">暂无物流信息</view>
+          <view class="order-number">快递公司：{{orderDetail.address.delivery_company}}</view>
+          <view class="wuliu-text">快递单号：{{orderDetail.address.delivery_number}}</view>
         </view>
       </view>
       <view class="address-sec">
@@ -47,9 +32,9 @@
           <image class="icon" src="/images/order-details/icon-address.png"></image>
         </view>
         <view class="right-box">
-          <view class="name-tel">{{orderDetail.logistics.linkMan}} {{orderDetail.logistics.mobile}}</view>
+          <view class="name-tel">{{orderDetail.address.name}} {{orderDetail.phone}}</view>
           <view class="text">
-            {{orderDetail.logistics.address}}
+            {{orderDetail.address.province}} {{orderDetail.address.city}} {{orderDetail.address.county}} {{orderDetail.address.detail_info}}
           </view>
         </view>
       </view>
@@ -58,52 +43,48 @@
   <view class="goods-list">
     <view class="list-title">商品信息</view>
     <form bindsubmit="submitReputation">
-      <block wx:for-items="{{orderDetail.goods}}" wx:key="{{index}}">
+      <block wx:for="{{orderDetail.goods}}" wx:key="{{index}}">
         <view class="a-goods">
           <view class="img-box">
-            <image src="{{item.pic}}" class="img" />
+            <image src="{{item.pic_url}}" class="img" />
           </view>
           <view class="text-box">
             <view class="arow arow01">
-              <view class="goods-name">{{item.goodsName}}</view>
-              <view class="goods-price">¥ {{item.amount}}</view>
+              <view class="goods-name">{{item.name}}</view>
+              <view class="goods-price">¥ {{item.pivot.product_price}}</view>
             </view>
             <view class="arow">
-              <view class="goods-label">{{item.property}}</view>
-              <view class="goods-num">x {{item.number}}</view>
+              <view class="goods-label">{{item.pivot.sku}}</view>
+              <view class="goods-num">x {{item.pivot.product_count}}</view>
             </view>
           </view>
         </view>
-        <view class="btn-row" wx:if="{{orderDetail.orderInfo.status==3}}">
-
+        <view class="btn-row" wx:if="{{orderDetail.status==3}}">
           <view class="section section_gap">
-            <view style="margin-top:35rpx;margin-bottom:35rpx;">评价：</view>
-            <radio-group name="goodReputation{{index}}">
-              <label style="margin-right:35rpx;">
-                <radio value="2" checked/>好评</label>
-              <label style="margin-right:35rpx;">
-                <radio value="1" />中评</label>
-              <label style="margin-right:35rpx;">
-                <radio value="0" />差评</label>
-            </radio-group>
+            <view class="list-title-eval">评分：</view>
+              <block wx:for="{{[1,2,3,4,5]}}" wx:for-index="scoreIndex" wx:for-item="starScore">
+                <image src="/images/1star.png" wx:if="{{starScore <= score[index]}}" data-id="{{index}}" data-score="{{starScore}}" bindtap="setScore" class="star"></image>
+                <image src="/images/0star.png" wx:else bindtap="setScore" data-id="{{index}}" data-score="{{starScore}}" class="star"></image>
+              </block>
           </view>
           <view class="row-box" style="margin-top:35rpx">
-            <view class="row-label">文字描述</view>
-            <input name="orderGoodsId{{index}}" value="{{item.id}}" style="display:none;" />
-            <textarea name="goodReputationRemark{{index}}" style="margin-top:35rpx;width:100%;" value="非常愉快的一次购物！" />
+            <view class="list-title-eval">文字描述:</view>
+            <input name="orderGoodsId{{index}}" value="{{item.pivot.id}}" style="display:none;" />
+            <input name="orderGoodsName{{index}}" value="{{item.name}}" style="display:none;" />
+            <textarea name="goodReputationRemark{{index}}" class="eval-textarea" value="非常愉快的一次购物！" />
           </view>
         </view>
       </block>
-      <view class="btn-row" wx:if="{{orderDetail.orderInfo.status==3}}">
+      <view class="btn-row" wx:if="{{orderDetail.status==3}}">
         <button class="confirm-btn" formType="submit">提交评价</button>
       </view>
     </form>
-    <view class="btn-row" wx:if="{{orderDetail.orderInfo.status==2}}">
-      <view class="confirm-btn" bindtap="confirmBtnTap" data-id="{{orderDetail.orderInfo.id}}">确认收货</view>
+    <view class="btn-row" wx:if="{{orderDetail.status==2}}">
+      <view class="confirm-btn" bindtap="confirmBtnTap" data-id="{{orderDetail.id}}">确认收货</view>
     </view>
 
   </view>
-  <view class="peisong-way" hidden="true">
+  <!-- <view class="peisong-way" hidden="true">
     <view class="row-box">
       <view class="row-label">配送方式</view>
       <view class="right-text">顺丰快递</view>
@@ -114,19 +95,19 @@
         <input name="remark" type="text" class="liuyan" placeholder="如需留言请输入" />
       </view>
     </view>
-  </view>
+  </view> -->
   <view class="goods-info">
     <view class="row-box">
       <view class="row-label">商品金额</view>
-      <view class="right-text">¥ {{orderDetail.orderInfo.amount}}</view>
+      <view class="right-text">¥ {{orderDetail.product_amount_total}}</view>
     </view>
     <view class="row-box">
       <view class="row-label">运费</view>
-      <view class="right-text">+ ¥ {{orderDetail.orderInfo.amountLogistics}}</view>
+      <view class="right-text">+ ¥ {{orderDetail.logistics_fee}}</view>
     </view>
     <view class="row-box">
       <view class="row-label">应付总额</view>
-      <view class="right-text">¥ {{orderDetail.orderInfo.amountReal}}</view>
+      <view class="right-text">¥ {{orderDetail.order_amount_total}}</view>
     </view>
   </view>
 </view>

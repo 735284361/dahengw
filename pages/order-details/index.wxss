@@ -166,6 +166,27 @@ page{
     margin-left: 30rpx;
     border-top: 1rpx solid #f4f4f4;
 }
+
+.list-title-eval{
+    font-size: 28rpx;
+    color: #000;
+    padding: 30rpx 0 25rpx 0;
+}
+.eval-textarea{
+  width:92%;
+  font-size:30rpx;
+  /* color:#888; */
+  border-top: 1px solid #f4f4f4;
+  padding: 10rpx;
+  margin-bottom: 5rpx;
+}
+.star{
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
+  margin-right: .5em;
+  vertical-align: middle;
+}
 .confirm-btn{
     background:#ffffff;
     border:1rpx solid #e64340;

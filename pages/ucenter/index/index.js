@@ -239,45 +239,6 @@ Page({
       }
     })
   },
-  pay: function () {
-    var that = this;
-    wx.request({
-      url: app.globalData.domain + 'api/pay/pay',
-      header: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': wx.getStorageSync('token') ? `Bearer ${wx.getStorageSync('token')}` : ''
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          wx.requestPayment({
-            timeStamp: String(res.data.data.timeStamp),
-            nonceStr: res.data.data.nonceStr,
-            package: res.data.data.package,
-            signType: 'MD5',
-            paySign: res.data.data.paySign,
-            success(res) {
-              wx.showModal({
-                title: '错误',
-                content: res.data.msg,
-                showCancel: false
-              })
-            },
-            fail(res) {
-              console.log(res)
-            }
-          })
-        } else {
-          console.log(res)
-          // wx.showModal({
-          //   title: '错误',
-          //   content: res.data.msg,
-          //   showCancel: false
-          // })
-        }
-      }
-    })
-  },
   relogin: function () {
     wx.navigateTo({
      url: "/pages/authorize/index"

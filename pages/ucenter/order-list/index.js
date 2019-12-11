@@ -1,4 +1,5 @@
 var wxpay = require('../../../utils/pay.js')
+var request = require('../../../utils/request.js');
 var app = getApp()
 Page({
   data: {
@@ -28,82 +29,33 @@ Page({
   onShow: function () {
     // 获取订单列表
     this.setData({
-      loadingStatus: true
+      loadingStatus: true,
+      tabClass: ["", "", "", "", ""]
     })
-    this.getOrderStatistics();
     this.getOrderList()
-  },
-  getOrderStatistics: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/statistics',
-      data: { 
-        token: wx.getStorageSync('token') 
-      },
-      success: (res) => {
-        wx.hideLoading();
-        if (res.data.code == 0) {
-          var tabClass = that.data.tabClass;
-          if (res.data.data.count_id_no_pay > 0) {
-            tabClass[0] = "red-dot"
-          } else {
-            tabClass[0] = ""
-          }
-          if (res.data.data.count_id_no_transfer > 0) {
-            tabClass[1] = "red-dot"
-          } else {
-            tabClass[1] = ""
-          }
-          if (res.data.data.count_id_no_confirm > 0) {
-            tabClass[2] = "red-dot"
-          } else {
-            tabClass[2] = ""
-          }
-          if (res.data.data.count_id_no_reputation > 0) {
-            tabClass[3] = "red-dot"
-          } else {
-            tabClass[3] = ""
-          }
-          if (res.data.data.count_id_success > 0) {
-            //tabClass[4] = "red-dot"
-          } else {
-            //tabClass[4] = ""
-          }
-
-          console.log(tabClass)
-          that.setData({
-            tabClass: tabClass,
-          });
-        }
-      }
-    })
   },
   getOrderList: function () {
     var that = this;
     var postData = {
-      token: wx.getStorageSync('token'),
       pageSize: app.globalData.pageSize,
       page: app.globalData.page
     };
-    console.log('getting orderList')
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/list',
+    request.$get({
+      url: 'order/list',
       data: postData,
       success: (res) => {
         if (res.data.code === 0) {
           console.log('orderList',res.data.data.orderList)
           that.setData({
-            totalOrderList: res.data.data.orderList,
-            logisticsMap: res.data.data.logisticsMap,
-            goodsMap: res.data.data.goodsMap
+            totalOrderList: res.data.data
           });
-          //订单分类
+          // 订单分类
           var orderList = [];
           for (let i = 0; i < that.data.tabs.length; i++) {
             var tempList = [];
-            for (let j = 0; j < res.data.data.orderList.length; j++) {
-              if (res.data.data.orderList[j].status == i) {
-                tempList.push(res.data.data.orderList[j])
+            for (let j = 0; j < res.data.data.length; j++) {
+              if (res.data.data[j].status == i) {
+                tempList.push(res.data.data[j])
                 //orderList[i].push(res.data.data.orderList[j])
               }
             }
@@ -133,6 +85,7 @@ Page({
   },
   orderDetail: function (e) {
     var orderId = e.currentTarget.dataset.id;
+    debugger
     wx.navigateTo({
       url: "/pages/order-details/index?id=" + orderId
     })
