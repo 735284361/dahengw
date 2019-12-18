@@ -6,20 +6,25 @@
       <!-- 主要信息 -->
       <view class="main-box">
         <view class="left-img">
-          <image class="pic" src="{{item.imgSrc}}"></image>
+          <image class="pic" src="{{item.avatar}}"></image>
         </view>
         <view class="right-info">
-          <view class="top"> 成员：{{item.name}}</view>
-          <view class="btm">注册时间：{{item.registerTime}}</view>
+          <view class="top"> 成员：{{item.nickname}}</view>
+          <view class="btm">注册时间：{{item.created_at}}</view>
         </view>
       </view>
       <!-- 订单信息 -->
       <view class="main-btm">
-        <view class="btm-left">消费{{item.expense}}</view>
-        <view class="btm-right">{{item.orderNum}}个订单</view>
+        <view class="btm-left">消费{{item.amount}}</view>
+        <view class="btm-right">{{item.order_number}}个订单</view>
       </view>
     </view>  
-    <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+    <view wx:if="{{distribMemberList.length == 0}}" class="no-data">
+      你还没有成员，快去添加成员吧
+    </view>
+    <view wx:if="{{distribMemberList.length > 0}}">
+      <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+    </view>
     <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://s10.mogucdn.com/mlcdn/c45406/171018_8gj08gbl9fj6igb380dec9k1ifhe2_32x32.png"></wxc-loadmore>
   </view>
 </view>

@@ -1,4 +1,6 @@
-var wxpay = require('../../../utils/pay.js')
+var wxpay = require('../../../utils/pay.js');
+var request = require("../../../utils/request.js");
+
 var app = getApp()
 Page({
   data: {
@@ -86,10 +88,10 @@ Page({
       page: app.globalData.page
     };
     console.log('getting orderList')
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/list',
-      data: postData,
+    request.$get({
+      url: 'agent/orders',
       success: (res) => {
+        console.log(res)
         if (res.data.code === 0) {
           console.log('orderList', res.data.data.orderList)
           that.setData({
@@ -101,12 +103,16 @@ Page({
           var orderList = [];
           for (let i = 0; i < that.data.tabs.length; i++) {
             var tempList = [];
-            for (let j = 0; j < res.data.data.orderList.length; j++) {
-              if (res.data.data.orderList[j].status == i) {
-                tempList.push(res.data.data.orderList[j])
-                //orderList[i].push(res.data.data.orderList[j])
+            if (i === 0) {
+              tempList = res.data.data;
+            }else {
+              for (let j = 0; j < res.data.data.length; j++) {
+                if (res.data.data[j].status == i) {
+                  tempList.push(res.data.data[j]);
+                }
               }
             }
+            
             console.log(tempList)
             orderList.push({ 'status': i, 'isnull': tempList.length === 0, 'orderList': tempList })
           }

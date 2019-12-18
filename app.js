@@ -230,9 +230,9 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    domain: "http://daheng.test/",// 商城后台域名
+    // domain: "http://daheng.test/",// 商城后台域名
     picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
-    // domain: "http://dh.raohouhai.com/",// 商城后台域名
+    domain: "http://dh.raohouhai.com/",// 商城后台域名
     subDomain: "raohouhai",// 商城后台个性域名tgg
     vDomain: "api/v1",// 商城后台个性域名tgg
     version: "2.0.6",

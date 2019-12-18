@@ -1,3 +1,5 @@
+var request = require('../../../utils/request.js');
+
 const date = new Date()
 const years = []
 const curYear = date.getFullYear();
@@ -27,8 +29,12 @@ for (let i = 1; i <= date.getMonth()+1; i++) {
   countMon.push(i)
 }
 for (let i = 1; i <= date.getDate(); i++) {
-  countDate.push(i);
-  revs.push(i);
+  var d = i;
+  if (i < 10) {
+    d = "0" + i;
+  }
+  countDate.push(d);
+  revs.push(d);
 }
 revs.reverse();
 
@@ -42,34 +48,34 @@ Page({
     labels: [
       {
         name: "全部",
-        id: '1',
+        id: '0',
         isSelected: true
+      },
+      {
+        name: "购物",
+        id: '1',
+        isSelected: false        
       },
       {
         name: "充值",
         id: '2',
-        isSelected: false        
+        isSelected: false
       },
       {
         name: "提现",
         id: '3',
         isSelected: false
+
       },
       {
-        name: "分销",
+        name: "佣金",
         id: '4',
         isSelected: false
 
       },
       {
-        name: "分销",
-        id: '4',
-        isSelected: false
-
-      },
-      {
-        name: "分销",
-        id: '4',
+        name: "分成",
+        id: '5',
         isSelected: false
 
       }
@@ -97,7 +103,7 @@ Page({
     showStartTime: true,
     showEndTime: false,
     statusMask: "hide",
-    startBottom: true
+    startBottom: true,
   },
 
   /**
@@ -115,11 +121,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.queryDetail();
-    // var year = new Date().getFullYear();
-    // var mon = new Date().getMonth + 1;
-    // var day = new Date().getDate();
-    // var date = year + "-" + this.dealTimeToStr(mon) + this.dealTimeToStr(day);
     this.setData({
       endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate())-1],
       startTime: curYear + "-" + (curMonth + 1) + "-01",
@@ -128,37 +129,16 @@ Page({
       days: countDate,
       startDays: revs,
       endDays: countDate
-    })
+    });
+    this.queryDetail();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -167,67 +147,35 @@ Page({
   },
   // 查询资金流水明细
   queryDetail: function () {
-    // 1574136755000 ：2019-11-19 12:12:35
-     // 1574216469000 ：2019-11-20 10:21:09
-      // 1574036469000 ：2019-11-18 08:21:09
-    let data = {
-      spended: "123412",
-      income: "1234",
-      DATA: [
-        {
-          shopName: "优优稻香",
-          type: "餐饮美食",
-          time: 1574136755000,
-          detail: "-21"
-        },
-        {
-          shopName: "优优稻香",
-          type: "餐饮美食",
-          time: 1574216469000,
-          detail: "-21"
-        },
-        {
-          shopName: "优优稻香",
-          type: "餐饮美食",
-          time: 1574036469000,
-          detail: "-21"
-        }
-      ]
-    };
-    for (var i = 0; i<data.DATA.length; i++){
-      var item = data.DATA[i];
-      if (item.time) {
-        item.time = this.formateTime(item.time);
-      }
-    }
-    
-    this.setData({
-      financialDetail: {
-        spended: data.spended,
-        income: data.income,
-        detailData: data.DATA
+    var labelIds = [];
+
+    this.data.labels.map(function (item) {
+      if (item.isSelected) {
+        labelIds.push(item.id);
       }
     });
-  },
-  // 处理时间
-  formateTime: function (time) {
-    let str="";
-    let curTime = new Date().getTime();
-    let today = 8640000, yesterday = 172800000;
-    let between = curTime - time;
-    let years = new Date(time).getFullYear();
-    let mon = this.dealTimeToStr(new Date(time).getMonth() + 1);
-    let day = this.dealTimeToStr(new Date(time).getDate());
-    let hours = this.dealTimeToStr(new Date(time).getHours());
-    let min = this.dealTimeToStr(new Date(time).getMinutes());
-    if (between < today) {
-      str = "今天 " + hours + ":" + min;
-    } else if (between > today && between < yesterday) {
-      str = "昨天 " + hours + ":" + min;
-    } else {
-      str = years + "-" + mon + "-" + day + " " + hours + ":" + min;
-    }
-    return str;
+      var that = this;
+      var params = {
+        type: labelIds.join(","),
+        start_at: this.data.startTime,
+        end_at: this.data.endTime
+      }
+      request.$get({
+        url: 'bill/list',
+        data: params,
+        success: (res) => {
+          if (res.statusCode == 200) {
+            this.setData({
+              financialDetail: {
+                spended: res.data.expand,
+                income: res.data.income,
+                detailData: res.data.list
+              }
+            });
+            console.log(this.data.financialDetail)
+          }
+        }
+      });
   },
   // 统一处理时间
   dealTimeToStr: function (time) {
@@ -239,13 +187,12 @@ Page({
   },
   // 选择时间
   checkedTime: function(){
-    var curYear = new Date().getFullYear();
-    var curMon = new Date().getMonth();
-    var day = new Date().getDate();
     this.setData({
       openPicker: !this.data.openPicker,
-      statusMask: 'show'
-    })
+      statusMask: 'show',
+      startValue: this.data.startValue,
+      endValue: this.data.endValue
+    });
   },
   // 筛选
   clickSearch: function () {
@@ -256,6 +203,13 @@ Page({
   // 选择标签
   checked: function (e) {
     var index = e.currentTarget.dataset.index;
+    if (this.data.labels[index].id == 0) {
+      this.data.labels.map(function (item) {
+        item.isSelected = false;
+      })
+    }else {
+      this.data.labels[0].isSelected = false;
+    }
     this.data.labels[index].isSelected = !this.data.labels[index].isSelected;
     this.setData({
       labels:this.data.labels
@@ -267,14 +221,14 @@ Page({
       this.setData({
         startValue: [curYear, curMonth, 0],
         startTime: curYear + "-" + (curMonth + 1) + "-01",
+        endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1]
       })
     }
     console.log(val)
     this.setData({
       showStartTime: true,
       showEndTime: false,
-      startBottom: true,
-      endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1]
+      startBottom: true
     });
   },
   showEndPicker: function (e) {
@@ -282,7 +236,8 @@ Page({
     if (val == "结束时间") {
       this.setData({
         endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1],
-        endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate())
+        endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate()),
+        startValue: [curYear, curMonth, 0],
       })
     }
     this.setData({
@@ -297,18 +252,21 @@ Page({
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
-        startDays: days[mon]
+        startDays: days[mon],
+        startValue: val
       })
     } else {
       if (this.data.months[val[1]-1] != curMonth) {
         this.setData({
           months: countMon,
-          startDays: days[mon]
+          startDays: days[mon],
+          startValue: val
         })
       }else {
         this.setData({
           months: countMon,
-          startDays: revs
+          startDays: revs,
+          startValue: val
         })
       }
     }
@@ -322,18 +280,21 @@ Page({
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
-        endDays: days[mon]
+        endDays: days[mon],
+        endValue: val
       })
     } else {
       if (this.data.months[val[1] - 1] != curMonth) {
         this.setData({
           months: countMon,
-          endDays: days[mon]
+          endDays: days[mon],
+          endValue: val
         })
       } else {
         this.setData({
           months: countMon,
-          endDays: countDate
+          endDays: countDate,
+          endValue: val
         })
       }
     }
@@ -363,6 +324,7 @@ Page({
     }
     var selectedLabekIds = selectedLabelArr.join(","); // 选中标签ID
     this.toggleMask();
+    this.queryDetail();
   },
   // 切换蒙层
   toggleMask: function () {
@@ -386,8 +348,7 @@ Page({
   },
   // 刷选好时间
   dateConfirm: function (){
-    console.log(this.data.startValue)
-    console.log(this.data.endValue)
+    this.queryDetail()
     this.bindMask();
   },
   clearDate: function () {

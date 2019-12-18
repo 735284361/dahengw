@@ -1,4 +1,5 @@
 const app = getApp();
+var request = require('../../../utils/request.js');
 
 Page({
   data: {
@@ -34,6 +35,8 @@ Page({
   onShow: function () {
     this.getUserApiInfo();
     this.getUserDistribInfo();
+    this.getAgentInfo();
+    // this.getStatisticsInfo();
 
     var userInfo = wx.getStorageSync('userInfo')
     if (userInfo) {
@@ -72,7 +75,6 @@ Page({
         token: wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res)
         if (res.data.code == 0) {
           that.setData({
             amount: 1200,
@@ -92,7 +94,40 @@ Page({
       url: "/pages/authorize/index"
     })
     this.onLoad()
+  },
+  // 获取代理商信息
+  getAgentInfo: function () {
+    var that = this;
+    request.$get({
+      url: 'agent/detail',
+      success: function (res) {
+        console.log(res)
+        if (res.data.code == 0) {
+          if (res.data.data.id) {
+            that.getStatisticsInfo();
+          } else {
+            wx.redirectTo({
+              url: "/pages/apply-agent/index"
+            });
+          }
+        }
+      }
+    });
+  },
+  getStatisticsInfo: function () {
+    var that = this;
+    request.$get({
+      url: 'agent/statistics',
+      success: function (res) {
+        console.log(res)
+        if (res.data.code == 0) {
+          that.setData({
+            amount: res.data.data.amount,
+            commission: res.data.data.divide
+          });
+        }
+      }
+    })
   }
-
 
 })
