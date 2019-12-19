@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/order-details/index",
     "pages/start/start",
     "pages/ucenter/order-list/index",
     "pages/ucenter/index/index",
+    "pages/order-details/index",
     "pages/shop-cart/index",
     "pages/apply-agent/index",
     "pages/to-pay-order/index",

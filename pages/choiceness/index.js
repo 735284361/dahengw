@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var starscore = require("../../templates/starscore/starscore.js");
+var request = require('../../utils/request.js');
 var app = getApp();
 Page({
   data: {
@@ -46,13 +47,13 @@ Page({
       title: '大亨推荐',
     })
     that.getBanners();
-    that.getNotice();
+    // that.getNotice();
     that.getAppRecommendGoodsList()
     that.getRGshow()
     try {
       var res = wx.getSystemInfoSync()
       console.log('system information', res)
-      if (that.data.noticeList) {
+      if (!that.data.noticeList) {
         that.setData({
           stv: {
             windowsWidth: res.windowWidth,
@@ -129,8 +130,8 @@ Page({
   getRecommendTitlePicStr: function () {
     var that = this;
     //  获取商品推荐图片
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'finderRecommendTtile'
       },
@@ -164,24 +165,24 @@ Page({
     })
     console.log('recommendGoods:', recommendGoods)
   },
-  getNotice: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
-      data: { pageSize: 7 },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            noticeList: res.data.data
-          });
-        }
-      }
-    })
-  },
+  // getNotice: function () {
+  //   var that = this;
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
+  //     data: { pageSize: 7 },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           noticeList: res.data.data
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
   getBanners: function () {
     var that = this
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/banner/list',
+    request.$get({
+      url: 'banner/list',
       success: function (res) {
         console.log("请求banners返回代码", res.data.code)
         if (res.data.code === 0) {

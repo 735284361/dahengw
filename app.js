@@ -5,7 +5,7 @@ App({
     var that = this;
     //  获取商城名称
     wx.request({
-      url: that.globalData.domain + that.globalData.vDomain + '/config/value',
+      url: that.globalData.domain + 'config/value',
       data: {
         key: 'mallName'
       },
@@ -17,7 +17,7 @@ App({
     })
     //  获取商城LOGO
     wx.request({
-      url: that.globalData.domain + that.globalData.vDomain + '/config/value',
+      url: that.globalData.domain + 'config/value',
       data: {
         key: 'shopLogo'
       },
@@ -63,7 +63,7 @@ App({
     //   }
     // })
     wx.request({
-      url: that.globalData.domain + that.globalData.vDomain + '/shop/category/list',
+      url: that.globalData.domain + 'shop/category/list',
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
@@ -81,31 +81,31 @@ App({
       }
     })
   },
-  sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString, emphasis_keyword){
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + that.globalData.subDomain + '/template-msg/put',
-      method:'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        token: wx.getStorageSync('token'), //登录接口返回的登录凭证
-        type: 0, //0 小程序 1 服务号
-        module: 'order', //所属模块：immediately 立即发送模板消息；order 所属订单模块
-        business_id: orderId, //登录接口返回的登录凭证
-        trigger: trigger, //module不为immediately时必填，代表对应的【订单】触发的状态
-        template_id: template_id, //模板消息ID
-        form_id: form_id, //type=0时必填，表单提交场景下，为 submit 事件带上的 formId；支付场景下，为本次支付的 prepay_id
-        url: page, //小程序：点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）；服务号：跳转的网页地址
-        postJsonString: postJsonString, //模板消息内容
-        emphasis_keyword: emphasis_keyword //小程序："keyword1.DATA" 模板需要放大的关键词，不填则默认无放大
-      },
-      success: (res) => {
-        //console.log(res.data);
-      }
-    })
-  },
+  // sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString, emphasis_keyword){
+  //   var that = this;
+  //   wx.request({
+  //     url: 'https://api.it120.cc/' + that.globalData.subDomain + '/template-msg/put',
+  //     method:'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     data: {
+  //       token: wx.getStorageSync('token'), //登录接口返回的登录凭证
+  //       type: 0, //0 小程序 1 服务号
+  //       module: 'order', //所属模块：immediately 立即发送模板消息；order 所属订单模块
+  //       business_id: orderId, //登录接口返回的登录凭证
+  //       trigger: trigger, //module不为immediately时必填，代表对应的【订单】触发的状态
+  //       template_id: template_id, //模板消息ID
+  //       form_id: form_id, //type=0时必填，表单提交场景下，为 submit 事件带上的 formId；支付场景下，为本次支付的 prepay_id
+  //       url: page, //小程序：点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）；服务号：跳转的网页地址
+  //       postJsonString: postJsonString, //模板消息内容
+  //       emphasis_keyword: emphasis_keyword //小程序："keyword1.DATA" 模板需要放大的关键词，不填则默认无放大
+  //     },
+  //     success: (res) => {
+  //       //console.log(res.data);
+  //     }
+  //   })
+  // },
   getGoods: function (categoryId) {
     if (categoryId == 0) {
       categoryId = "";
@@ -113,7 +113,7 @@ App({
     console.log(categoryId)
     var that = this;
     wx.request({
-      url: that.globalData.domain + that.globalData.vDomain + '/shop/goods/list',
+      url: that.globalData.domain + 'shop/goods/list',
       data: {
         page: that.globalData.page,
         per_page: that.globalData.pageSize,
@@ -158,7 +158,7 @@ App({
         console.log(that.globalData.goods)
 
         wx.request({
-          url: that.globalData.domain + that.globalData.vDomain + '/shop/goods/list',
+          url: that.globalData.domain + 'shop/goods/list',
           data: {
             page: that.globalData.page,
             per_page: that.globalData.pageSize,
@@ -230,11 +230,11 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    domain: "http://daheng.test/",// 商城后台域名
+    domain: "http://daheng.test/api/v1/",// 商城后台域名
+    // domain: "http://dh.raohouhai.com/api/v1/",// 商城后台域名
     picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
-    // domain: "http://dh.raohouhai.com/",// 商城后台域名
-    subDomain: "raohouhai",// 商城后台个性域名tgg
-    vDomain: "api/v1",// 商城后台个性域名tgg
+    // subDomain: "raohouhai",// 商城后台个性域名tgg
+    // vDomain: "api/v1",// 商城后台个性域名tgg
     version: "2.0.6",
     shareProfile: '重庆地道美味，麻辣鲜香' // 首页转发的时候术语
   }

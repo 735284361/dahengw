@@ -40,7 +40,7 @@ Page({
     ],
   },
   onLoad: function (e) {
-    var orderId = 11;//e.id;
+    var orderId = e.id;
     this.data.orderId = orderId;
     this.setData({
       orderId: orderId
@@ -88,7 +88,6 @@ Page({
   },
   confirmBtnTap: function (e) {
     var that = this;
-    debugger
     var orderId = e.currentTarget.dataset.id;
     wx.showModal({
       title: '确认您已收到商品？',
@@ -96,10 +95,9 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/delivery',
+          request.$get({
+            url: 'order/confirm',
             data: {
-              token: wx.getStorageSync('token'),
               orderId: orderId
             },
             success: (res) => {

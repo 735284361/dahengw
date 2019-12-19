@@ -1,5 +1,7 @@
 // const apiHttp = 'http://dh.raohouhai.com/api/v1/'
-const apiHttp = 'http://daheng.test/api/v1/'
+var app = getApp()
+const apiHttp = app.globalData.domain
+
 const header = {
   'content-type': 'application/x-www-form-urlencoded',
   'Accept': 'application/json'
@@ -35,7 +37,7 @@ function request(url, method, data, complete, success, fail) {
             case 401:
               // 401 清除token信息并跳转到登录页面
               wx.navigateTo({
-                url: '../authorize/index',
+                url: '/pages/authorize/index',
               })
               break
             case 403:

@@ -36,13 +36,12 @@ Page({
   },
   getOrderList: function () {
     var that = this;
-    var postData = {
-      pageSize: app.globalData.pageSize,
-      page: app.globalData.page
-    };
+    // var postData = {
+    //   pageSize: app.globalData.pageSize,
+    //   page: app.globalData.page
+    // };
     request.$get({
       url: 'order/list',
-      data: postData,
       success: (res) => {
         if (res.data.code === 0) {
           console.log('orderList',res.data.data.orderList)
@@ -85,7 +84,6 @@ Page({
   },
   orderDetail: function (e) {
     var orderId = e.currentTarget.dataset.id;
-    debugger
     wx.navigateTo({
       url: "/pages/order-details/index?id=" + orderId
     })
@@ -99,10 +97,9 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
-          wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/close',
+          request.$get({
+            url: 'order/close',
             data: {
-              token: wx.getStorageSync('token'),
               orderId: orderId
             },
             success: (res) => {
@@ -119,49 +116,54 @@ Page({
   toPayTap: function (e) {
     var that = this;
     var orderId = e.currentTarget.dataset.id;
-    var money = e.currentTarget.dataset.money;
-    var needScore = e.currentTarget.dataset.score;
     //wxpay.wxpay(app, money, orderId, "/pages/order-list/index");
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
+    request.$post({
+      url: 'order/repay',
+      method: 'POST',
       data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
+        orderId: orderId
+      }, // 设置请求的 参数
+      success: (res) => {
+        wx.hideLoading();
         if (res.data.code == 0) {
-          // res.data.data.balance
-          money = money - res.data.data.balance;
-          if (res.data.data.score < needScore) {
-            wx.showModal({
-              title: '错误',
-              content: '您的积分不足，无法支付',
-              showCancel: false
-            })
-            return;
-          }
-          if (money <= 0) {
-            // 直接使用余额支付
-            wx.request({
-              url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/pay',
-              method: 'POST',
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              data: {
-                token: wx.getStorageSync('token'),
-                orderId: orderId
-              },
-              success: function (res2) {
+          wx.requestPayment({
+            timeStamp: String(res.data.data.timeStamp),
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            signType: 'MD5',
+            paySign: res.data.data.paySign,
+            success(res) {
+              console.log(res)
+            },
+            complete: function (res) {
+              if (res.errMsg == 'requestPayment:fail cancel') {
                 that.onShow();
+              } else if (res.errMsg == 'requestPayment:ok') {
+                wx.showModal({
+                  title: '提示',
+                  content: '支付成功',
+                  showCancel: false,
+                  success: function() {
+                    that.onShow()
+                  }
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '支付失败',
+                  showCancel: false,
+                  success: function () {
+                    that.onShow()
+                  }
+                })
               }
-            })
-          } else {
-            wxpay.wxpay(app, money, orderId, "/pages/ucenter/order-list/index");
-          }
+            }
+          })
         } else {
+          console.log(res)
           wx.showModal({
-            title: '错误',
-            content: '无法获取用户资金信息',
+            title: '提示',
+            content: res.data.msg,
             showCancel: false
           })
         }

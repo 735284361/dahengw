@@ -57,7 +57,7 @@
         <image style="width: 100rpx; height: 100rpx;" src="{{item.user.avatar}}"></image>
       </view>
       <view style="width:500rpx;float:left;margin-left:35rpx;border-bottom:1px solid #f4f4f4;">
-        <view>{{item.content}}</view>
+        <view>{{item.comment}}</view>
         <view style="color: #B0B0B0;font-size:24rpx;">{{item.created_at}}</view>
       </view>
       <wxc-label class='goods-text-label' type='corner' text="{{item.score}}分"></wxc-label>

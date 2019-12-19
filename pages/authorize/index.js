@@ -100,7 +100,7 @@ Page({
     wx.login({
       success: function (res) {
         wx.request({
-          url: app.globalData.domain + 'api/wechat/login',
+          url: app.globalData.domain + 'wechat/login',
           data: {
             code: res.code
           },
@@ -141,7 +141,7 @@ Page({
             var encryptedData = res.encryptedData;
             // 下面开始调用注册接口
             wx.request({
-              url: app.globalData.domain + 'api/wechat/register',
+              url: app.globalData.domain + 'wechat/register',
               data: { code: code, encryptedData: encryptedData, iv: iv }, // 设置请求的 参数
               success: (res) => {
                 wx.hideLoading();

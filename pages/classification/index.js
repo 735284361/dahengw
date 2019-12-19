@@ -1,5 +1,6 @@
 var app = getApp();
 var starscore = require("../../templates/starscore/starscore.js");
+var request = require('../../utils/request.js');
 //var server = require('../../utils/server');
 Page(Object.assign({},{
   data: {
@@ -151,8 +152,8 @@ Page(Object.assign({},{
       title: '努力加载中···',
       mask: true,
     });*/
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/category/all',
+    request.$get({
+      url: 'category/all',
       success: function (res) {
         var categories = []; //{ id: 0, name: "全品类" }
         if (res.data.code == 0) {
@@ -181,8 +182,8 @@ Page(Object.assign({},{
     }
     console.log(categoryId)
     var that = this;
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/shop/goods/list',
+    request.$get({
+      url: 'shop/goods/list',
       data: {
         page: that.data.page,
         per_page: that.data.pageSize,
@@ -218,16 +219,14 @@ Page(Object.assign({},{
           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
           goods[i].starpic = starscore.picStr(goods[i].starscore)
         }
-        debugger
         that.setData({
           goods: goods,
         });
         console.log('getGoodsReputation----------------------')
         console.log(goods)
 
-
-        wx.request({
-          url: app.globalData.domain + app.globalData.Domain + '/shop/goods/list',
+        request.$get({
+          url: 'shop/goods/list',
           data: {
             page: that.data.page,
             per_page: that.data.pageSize,
@@ -303,8 +302,8 @@ Page(Object.assign({},{
   getPrompt: function () {
     var that = this
     //  获取关于我们Title
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'shopPrompt'
       },
@@ -321,8 +320,8 @@ Page(Object.assign({},{
   getDelivery: function () {
     var that = this
     //  获取关于我们Title
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'shopDelivery'
       },

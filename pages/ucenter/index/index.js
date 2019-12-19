@@ -1,4 +1,5 @@
 const app = getApp()
+var request = require('../../../utils/request.js');
 
 Page({
   data: {
@@ -6,8 +7,8 @@ Page({
     aboutUsContent: '',
     servicePhoneNumber: '',
     balance: 0,
-    freeze: 0,
-    score: 0,
+    withdrawn: 0,
+    cash_in: 0,
     score_sign_continuous: 0,
     iconSize: 45,
     iconColor: '#999999',
@@ -40,9 +41,9 @@ Page({
   },
   onShow() {
     var that = this;
-    that.getUserApiInfo();
+    // that.getUserApiInfo();
     that.getUserAmount();
-    that.checkScoreSign();
+    // that.checkScoreSign();
     that.getAboutUs();
     that.getservicePhoneNumber();
 
@@ -117,37 +118,31 @@ Page({
   //     }
   //   })
   // },
-  getUserApiInfo: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/detail',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            apiUserInfoMap: res.data.data,
-            userMobile: res.data.data.base.mobile
-          });
-        }
-      }
-    })
+  // getUserApiInfo: function () {
+  //   var that = this;
+  //   request.$get({
+  //     url: 'user/detail',
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           apiUserInfoMap: res.data.data,
+  //           userMobile: res.data.data.base.mobile
+  //         });
+  //       }
+  //     }
+  //   })
 
-  },
+  // },
   getUserAmount: function () {
     var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
-      data: {
-        token: wx.getStorageSync('token')
-      },
+    request.$get({
+      url: 'user/account',
       success: function (res) {
         if (res.data.code == 0) {
           that.setData({
             balance: res.data.data.balance,
-            freeze: res.data.data.freeze,
-            score: res.data.data.score
+            withdrawn: res.data.data.withdrawn,
+            cash_in: res.data.data.cash_in
           });
         }
       }
@@ -157,8 +152,8 @@ Page({
   getAboutUs: function () {
     var that = this
     //  获取关于我们Title
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'aboutUsTitle'
       },
@@ -171,8 +166,8 @@ Page({
       }
     })
     //  获取关于我们内容
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'aboutUsContent'
       },
@@ -188,8 +183,8 @@ Page({
   getservicePhoneNumber: function () {
     var that = this
     //  获取客服电话
-    wx.request({
-      url: app.globalData.domain + app.globalData.vDomain + '/config/value',
+    request.$get({
+      url: 'config/value',
       data: {
         key: 'servicePhoneNumber'
       },
@@ -202,43 +197,43 @@ Page({
       }
     })
   },
-  checkScoreSign: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/today-signed',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            score_sign_continuous: res.data.data.continuous
-          });
-        }
-      }
-    })
-  },
-  scoresign: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/score/sign',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.getUserAmount();
-          that.checkScoreSign();
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.data.msg,
-            showCancel: false
-          })
-        }
-      }
-    })
-  },
+  // checkScoreSign: function () {
+  //   var that = this;
+  //   request.$get({
+  //     url: 'score/today-signed',
+  //     data: {
+  //       token: wx.getStorageSync('token')
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           score_sign_continuous: res.data.data.continuous
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
+  // scoresign: function () {
+  //   var that = this;
+  //   request.$get({
+  //     url: 'score/sign',
+  //     data: {
+  //       token: wx.getStorageSync('token')
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.getUserAmount();
+  //         that.checkScoreSign();
+  //       } else {
+  //         wx.showModal({
+  //           title: '错误',
+  //           content: res.data.msg,
+  //           showCancel: false
+  //         })
+  //       }
+  //     }
+  //   })
+  // },
   relogin: function () {
     wx.navigateTo({
      url: "/pages/authorize/index"
