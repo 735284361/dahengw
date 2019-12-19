@@ -1,4 +1,3 @@
-// const apiHttp = 'http://dh.raohouhai.com/api/v1/'
 var app = getApp()
 const apiHttp = app.globalData.domain
 

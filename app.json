@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/start/start",
+    "pages/order-details/index",
     "pages/ucenter/order-list/index",
     "pages/ucenter/index/index",
     "pages/order-details/index",

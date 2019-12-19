@@ -1,4 +1,6 @@
 let app = getApp();
+var request = require("../../../utils/request.js");
+
 Page({
 
   data: {
@@ -15,6 +17,7 @@ Page({
   },
 
   onShow: function () {
+    this.getCode();
     
   },
   longTap: function (e) {
@@ -65,5 +68,20 @@ Page({
 
   onShareAppMessage: function () {
     
+  },
+
+  getCode: function () {
+    var that = this;
+    request.$get({
+      url: 'agent/qrcode',
+      success: (res) => {
+        if (res.data.code == 0) {
+          that.setData({
+            imgSrc: res.data.data
+          });
+        }
+      }
+    })
   }
+
 })
