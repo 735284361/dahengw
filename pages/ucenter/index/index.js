@@ -249,5 +249,10 @@ Page({
     wx.navigateTo({
       url: "/pages/withdraw/index"
     })
+  },
+  switchBar: function () {
+    wx.switchTab({
+      url: '/pages/distribution/index/index'
+    });
   }
 })

@@ -10,7 +10,7 @@ page {
 .main {
   display: flex;
   width: 650rpx;
-  height: 650rpx;
+  height: 808rpx;
   justify-content: center;
   align-items: center;
   margin-top: 216rpx;
@@ -24,13 +24,18 @@ page {
   width: 278rpx;
   text-align: center;
 }
+.main .img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .main .img {
   width: 650rpx;
   height: 650rpx;
 }
 .tip {
   position: absolute;
-  top: 928rpx;
+  top: 972rpx;
   width: 100%;
   text-align: center;
   font-size: 24rpx;

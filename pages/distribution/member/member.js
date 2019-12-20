@@ -8,6 +8,7 @@ Page({
    */
   data: {
     distribMemberList: [],
+    loadingStatus: false
   },
 
   /**
@@ -21,6 +22,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      loadingStatus: true
+    });
     this.getMembersData();
   },
   /**
@@ -38,6 +42,9 @@ Page({
           });
           console.log(that.data.distribMemberList)
         }
+        that.setData({
+          loadingStatus: false
+        });
       }
     });
   }

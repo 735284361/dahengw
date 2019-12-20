@@ -1,5 +1,6 @@
 <view class="container">
   <view class="finBox">
+    <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
     <view class="search gray-28">
       <view bindtap="clickSearch" class="ser-box">
         <text class="{{isShowPanel ? 'gren-color':''}}">筛选</text>

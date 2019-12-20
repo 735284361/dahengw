@@ -1,10 +1,13 @@
 <view class="container" bindtap="bindtap" bindtouchstart="touchStart" bindtouchend="touchEnd">
-  <view class="main">
-    <text class="saveBtn" wx:if="{{showSaveTip}}" bindtap="saveOrShare">保存并分享</text>
-    <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
-  </view>
-  <view class="tip">
-    <text class="margin-20">长按可保存分享推广码</text>
+  <wxc-loading wx:if="{{loadingStatus}}" is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
+  <view class="main" wx:if="{{imgSrc != ''}}">
+    <view class="img-box">
+      <text class="saveBtn" wx:if="{{showSaveTip}}" bindtap="saveOrShare">保存并分享</text>
+      <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
+    </view>
+    <view class="tip">
+      <text class="margin-20">长按可保存分享推广码</text>
+    </view>
   </view>
   <!-- <wxc-mask status="{{maskStatus}}" ></wxc-mask> -->
 </view>
