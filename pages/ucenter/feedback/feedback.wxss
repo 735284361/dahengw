@@ -42,7 +42,7 @@ page{
 }
 
 .fb-body .content{
-  width: 85%;
+  width: 100%;
   height: 100%;
   color: #333;
   line-height: 40rpx;

@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/ucenter/index/index",
+    "pages/ucenter/feedback/feedback",
     "pages/start/start",
     "pages/order-details/index",
     "pages/ucenter/order-list/index",
-    "pages/ucenter/index/index",
     "pages/shop-cart/index",
     "pages/apply-agent/index",
     "pages/to-pay-order/index",
@@ -22,7 +23,6 @@
     "pages/recharge/index",
     "pages/withdraw/index",
     "pages/kanjia/index",
-    "pages/ucenter/feedback/feedback",
     "pages/ucenter/footprint/footprint",
     "templates/canvas-clock/index",
     "pages/ucenter/location/location",
@@ -34,6 +34,11 @@
     "pages/distribution/financial-detail/financialDetail",
     "pages/distribution/code/code"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "WeChat",

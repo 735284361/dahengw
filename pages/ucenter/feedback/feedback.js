@@ -1,7 +1,8 @@
 //var util = require('../../../utils/util.js');
 //var api = require('../../../config/api.js');
 
-
+const request = require('../../../utils/request.js');
+const fun = require('../../../utils/function.js');
 
 var app = getApp();
 
@@ -12,7 +13,6 @@ Page({
     inputTxt: '',
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
@@ -23,6 +23,60 @@ Page({
       inputTxt: ''
     })
   },
+
+  bindSave: function (e) {
+    var that = this;
+    var type = e.detail.value.type;
+    var content = e.detail.value.content;
+    var phone = e.detail.value.phone;
+
+    if (type == 0) {
+      wx.showToast({
+        title: '请选择反馈类型',
+        duration: 2000
+      })
+      return
+    } else {
+      type = that.data.array[type]
+    }
+    if (content == "") {
+      wx.showToast({
+        title: '请填写反馈内容',
+        duration: 2000
+      })
+      return
+    }
+    if (!fun.phone(phone)) {
+      wx.showToast({
+        title: '手机号格式错误',
+        duration: 2000
+      })
+      return
+    }
+    wx.showLoading()
+    request.$post({
+      url: 'user/feedback',
+      data: {
+        type: type,
+        content: content,
+        phone: phone,
+      },
+      complete: function (res) {
+        wx.hideLoading();
+        if (res.data.code != 0) {
+          wx.showModal({
+            title: '失败',
+            content: res.data.msg,
+            showCancel: false
+          })
+          return;
+        }
+        // 跳转到结算页面
+        wx.navigateBack({})
+      }
+    })
+  },
+
   onLoad: function (options) {
   },
   onReady: function () {

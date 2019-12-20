@@ -5,48 +5,42 @@ var totalSecond  = 0;
 var oriMeters = 0.0;
 /* 毫秒级倒计时 */
 function count_down(that) {
+  if (starRun == 0) {
+    return;
+  }
 
-    if (starRun == 0) {
-      return;
-    }
+  if (countTooGetLocation >= 100) {
+    var time = date_format(total_micro_second);
+    that.updateTime(time);
+  }
 
-    if (countTooGetLocation >= 100) {
-      var time = date_format(total_micro_second);
-      that.updateTime(time);
-    }
+  if (countTooGetLocation >= 5000) { //1000为1s
+    that.getLocation();
+    countTooGetLocation = 0;
+  }   
 
-  	if (countTooGetLocation >= 5000) { //1000为1s
-        that.getLocation();
-        countTooGetLocation = 0;
-  	}   
-    
-
- setTimeout
-  	setTimeout(function(){
-		countTooGetLocation += 10;
+  setTimeout
+  setTimeout(function() {
+    countTooGetLocation += 10;
     total_micro_second += 10;
-		count_down(that);
-    }
-    ,10
-    )
+    count_down(that);
+  },10)
 }
-
 
 // 时间格式化输出，如03:25:19 86。每10ms都会调用一次
 function date_format(micro_second) {
-  	// 秒数
-  	var second = Math.floor(micro_second / 1000);
-  	// 小时位
-  	var hr = Math.floor(second / 3600);
-  	// 分钟位
-  	var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
-  	// 秒位
+  // 秒数
+  var second = Math.floor(micro_second / 1000);
+  // 小时位
+  var hr = Math.floor(second / 3600);
+  // 分钟位
+  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
+  // 秒位
 	var sec = fill_zero_prefix((second - hr * 3600 - min * 60));// equal to => var sec = second % 60;
 
 
 	return hr + ":" + min + ":" + sec + " ";
 }
-
 
 function getDistance(lat1, lng1, lat2, lng2) { 
     var dis = 0;
@@ -81,7 +75,7 @@ Page({
     time: "0:00:00"
   },
 
-//****************************
+  //****************************
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     this.getTgLocation()
