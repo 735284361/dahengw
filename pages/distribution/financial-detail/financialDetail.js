@@ -179,6 +179,11 @@ Page({
           this.setData({
             loadingStatus: false
           });
+        },
+        fail: (res) => {
+          this.setData({
+            loadingStatus: false
+          });
         }
       });
   },
