@@ -8,7 +8,7 @@ var app = getApp();
 
 Page({
   data: {
-    array: ['请选择反馈类型', '商品相关', '物流状况', '客户服务', '优惠活动', '功能异常', '产品建议', '其他'],
+    types: [],
     index: 0,
     inputTxt: '',
   },
@@ -36,8 +36,6 @@ Page({
         duration: 2000
       })
       return
-    } else {
-      type = that.data.array[type]
     }
     if (content == "") {
       wx.showToast({
@@ -77,13 +75,37 @@ Page({
     })
   },
 
+  getTypes: function () {
+    var that = this
+    wx.showLoading()
+    request.$get({
+      url: 'user/feedback/types',
+      complete: function (res) {
+        wx.hideLoading();
+        if (res.data.code != 0) {
+          wx.showModal({
+            title: '失败',
+            content: res.data.msg,
+            showCancel: false
+          })
+          return;
+        } else {
+          that.setData({
+            types: res.data.data
+          })
+        }
+      }
+    })
+  },
+
   onLoad: function (options) {
+    var that = this
+    that.getTypes();
   },
   onReady: function () {
 
   },
   onShow: function () {
-
   },
   onHide: function () {
     // 页面隐藏
