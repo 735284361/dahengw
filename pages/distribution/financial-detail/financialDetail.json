@@ -7,6 +7,7 @@
     "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
     "wxc-mask": "../../dist/packages/@minui/wxc-mask/dist/index",
     "wxc-button": "../../dist/packages/@minui/wxc-button/dist/index",
-    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index"
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index",
+    "wxc-loading": "../../../dist/packages/@minui/wxc-loading/dist/index"
   }
 }

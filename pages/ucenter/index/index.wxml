@@ -71,9 +71,9 @@
       </navigator>
     </view>
     <view class="item no-border-right">
-      <navigator url="/pages/ucenter/location/location" hover-class="none" class="a">
-        <wxc-icon type='location' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">到店里</text>
+      <navigator url="/pages/distribution/financial-detail/financialDetail" hover-class="none" class="a">
+      <view class="iconfont icon-money" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
+      <text class="txt">资金流水</text>
       </navigator>
     </view>
     <!-- <view class="item">
@@ -122,10 +122,10 @@
       </navigator>
     </view>
     <view class="item">
-      <!-- <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
-        <wxc-icon type='comment' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">意见反馈</text>
-      </navigator> -->
+      <view class="a" bindtap="switchBar">
+        <view class="iconfont .icon-agent" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
+        <text class="txt">代理</text>
+      </view>
     </view>
     <view class="item no-border-bottom">
       <!-- <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">

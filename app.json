@@ -63,7 +63,7 @@
         "pagePath": "pages/distribution/index/index",
         "iconPath": "images/nav/fenxiao-off.png",
         "selectedIconPath": "images/nav/fenxiao-on.png",
-        "text": "分销"
+        "text": "代理"
       },
       {
         "pagePath": "pages/classification/index",

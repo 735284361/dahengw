@@ -4,10 +4,11 @@ var request = require("../../../utils/request.js");
 Page({
 
   data: {
-    imgSrc:'/images/more/timg.jpg',
+    imgSrc:'',
     showSaveTip: false,
     startTime:0,
-    endTime:0
+    endTime:0,
+    loadingStatus: false
   },
   onLoad: function (options) {
     
@@ -17,6 +18,9 @@ Page({
   },
 
   onShow: function () {
+    this.setData({
+      loadingStatus: true
+    });
     this.getCode();
     
   },
@@ -80,6 +84,9 @@ Page({
             imgSrc: res.data.data
           });
         }
+        this.setData({
+          loadingStatus: false
+        });
       }
     })
   }

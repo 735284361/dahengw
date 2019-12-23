@@ -104,6 +104,7 @@ Page({
     showEndTime: false,
     statusMask: "hide",
     startBottom: true,
+    loadingStatus: false
   },
 
   /**
@@ -128,7 +129,8 @@ Page({
       months: countMon,
       days: countDate,
       startDays: revs,
-      endDays: countDate
+      endDays: countDate,
+      loadingStatus: true
     });
     this.queryDetail();
   },
@@ -174,6 +176,14 @@ Page({
             });
             console.log(this.data.financialDetail)
           }
+          this.setData({
+            loadingStatus: false
+          });
+        },
+        fail: (res) => {
+          this.setData({
+            loadingStatus: false
+          });
         }
       });
   },
@@ -219,7 +229,7 @@ Page({
     var val = e.currentTarget.dataset.start;
     if (val == "开始时间") {
       this.setData({
-        startValue: [curYear, curMonth, 0],
+        startValue: [curYear, curMonth, revs.length - 1],
         startTime: curYear + "-" + (curMonth + 1) + "-01",
         endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1]
       })
@@ -237,7 +247,7 @@ Page({
       this.setData({
         endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1],
         endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate()),
-        startValue: [curYear, curMonth, 0],
+        startValue: [curYear, curMonth, revs.length - 1],
       })
     }
     this.setData({
@@ -322,6 +332,9 @@ Page({
         selectedLabelArr.push(item.id);
       }
     }
+    this.setData({
+      loadingStatus: true
+    });
     var selectedLabekIds = selectedLabelArr.join(","); // 选中标签ID
     this.toggleMask();
     this.queryDetail();
@@ -348,6 +361,9 @@ Page({
   },
   // 刷选好时间
   dateConfirm: function (){
+    this.setData({
+      loadingStatus: true
+    });
     this.queryDetail()
     this.bindMask();
   },

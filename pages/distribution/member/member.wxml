@@ -1,6 +1,7 @@
 
 <view class="container">
   <view class="main">
+  <wxc-loading wx:if="{{loadingStatus}}" is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
     <!-- 人员盒子 -->
     <view class="mbr-item" wx:for="{{distribMemberList}}" wx:key="id" wx:for-item="item" data-id="{{item.id}}">
       <!-- 主要信息 -->
@@ -19,7 +20,7 @@
         <view class="btm-right">{{item.order_number}}个订单</view>
       </view>
     </view>  
-    <view wx:if="{{distribMemberList.length == 0}}" class="no-data">
+    <view wx:if="{{distribMemberList.length == 0 && !loadingStatus}}" class="no-data">
       你还没有成员，快去添加成员吧
     </view>
     <view wx:if="{{distribMemberList.length > 0}}">

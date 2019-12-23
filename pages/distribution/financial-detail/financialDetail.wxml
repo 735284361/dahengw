@@ -1,5 +1,6 @@
 <view class="container">
-  <view class="finBox">
+ <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
+  <view class="finBox" wx:if="{{financialDetail.detailData.length>0}}">
     <view class="search gray-28">
       <view bindtap="clickSearch" class="ser-box">
         <text class="{{isShowPanel ? 'gren-color':''}}">筛选</text>
@@ -127,6 +128,9 @@
       </view>
     </view>
      <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+  </view>
+  <view wx:if="{{financialDetail.detailData.length==0}}">
+    您还没有资金明细~~
   </view>
   <view class="mask" wx:if="{{isShowPanel}}" bindtap="toggleMask"></view>
   <wxc-mask status="{{statusMask}}" opacity="0.6" background-color="#ccc" bindtap="bindMask"></wxc-mask>

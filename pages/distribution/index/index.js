@@ -11,7 +11,7 @@ Page({
     distribMember: 80, // 分销成员
     iconSize: 45,
     iconColor: '#999999',
-    shopLogo: null
+    shopLogo: null,
   },
 
   onLoad: function () {
