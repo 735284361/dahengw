@@ -29,7 +29,7 @@ App({
     })
     // 好评积分赠送规则
     // wx.request({
-    //   url: 'https://api.it120.cc/' + that.globalData.subDomain + '/score/send/rule',
+    //   url: '' + that.globalData.subDomain + '/score/send/rule',
     //   data: {
     //     code: 'goodReputation'
     //   },
@@ -42,7 +42,7 @@ App({
     // })
 
     // wx.request({
-    //   url: 'https://api.it120.cc/' + that.globalData.subDomain + '/config/get-value',
+    //   url: '' + that.globalData.subDomain + '/config/get-value',
     //   data: {
     //     key: 'recharge_amount_min'
     //   },
@@ -54,7 +54,7 @@ App({
     // })
     // 获取砍价设置
     // wx.request({
-    //   url: 'https://api.it120.cc/' + that.globalData.subDomain + '/shop/goods/kanjia/list',
+    //   url: '' + that.globalData.subDomain + '/shop/goods/kanjia/list',
     //   data: {},
     //   success: function (res) {
     //     if (res.data.code == 0) {
@@ -84,7 +84,7 @@ App({
   // sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString, emphasis_keyword){
   //   var that = this;
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + that.globalData.subDomain + '/template-msg/put',
+  //     url: '' + that.globalData.subDomain + '/template-msg/put',
   //     method:'POST',
   //     header: {
   //       'content-type': 'application/x-www-form-urlencoded'
@@ -230,8 +230,8 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    domain: "http://daheng.test/api/v1/",// 商城后台域名
-    // domain: "http://dh.raohouhai.com/api/v1/",// 商城后台域名
+    // domain: "http://daheng.test/api/v1/",// 商城后台域名
+    domain: "https://dh.raohouhai.com/api/v1/",// 商城后台域名
     picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
     // subDomain: "raohouhai",// 商城后台个性域名tgg
     // vDomain: "api/v1",// 商城后台个性域名tgg

@@ -37,7 +37,7 @@ Page({
       var that=this;
       console.log(keyword + "---" + pageNum + "---" + pageSize);
       wx.request({
-        url: "https://api.it120.cc/" + app.globalData.subDomain + "/shop/goods/list",
+        url: "" + app.globalData.subDomain + "/shop/goods/list",
         data:{
           page: pageNum,
           pageSize: pageSize,
@@ -59,7 +59,7 @@ Page({
             var pageSize = that.data.pageSize;
             for (let i = 0; i < goods.length; i++) {
               wx.request({
-                url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/reputation',
+                url: '' + app.globalData.subDomain + '/shop/goods/reputation',
                 data: {
                   goodsId: goods[i].id,
                   page: page,

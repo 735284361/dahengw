@@ -1,5 +1,5 @@
 var app = getApp()
-const head = "https://api.it120.cc/"
+const head = ""
 const projectName = app.globalData.subDomain
 
 

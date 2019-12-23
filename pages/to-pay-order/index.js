@@ -296,7 +296,7 @@ Page({
 //   getMyCoupons: function () {
 //     var that = this;
 //     wx.request({
-//       url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/my',
+//       url: '' + app.globalData.subDomain + '/discounts/my',
 //       data: {
 //         token: wx.getStorageSync('token'),
 //         status: 0

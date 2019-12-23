@@ -94,7 +94,7 @@ Page({
   //   }
   //   var that = this;
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/wxapp/bindMobile',
+  //     url: '' + app.globalData.subDomain + '/user/wxapp/bindMobile',
   //     data: {
   //       token: wx.getStorageSync('token'),
   //       encryptedData: e.detail.encryptedData,

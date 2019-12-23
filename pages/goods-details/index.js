@@ -419,7 +419,7 @@ Page({
   // getVideoSrc: function (videoId) {
   //   var that = this;
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/media/video/detail',
+  //     url: '' + app.globalData.subDomain + '/media/video/detail',
   //     data: {
   //       videoId: videoId
   //     },
@@ -459,7 +459,7 @@ Page({
   //     return;
   //   }
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/kanjia/join',
+  //     url: '' + app.globalData.subDomain + '/shop/goods/kanjia/join',
   //     data: {
   //       kjid: that.data.curGoodsKanjia.id,
   //       token: wx.getStorageSync('token')
@@ -484,7 +484,7 @@ Page({
   //   var that = this
   //   //  获取关于我们Title
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+  //     url: '' + app.globalData.subDomain + '/config/get-value',
   //     data: {
   //       key: 'shopDeliveryPrice'
   //     },

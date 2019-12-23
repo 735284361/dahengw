@@ -33,8 +33,6 @@ Page({
   },
 
   onShow: function () {
-    this.getUserApiInfo();
-    this.getUserDistribInfo();
     this.getAgentInfo();
     // this.getStatisticsInfo();
 
@@ -45,50 +43,7 @@ Page({
       })
     }
   },
-  // 获取用户信息
-  getUserApiInfo: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/detail',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            apiUserInfoMap: res.data.data,
-            userMobile: res.data.data.base.mobile
-          });
-        }
-      }
-    })
-
-  },
-  /**
-   * 获取用户用户分销信息
-   */
-  getUserDistribInfo: function () {
-    var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/amount',
-      data: {
-        token: wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            amount: 1200,
-            commission: 2000,
-            distribCommission: 203.18,
-            distribOrder: 121.75,
-            distribDetail: 0,
-            distribMember: 80
-          });
-        }
-      }
-    })
-  },
-
+  
   relogin: function () {
     wx.navigateTo({
       url: "/pages/authorize/index"

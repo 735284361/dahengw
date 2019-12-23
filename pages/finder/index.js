@@ -63,7 +63,7 @@ Page({
     var that = this;
     //  获取商城名称
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/config/get-value',
+      url: '' + app.globalData.subDomain + '/config/get-value',
       data: {
         key: 'couponsTitlePicStr'
       },
@@ -102,7 +102,7 @@ Page({
     console.log(categoryId)
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
+      url: '' + app.globalData.subDomain + '/shop/goods/list',
       data: {
         page: that.data.page,
         pageSize: that.data.pageSize,
@@ -146,7 +146,7 @@ Page({
   getCoupons: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/coupons',
+      url: '' + app.globalData.subDomain + '/discounts/coupons',
       data: {
         type: ''
       },
@@ -190,7 +190,7 @@ Page({
   gitCoupon: function (e) {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/fetch',
+      url: '' + app.globalData.subDomain + '/discounts/fetch',
       data: {
         id: e.currentTarget.dataset.id,
         token: wx.getStorageSync('token')

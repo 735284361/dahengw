@@ -168,7 +168,7 @@ Page({
   // getNotice: function () {
   //   var that = this;
   //   wx.request({
-  //     url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
+  //     url: '' + app.globalData.subDomain + '/notice/list',
   //     data: { pageSize: 7 },
   //     success: function (res) {
   //       if (res.data.code == 0) {
