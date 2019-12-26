@@ -21,6 +21,9 @@ for (let i = 1; i <= 12; i++) {
     if ((i == 2 || i == 4 || i == 6 || i == 9 || i == 11 ) && j == 31) {
       break;
     }
+    if(j < 10) {
+      // j = "0" + j;
+    }
     days[i].push(j);
   }
 }
@@ -31,7 +34,7 @@ for (let i = 1; i <= date.getMonth()+1; i++) {
 for (let i = 1; i <= date.getDate(); i++) {
   var d = i;
   if (i < 10) {
-    d = "0" + i;
+    // d = "0" + i;
   }
   countDate.push(d);
   revs.push(d);
@@ -89,15 +92,17 @@ Page({
     sortDescImg: '/images/more/sort-desc-s.png',
     sortAscImg: '/images/more/sort-asc-s.png',
     isShowPanel: false,
-    date: '本月',
+    selectedDate: '本月',
     openPicker: false,
     years: years,
     months: months,
     days: days[curMonth+1],
     startDays: [],
     endDays: [],
-    startValue: [curYear, curMonth,revs.length-1],
+    startValue: [years.length-1, curMonth,revs.length-1],
     endValue: [],
+    lastStart: [years.length-1, curMonth, revs.length - 1],
+    lastEnd: [],
     startTime: "",
     endTime: "",
     showStartTime: true,
@@ -123,14 +128,15 @@ Page({
    */
   onReady: function () {
     this.setData({
-      endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate())-1],
+      endValue: [years.length - 1, curMonth, this.dealTimeToStr(date.getDate())-1],
       startTime: curYear + "-" + (curMonth + 1) + "-01",
       endTime: curYear + "-" + (curMonth + 1) + "-" + this.dealTimeToStr(date.getDate()),
       months: countMon,
       days: countDate,
       startDays: revs,
       endDays: countDate,
-      loadingStatus: true
+      loadingStatus: true,
+      lastEnd: [years.length - 1, curMonth, this.dealTimeToStr(date.getDate()) - 1]
     });
     this.queryDetail();
   },
@@ -174,7 +180,6 @@ Page({
                 detailData: res.data.list
               }
             });
-            console.log(this.data.financialDetail)
           }
           this.setData({
             loadingStatus: false
@@ -200,8 +205,8 @@ Page({
     this.setData({
       openPicker: !this.data.openPicker,
       statusMask: 'show',
-      startValue: this.data.startValue,
-      endValue: this.data.endValue
+      lastStart: this.data.startValue,
+      lastEnd: this.data.endValue
     });
   },
   // 筛选
@@ -234,7 +239,6 @@ Page({
         endValue: [curYear, curMonth, this.dealTimeToStr(date.getDate()) - 1]
       })
     }
-    console.log(val)
     this.setData({
       showStartTime: true,
       showEndTime: false,
@@ -259,40 +263,56 @@ Page({
   bindChange: function (e) {
     var val = e.detail.value;
     var mon = val[1] +1;
+    var yearIndex = val[0];
+    var monIndex = val[1]
+    var monarr = [].concat(days[mon]);
+    // monarr.reverse();
+    var index = monarr.indexOf(this.data.startDays[val[2]]);
+ 
     if (this.data.years[val[0]] != curYear) {
+      val[2] = index;
       this.setData({
         months: months,
-        startDays: days[mon],
+        startDays: [].concat(monarr),
         startValue: val
-      })
+      });
     } else {
       if (this.data.months[val[1]-1] != curMonth) {
+        val[2] = index;
         this.setData({
           months: countMon,
-          startDays: days[mon],
+          startDays: [].concat(monarr),
           startValue: val
         })
       }else {
+        if (val[0] == curYear || val[1] == curMonth) {
+          monarr = revs;
+          index = monarr.indexOf(this.data.startDays[val[2]]);
+        }
         this.setData({
           months: countMon,
-          startDays: revs,
-          startValue: val
+          startDays: monarr
+        })
+        this.setData({
+          startValue: [yearIndex, monIndex, index]
         })
       }
     }
     this.setData({
-      startTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.startDays[val[2]]
+      startTime: this.data.years[val[0]] + '-' + this.dealTimeToStr(this.data.months[val[1]]) + "-" + this.dealTimeToStr(this.data.startDays[index])
     });
   },
   changeEndTime: function (e) {
     var val = e.detail.value;
     var mon = val[1] + 1;
+    var dayArr = days[mon];
+
     if (this.data.years[val[0]] != curYear) {
       this.setData({
         months: months,
-        endDays: days[mon],
+        endDays: dayArr,
         endValue: val
-      })
+      });
     } else {
       if (this.data.months[val[1] - 1] != curMonth) {
         this.setData({
@@ -309,7 +329,7 @@ Page({
       }
     }
     this.setData({
-      endTime: this.data.years[val[0]] + '-' + this.data.months[val[1]] + "-" + this.data.endDays[val[2]]
+      endTime: this.data.years[val[0]] + '-' + this.dealTimeToStr(this.data.months[val[1]]) + "-" + this.dealTimeToStr(this.data.endDays[val[2]])
     });
   },
   // 重置标签
@@ -346,8 +366,17 @@ Page({
     });
   },
   bindMask: function(){
+    var startMonth = this.data.months[this.data.lastStart[1]];
+    var startDate = this.data.startDays[this.data.lastStart[2]];
+    var endMonth = this.data.months[this.data.lastEnd[1]];
+    var endDate = this.data.endDays[this.data.lastEnd[2]];
+   
     this.setData({
       openPicker: !this.data.openPicker,
+      startValue: this.data.lastStart,
+      endValue: this.data.lastEnd,
+      startTime: this.data.years[this.data.lastStart[0]] + '-' + this.dealTimeToStr(startMonth) + "-" + this.dealTimeToStr(startDate),
+      endTime: this.data.years[this.data.lastEnd[0]] + '-' + this.dealTimeToStr(endMonth) + "-" + this.dealTimeToStr(endDate)
     });
     if(this.data.openPicker) {
       this.setData({
@@ -362,9 +391,21 @@ Page({
   // 刷选好时间
   dateConfirm: function (){
     this.setData({
-      loadingStatus: true
+      loadingStatus: true,
+      lastStart: this.data.startValue,
+      lastEnd: this.data.endValue
     });
-    this.queryDetail()
+    
+    if (new Date(this.data.startTime).valueOf() < new Date(this.data.endTime).valueOf()) {
+      this.setData({
+        selectedDate: this.data.startTime + "~" + this.data.endTime
+      });
+    }else {
+      this.setData({
+        selectedDate: this.data.endTime + "~" + this.data.startTime
+      });
+    }
+    this.queryDetail();
     this.bindMask();
   },
   clearDate: function () {

@@ -1,6 +1,6 @@
 <view class="container">
  <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
-  <view class="finBox" wx:if="{{financialDetail.detailData.length>0}}">
+  <view class="finBox">
     <view class="search gray-28">
       <view bindtap="clickSearch" class="ser-box">
         <text class="{{isShowPanel ? 'gren-color':''}}">筛选</text>
@@ -14,8 +14,8 @@
           <!-- <view>{{date}}</view> -->
           <view class="section">
             <!-- <view class="section__title">日期选择器</view> -->
-            <button class="wxc-btn" bindtap="checkedTime">
-              本月
+            <button class="wxc-btn {{selectedDate.length>2 ? 'long' : ''}}" bindtap="checkedTime">
+              {{selectedDate}}
               <image class="sort desc" src="{{sortDescImg}}"></image>
             </button>
             <!-- <picker class="time-picker" mode="date" value="{{date}}" start="{{startDate}}" bindchange="bindDateChange">
@@ -34,7 +34,7 @@
         </view>
       </view>
       <view class="f-content">
-        <view class="item" wx:for="{{financialDetail.detailData}}" wx:key="unique">
+        <view class="item" wx:if="{{financialDetail.detailData.length>0}}" wx:for="{{financialDetail.detailData}}" wx:key="unique">
           <view class="shop-name bottom-4">
             <view class="info-left">{{item.bill_name}}</view>
             <view class="info-right">{{item.amount}}</view>
@@ -105,10 +105,10 @@
               <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item<10 ? "0"+item: item}}</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{startDays}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{startDays}}"  wx:key="unique" style="line-height: 50px">{{item<10 ? "0"+item: item}}</view>
             </picker-view-column>
           </picker-view>
         </view>
@@ -118,20 +118,17 @@
               <view wx:for="{{years}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{months}}" wx:key="unique" style="line-height: 50px">{{item<10 ? "0"+item: item}}</view>
             </picker-view-column>
             <picker-view-column>
-              <view wx:for="{{endDays}}"  wx:key="unique" style="line-height: 50px">{{item}}</view>
+              <view wx:for="{{endDays}}"  wx:key="unique" style="line-height: 50px">{{item<10 ? "0"+item: item}}</view>
             </picker-view-column>
           </picker-view>
         </view>
       </view>
     </view>
-     <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
-  </view>
-  <view wx:if="{{financialDetail.detailData.length==0}}">
-    您还没有资金明细~~
+     <!-- <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore> -->
   </view>
   <view class="mask" wx:if="{{isShowPanel}}" bindtap="toggleMask"></view>
-  <wxc-mask status="{{statusMask}}" opacity="0.6" background-color="#ccc" bindtap="bindMask"></wxc-mask>
+  <wxc-mask status="{{statusMask}}" locked="true" opacity="0.6" background-color="#ccc"></wxc-mask>
 </view>

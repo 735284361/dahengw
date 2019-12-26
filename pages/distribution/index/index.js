@@ -33,7 +33,7 @@ Page({
   },
 
   onShow: function () {
-    this.getAgentInfo();
+    // this.getAgentInfo();
     // this.getStatisticsInfo();
 
     var userInfo = wx.getStorageSync('userInfo')

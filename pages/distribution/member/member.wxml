@@ -7,7 +7,7 @@
       <!-- 主要信息 -->
       <view class="main-box">
         <view class="left-img">
-          <image class="pic" src="{{item.avatar}}"></image>
+          <image class="pic" src="{{item.user.avatar}}"></image>
         </view>
         <view class="right-info">
           <view class="top"> 成员：{{item.nickname}}</view>
@@ -24,7 +24,7 @@
       你还没有成员，快去添加成员吧
     </view>
     <view wx:if="{{distribMemberList.length > 0}}">
-      <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore>
+      <!-- <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore> -->
     </view>
     <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://s10.mogucdn.com/mlcdn/c45406/171018_8gj08gbl9fj6igb380dec9k1ifhe2_32x32.png"></wxc-loadmore>
   </view>
