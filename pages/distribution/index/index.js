@@ -33,7 +33,7 @@ Page({
   },
 
   onShow: function () {
-    // this.getAgentInfo();
+    this.getAgentInfo();
     // this.getStatisticsInfo();
 
     var userInfo = wx.getStorageSync('userInfo')
@@ -60,11 +60,11 @@ Page({
         if (res.data.code == 0) {
           if (res.data.data.id) {
             that.getStatisticsInfo();
-          } else {
-            wx.redirectTo({
-              url: "/pages/apply-agent/index"
-            });
           }
+        } else {
+          wx.redirectTo({
+            url: "/pages/apply-agent/index"
+          });
         }
       }
     });
