@@ -40,10 +40,8 @@ function request(url, method, data, complete, success, fail) {
               })
               break
             case 403:
-              wx.showModal({
-                title: '提示',
-                content: '403 无访问权限',
-                showCancel: false
+              wx.showToast({
+                title: '403 无访问权限',
               })
               break
             case 404:

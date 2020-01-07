@@ -8,8 +8,18 @@ page{
 .form-box{
     width:100%;
     background-color: #fff;
-    margin-top: 20rpx;
 }
+
+.tips{
+    margin: 20rpx 0 10rpx 30rpx;
+    width: 720rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    display: flex;
+    font-size: 26rpx;
+    color: #929292;
+}
+
 .row-wrap{
     width: 720rpx;
     height: 88rpx;

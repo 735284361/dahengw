@@ -1,3 +1,5 @@
+
+const request = require('../../utils/request.js');
 var app = getApp()
 Page({
 
@@ -5,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    balance:0
   },
 
   /**
@@ -26,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getUserAmount()
   },
 
   /**
@@ -66,11 +68,27 @@ Page({
   bindCancel: function () {
     wx.navigateBack({})
   },
+
+  getUserAmount: function () {
+    var that = this;
+    request.$get({
+      url: 'user/account',
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            balance: res.data.data.balance,
+          });
+        }
+      }
+    })
+
+  },
+
   bindSave: function (e) {
     var that = this;
     var amount = e.detail.value.amount;
 
-    if (amount == "" || amount * 1 < 30) {
+    if (amount == "" || amount * 1 < 50) {
       wx.showModal({
         title: '错误',
         content: '请填写正确的提现金额',
@@ -78,11 +96,10 @@ Page({
       })
       return
     }
-    wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/withDraw/apply',
+    request.$post({
+      url: 'user/withdraw/apply',
       data: {
-        token: wx.getStorageSync('token'),
-        money: amount
+        apply_total: amount
       },
       success: function (res) {
         if (res.data.code == 0) {

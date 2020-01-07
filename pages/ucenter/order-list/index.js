@@ -36,10 +36,6 @@ Page({
   },
   getOrderList: function () {
     var that = this;
-    // var postData = {
-    //   pageSize: app.globalData.pageSize,
-    //   page: app.globalData.page
-    // };
     request.$get({
       url: 'order/list',
       success: (res) => {
