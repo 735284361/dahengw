@@ -43,7 +43,15 @@ form {
   display: block;
   text-align: center;
   font-size: 24rpx;
-  margin-top: 12rpx;
+  margin-top: 20rpx;
+  color: #7bcbcc;
+}
+
+.msg {
+  display: block;
+  text-align: center;
+  font-size: 30rpx;
+  margin-bottom: 40rpx;
   color: #7bcbcc;
 }
 

@@ -6,9 +6,13 @@
         <view  class="iconfont icon-apply" style="color:#7bcbcc;"></view>
       </view>
       <!-- 按钮 -->
-      <view>
-        <button class='btn' bindtap="appliAgent">申请代理</button>
+      <view wx:if="{{code == 1}}">
+        <button class='btn' bindtap="applyAgent">申请代理</button>
         <text class="tip">请点击申请代理</text>
+      </view>
+      <view wx:else>
+          <text class="msg">{{msg}}</text>
+          <button class='btn' bindtap="goBack">返回</button>
       </view>
     </view>
   </form>

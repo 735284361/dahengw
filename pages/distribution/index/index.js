@@ -57,14 +57,12 @@ Page({
       url: 'agent/detail',
       success: function (res) {
         console.log(res)
-        if (res.data.code == 0) {
-          if (res.data.data.id) {
-            that.getStatisticsInfo();
-          } else {
-            wx.redirectTo({
-              url: "/pages/apply-agent/index"
-            });
-          }
+        if (res.data.code == 0 && res.data.data.status == 1) {
+          that.getStatisticsInfo();
+        } else {
+          wx.redirectTo({
+            url: "/pages/apply-agent/index"
+          });
         }
       }
     });

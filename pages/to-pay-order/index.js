@@ -103,10 +103,11 @@ Page({
       success: (res) => {
         wx.hideLoading();
         if (res.data.code == 0) {
-          if (e && "buyNow" != that.data.orderType) {
-            // 清空购物车数据
-            wx.removeStorageSync('shopCarInfo');
-          }
+          // if (e && "buyNow" != that.data.orderType) {
+          //   // 清空购物车数据
+          //   wx.removeStorageSync('shopCarInfo');
+          // }
+          let id = res.data.id
           wx.requestPayment({
             timeStamp: String(res.data.data.timeStamp),
             nonceStr: res.data.data.nonceStr,
@@ -123,7 +124,7 @@ Page({
                 });
               } else if (res.errMsg == 'requestPayment:ok') {
                 wx.redirectTo({
-                  url: "/pages/ucenter/order-list/index"
+                  url: "/pages/order-details/index?id=" + id
                 });
               } else {
                 wx.showModal({
