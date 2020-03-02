@@ -50,15 +50,30 @@ Page({
   },
 
   saveOrShare: function () {
-    wx.saveImageToPhotosAlbum({
-      filePath: this.data.imgSrc,
-      success(res) {
-        console.log(res);
-      },
-      fail(res) {
-        console.log(res);
+    wx.downloadFile({
+      url: this.data.imgSrc, //仅为示例，并非真实的资源
+      success: function (res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success:function(dres){
+            if (dres.errMsg == 'saveImageToPhotosAlbum:ok') {
+              wx.showToast({
+                title: '保存成功',
+              })
+            } else {
+              wx.showToast({
+                title: '保存失败',
+              })
+            }
+          },
+          fail(res) {
+            wx.showToast({
+              title: '保存失败',
+            })
+          }
+        })
       }
-    });
+    })
     this.setData({
       showSaveTip: false
     });

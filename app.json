@@ -32,6 +32,7 @@
     "pages/distribution/member/member",
     "pages/distribution/order/order",
     "pages/distribution/financial-detail/financialDetail",
+    "pages/distribution/accept/index",
     "pages/distribution/code/code"
   ],
   "permission": {

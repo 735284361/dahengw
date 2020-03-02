@@ -7,25 +7,18 @@ page {
   height: 100%;
   /* background: #ccc; */
 }
-.main {
-  display: flex;
-  width: 650rpx;
-  height: 808rpx;
-  justify-content: center;
-  align-items: center;
-  margin-top: 216rpx;
-}
-.main .saveBtn {
-  position: absolute;
-  color: #000;
-  font-size: 36rpx;
-  font-weight: 500;
-  background: #fff;
-  width: 278rpx;
+.saveBtn {
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
+  margin-top:30rpx; 
+  border-radius: 6rpx;
+  box-sizing: border-box;
 }
+
 .main .img-box {
-  display: flex;
+  margin-top: 250rpx;
   align-items: center;
   justify-content: center;
 }
@@ -34,14 +27,13 @@ page {
   height: 650rpx;
 }
 .tip {
-  position: absolute;
-  top: 972rpx;
-  width: 100%;
+  margin: 200rpx auto;
+  width: 60%;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 35rpx;
 }
 .tip .margin-20 {
   display: block;
-  margin-bottom: 20rpx;
+  margin: 20rpx;
   padding: 0 30rpx;
 }

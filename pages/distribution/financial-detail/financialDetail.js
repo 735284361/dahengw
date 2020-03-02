@@ -398,11 +398,11 @@ Page({
     
     if (new Date(this.data.startTime).valueOf() < new Date(this.data.endTime).valueOf()) {
       this.setData({
-        selectedDate: this.data.startTime + "~" + this.data.endTime
+        selectedDate: this.data.startTime + "至" + this.data.endTime
       });
     }else {
       this.setData({
-        selectedDate: this.data.endTime + "~" + this.data.startTime
+        selectedDate: this.data.endTime + "至" + this.data.startTime
       });
     }
     this.queryDetail();

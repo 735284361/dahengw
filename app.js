@@ -230,8 +230,8 @@ App({
     bgGreen: 175,
     bgBlue: 180,
     userInfo: null,
-    // domain: "https://daheng.raohouhai.com/api/v1/",// 正式商城后台域名
-    domain: "http://daheng.test/api/v1/",// 本地商城后台域名
+    domain: "https://daheng.raohouhai.com/api/v1/",// 正式商城后台域名
+    // domain: "http://daheng.test/api/v1/",// 本地商城后台域名
     // domain: "https://dh.raohouhai.com/api/v1/",// 测试商城后台域名
     picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
     // subDomain: "raohouhai",// 商城后台个性域名tgg

@@ -52,6 +52,13 @@
     <view class="item" >
       <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
         <view class="iconfont icon-member icon-style"></view>
+        <text class="txt">我的客户</text>
+      </navigator>
+    </view>
+
+    <view class="item" >
+      <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
+        <view class="iconfont icon-coustomer icon-style"></view>
         <text class="txt">我的团队</text>
       </navigator>
     </view>

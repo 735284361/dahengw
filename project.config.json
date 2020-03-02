@@ -3,10 +3,12 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -15,7 +17,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"bundle": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.6",
@@ -53,6 +56,10 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": -1,
 			"list": [
@@ -85,6 +92,12 @@
 					"name": "购物车",
 					"pathName": "pages/shop-cart/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/start/start",
+					"pathName": "pages/start/start",
+					"scene": null
 				}
 			]
 		}

@@ -5,7 +5,7 @@ var app = getApp()
 Page({
   data: {
     tabs: ["全部", "已付款", "已完成"],
-    tabClass: ["", "", "", "", ""],
+    tabClass: ["", "", ""],
     stv: {
       windowWidth: 0,
       lineWidth: 0,
@@ -36,41 +36,33 @@ Page({
   },
   getOrderList: function () {
     var that = this;
-    var postData = {
-      token: wx.getStorageSync('token'),
-      pageSize: app.globalData.pageSize,
-      page: app.globalData.page
-    };
-    console.log('getting orderList')
     request.$get({
       url: 'agent/orders',
       success: (res) => {
-        console.log(res)
         if (res.data.code === 0) {
-          console.log('orderList', res.data.data.orderList)
-          that.setData({
-            totalOrderList: res.data.data.orderList,
-            logisticsMap: res.data.data.logisticsMap,
-            goodsMap: res.data.data.goodsMap
-          });
           //订单分类
           var orderList = [];
           for (let i = 0; i < that.data.tabs.length; i++) {
             var tempList = [];
             if (i === 0) {
               tempList = res.data.data;
-            }else {
+              orderList.push({ 'status': 0, 'isnull': tempList.length === 0, 'orderList': tempList })
+            } else if (i == 1) {
               for (let j = 0; j < res.data.data.length; j++) {
-                if (res.data.data[j].status == i) {
+                if (res.data.data[j].status == 1) {
                   tempList.push(res.data.data[j]);
                 }
               }
+              orderList.push({ 'status': 1, 'isnull': tempList.length === 0, 'orderList': tempList })
+            } else if (i == 2) {
+              for (let j = 0; j < res.data.data.length; j++) {
+                if (res.data.data[j].status == 4) {
+                  tempList.push(res.data.data[j]);
+                }
+              }
+              orderList.push({ 'status': 4, 'isnull': tempList.length === 0, 'orderList': tempList })
             }
-            
-            console.log(tempList)
-            orderList.push({ 'status': i, 'isnull': tempList.length === 0, 'orderList': tempList })
           }
-          console.log(orderList)
           this.setData({
             orderList: orderList
           });

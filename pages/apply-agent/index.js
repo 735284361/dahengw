@@ -8,7 +8,7 @@ Page({
    */
   data: {
     code:0,
-    msg:'',
+    msg:'加载中...',
   },
 
   /**
@@ -31,10 +31,12 @@ Page({
     request.$get({
       url: 'agent/detail',
       success: function (res) {
-        that.setData({
-          code: res.data.code,
-          msg: res.data.msg
-        })
+        if (res.data.msg) {
+          that.setData({
+            code: res.data.code,
+            msg: res.data.msg
+          })
+        }
       }
     });
   },

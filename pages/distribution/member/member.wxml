@@ -10,18 +10,21 @@
           <image class="pic" src="{{item.user.avatar}}"></image>
         </view>
         <view class="right-info">
-          <view class="top"> 成员：{{item.nickname}}</view>
+          <view class="top"> 成员：<text class="nickname">{{item.user.nickname}}</text></view>
           <view class="btm">注册时间：{{item.created_at}}</view>
         </view>
       </view>
       <!-- 订单信息 -->
       <view class="main-btm">
-        <view class="btm-left">消费{{item.amount}}</view>
-        <view class="btm-right">{{item.order_number}}个订单</view>
+        <view class="btm-left">消费:<text class="amount">{{item.amount}}</text>元</view>
+        <view class="btm-right">{{item.order_number}}  个订单</view>
       </view>
     </view>  
-    <view wx:if="{{distribMemberList.length == 0 && !loadingStatus}}" class="no-data">
-      你还没有成员，快去添加成员吧
+    <view wx:if="{{distribMemberList.length == 0 && !loadingStatus}}">
+      <view class='none-data'>
+        <image src="../../../images/none.png" class="none-img"></image>
+        <view class="none-tips">您还没有成员~</view>
+      </view>
     </view>
     <view wx:if="{{distribMemberList.length > 0}}">
       <!-- <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore> -->

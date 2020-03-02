@@ -1,9 +1,9 @@
 <view class="container">
  <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
   <view class="finBox">
-    <view class="search gray-28">
+    <view class="search gray-26">
       <view bindtap="clickSearch" class="ser-box">
-        <text class="{{isShowPanel ? 'gren-color':''}}">筛选</text>
+        <text class="{{isShowPanel ? 'gren-color':'gray-26'}}">筛选</text>
         <image class="sort {{isShowPanel ? 'asc':'desc'}}" src="{{isShowPanel ? sortAscImg : sortDescImg}}"></image>
       </view>
       
@@ -15,7 +15,7 @@
           <view class="section">
             <!-- <view class="section__title">日期选择器</view> -->
             <button class="wxc-btn {{selectedDate.length>2 ? 'long' : ''}}" bindtap="checkedTime">
-              {{selectedDate}}
+              <text class="date-tip">{{selectedDate}}</text>
               <image class="sort desc" src="{{sortDescImg}}"></image>
             </button>
             <!-- <picker class="time-picker" mode="date" value="{{date}}" start="{{startDate}}" bindchange="bindDateChange">
@@ -25,10 +25,10 @@
           </view>
         </view>
         <view class="right">
-          <view class="gray-28 bottom-10">
+          <view class="gray-26 bottom-10">
             支出 <wxc-price class="price">{{financialDetail.spended}}</wxc-price>
           </view>
-          <view class="gray-28">
+          <view class="gray-26">
             收入 <wxc-price class="price">{{financialDetail.income}}</wxc-price>
           </view>
         </view>
@@ -36,11 +36,19 @@
       <view class="f-content">
         <view class="item" wx:if="{{financialDetail.detailData.length>0}}" wx:for="{{financialDetail.detailData}}" wx:key="unique">
           <view class="shop-name bottom-4">
-            <view class="info-left">{{item.bill_name}}</view>
-            <view class="info-right">{{item.amount}}</view>
+            <view class="info-left bill-title">{{item.bill_name}}</view>
+            <view class="info-right info-fee">
+              <text wx:if="{{item.amount_type===1}}">+</text><text wx:else>-</text>{{item.amount}}</view>
           </view>
           <view class="gray-24 bottom-4">{{item.bill_type_str}}</view>
           <view class="gray-24">{{item.created_at}}</view>
+        </view>
+      </view>
+        
+      <view wx:if="{{financialDetail.detailData.length == 0 && !loadingStatus}}">
+        <view class='none-data'>
+          <image src="../../../images/none.png" class="none-img"></image>
+          <view class="none-tips">暂无资金流水~</view>
         </view>
       </view>
 
@@ -50,7 +58,7 @@
     </wxc-mask> -->
     <view class="search-box" wx:if="{{isShowPanel}}">
         <view style="display:block;padding:15rpx;font-size:30rpx;">
-          <text>快捷筛选</text>
+          <text class="gray-26">快捷筛选</text>
         </view>
         <view class="label-box">
           <!-- <wxc-label class="label" type="fill" type-color="#f4f4f4" text-color="#000">{{item.name}}</wxc-label> -->
@@ -65,7 +73,7 @@
         <!-- 按钮 -->
         <view class="ser-bottom">
           <view class="btn">
-            <wxc-button size="large" class="reset" btn-style="width:100%;height:90rpx;line-height:90rpx;background:#ccc;" bindclick="reset">重置</wxc-button>
+            <wxc-button size="large" class="reset" btn-style="width:100%;height:90rpx;line-height:90rpx;background:#ccc;color: rgb(77, 76, 76)" bindclick="reset">重置</wxc-button>
           </view>
           <view class="btn">
             <wxc-button size="large" btn-style="width:100%;height:90rpx;background:#7bcbcc;color:#fff" class="confirm" bindclick="confirm">确定</wxc-button>
@@ -76,10 +84,10 @@
       <view style="padding:0 40rpx;">
         <view style="display:flex;width:100%;">
           <view class="btn" style="width:100%;text-align:left;">
-            <wxc-button class="pick-btn cle"  btn-style="background:#fff;text-align:left;padding:0;" bindclick="bindMask" value="取消"></wxc-button>
+            <wxc-button class="pick-btn cle"  btn-style="margin: 30rpx;" bindclick="bindMask" value="取消"></wxc-button>
           </view>
           <view style="width:100%;text-align:right;">
-            <wxc-button class="pick-btn confir" btn-style="background:#fff;text-align:right;padding:0;" bindclick="dateConfirm" value="确定"></wxc-button>
+            <wxc-button class="pick-btn confir" btn-style="margin: 30rpx;" bindclick="dateConfirm" value="确定"></wxc-button>
           </view>
         </view>
         <!-- 时间 -->
@@ -94,10 +102,6 @@
             {{endTime}}
           </view>
         </view>
-        <!-- 清除 -->
-        <view class="del">
-          <wxc-icon type="delete" bindtap="clearDate"></wxc-icon>
-        </view> 
         <!-- 日期选择器 -->
         <view wx:if="{{showStartTime}}" class="date">
           <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{startValue}}" bindchange="bindChange">

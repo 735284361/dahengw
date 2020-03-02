@@ -6,7 +6,7 @@
       <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
     </view>
     <view class="tip">
-      <text class="margin-20">长按可保存分享推广码</text>
+    <button type="primary" class="save-btn" bindtap="saveOrShare">保存</button>
     </view>
   </view>
   <!-- <wxc-mask status="{{maskStatus}}" ></wxc-mask> -->

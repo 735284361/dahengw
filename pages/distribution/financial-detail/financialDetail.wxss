@@ -25,7 +25,6 @@ page {
   width: 42rpx;
   height: 42rpx;
   position: absolute;
-  left:60rpx;
 }
 .search .gren-color {
   color:#7bcbcc;
@@ -34,10 +33,7 @@ page {
   top: 19rpx;
 }
 .search .desc {
-  top: 5rpx;
-}
-.main {
-  /* padding: 0 20rpx; */
+  top: 3rpx;
 }
 .main .time {
   display: flex;
@@ -65,9 +61,8 @@ page {
   width:119rpx;
   background: #fff;
   border:1px solid #ccc;
-  border-radius: 40rpx;
-  font-size:28rpx;
-  padding:0rpx 10rpx;
+  border-radius: 10rpx;
+  padding:5rpx 10rpx;
   margin-left:10rpx;
   align-items: center;
   justify-content: left;
@@ -98,6 +93,7 @@ page {
 .f-content .item {
   padding:12rpx 0;
   border-bottom: 1rpx solid #EFEFEF;
+  margin-bottom: 10rpx;
 }
 .f-content .item .shop-name {
   display: flex;
@@ -107,17 +103,30 @@ page {
   width:50%;
   text-align: left;
 }
+.bill-title {
+  margin-bottom: 20rpx;
+}
 .f-content .item .shop-name .info-right {
   width:50%;
   text-align: right;
 }
+
+.info-fee {
+  font-size: 35rpx;
+  margin-bottom: 10rpx;
+}
 .gray-24 {
   font-size: 24rpx;
-  color:#ccc;
+  color: rgb(128, 128, 128);
+  margin-bottom: 10rpx;
+}
+.gray-26 {
+  font-size: 26rpx;
+  color: rgb(97, 97, 97);
 }
 .gray-28 {
   font-size: 28rpx;
-  color:#ccc;
+  color: rgb(128, 128, 128);
 }
 .mask {
   position: absolute;
@@ -147,6 +156,7 @@ page {
   /* padding:12rpx 40rpx; */
   background: #f4f4f4;
   border:none;
+  border-radius: 10rpx;
   margin: 20rpx;
   height: 78rpx;
   text-align: center;
@@ -188,7 +198,7 @@ page {
 }
 .ser-bottom .reset {
   background: #ccc;
-
+  color: rgb(77, 76, 76);
 }
 .ser-bottom .confirm {
   background: #7bcbcc;
@@ -224,7 +234,6 @@ page {
   justify-content: center;
 }
 .start-time, .end-time {
-  height: 100%;
   width: 232rpx;
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -246,3 +255,24 @@ page {
    text-align: center;
 }
 
+.none-data {
+  margin-top:250rpx;
+  text-align: center;
+}
+
+.none-img {
+  width: 288rpx;
+  height:192rpx;
+}
+.none-tips {
+  display: block;
+  width: 100%;
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  color: #d1cece;
+}
+.date-tip {
+  font-size: 26rpx;
+  margin: 10rpx 0 10rpx 10rpx;
+  color: rgb(128, 128, 128);
+}

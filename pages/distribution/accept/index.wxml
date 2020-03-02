@@ -1,0 +1,12 @@
+<view class="container">
+  <form>
+    <view class="form-box">
+    <!-- 图标 -->
+      <view class="aplay-icon">
+        <view  class="iconfont icon-apply" style="color:#7bcbcc;"></view>
+      </view>
+      <!-- 按钮 -->
+      <text class="tip">加载中...</text>
+    </view>
+  </form>
+</view>
