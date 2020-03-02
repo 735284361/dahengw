@@ -23,14 +23,13 @@
   url('iconfont.svg?t=1576865751841#iconfont') format('svg'); /* iOS 4.1- */
 }
 
-@font-face {
-  font-family: 'iconfont';  /* project id 1667262 */
-  src: url('//at.alicdn.com/t/font_1667262_uyqrqepdst.eot');
-  src: url('//at.alicdn.com/t/font_1667262_uyqrqepdst.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1667262_uyqrqepdst.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1667262_uyqrqepdst.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1667262_uyqrqepdst.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1667262_uyqrqepdst.svg#iconfont') format('svg');
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1583154360734'); /* IE9 */
+  src: url('iconfont.eot?t=1583154360734#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAL4AAsAAAAABtgAAAKsAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAqBZIFqATYCJAMICwYABCAFhG0HLhsOBhHVk4NkPxJjW8TbH+ZuTbRF403wPNr9d26SeT+fxAosBbQAKsDtutx6FuesrlERaiRv0aMfJAXOcgqA/zlmugQaSH6guWQFjvYGOG4dUGTfkd2BHIDfMHYTgUPYDwF8SCAPaevoORCLAQwTQGZOmzIOm3NgMFbYInhq5hpkGw5WrVdPYSv/fflTIhYUjgZk9Z3cPpGmH/UwSi9zl6mRFIETBG2xA2ggDzAgA2sDvdGIhdP4BAwpsK90gR/1rktVyF7/eYgHkOoHQJzKuCcmZt1qqgLAqM2dwIxRnwTjFxYdMOXDhyHv3w9++3bgu3eD9sjykxuPsyxs0P6wul0bIhr2xA6/8V6aaQ26ZW+r1M6HXpYFXHmd8OHDvI0nZRDPx2y37Live/Yow4ZJK6RSGuGk5xcdfBQUEBwXHBD0KGdv09MTbX5tJ5429Uyekz+sQkYvWTJa5YpOVduX5w+fsyBt7z1ZZQctA2sNsrJq37226QHBAWrtpUtrVdMaxWR6bX4wTQC4L/UxXfSL/4aNq45tGBNY99/6GgA+r0y/xm3uS0M/E9gbMQr8UGbPIhOygVhdGkMzKjozNhSoNNuMC7CE8H2sJPzudYLNMS1QeBEPGksa0mDzwMGXMvBgaQQfculc7Eso89GI8QZyWK2AEMRZUARwFzRBPEMa7DdwiOAfeAgSDT4MltA1fckQyOkj4yy4wfIHt5ZMSC1apN/QvOPMWTbHv5B354axG4rhK2bkOSbsHzOJEBCXBBflMIyxQOXicZXOitRD31PdN3VrSUrTyjgLbrD8wa0lEy0vuvTzNzTvOHNLwYDyhby71mHshh7IqyD3KriXR/aPmUQIiEuCi6LDCAMFan0vj6t0doSvHnqtFPUVdOuL0tetAHwAUiUwX2NmoH0rBQ==') format('woff2'),
+  url('iconfont.woff?t=1583154360734') format('woff'),
+  url('iconfont.ttf?t=1583154360734') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1583154360734#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {

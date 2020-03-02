@@ -63,7 +63,5 @@
       </navigator>
     </view>
     
-    <view class="item"></view>
-    <view class="item no-border-bottom"></view>
   </view>
 </view>
