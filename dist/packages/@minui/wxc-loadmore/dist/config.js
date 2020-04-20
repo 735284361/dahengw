@@ -1,20 +1,20 @@
 const TYPES = [{
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_57bl76e9010115f3fj1d2k1kj5l4b_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/a828b2d7fc76f7f1fd1e3c345aa9bd73.png',
     text: '再看点别的？'
 }, {
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_6c4a17j86gb0lh9hba01i464fkie2_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/9f02fee675b9437e7f46472938f61be7.png',
     text: '哎呀都看完了'
 }, {
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_1iddk17bfe1k4257f207i467f21e8_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/b76c4d13666fad3a87190b85c2308996.png',
     text: '叽~木有啦'
 }, {
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_2e6ig5fb6k773l546a9gj8g2k7bfg_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/bf50320af971686713b58dd1be087c91.png',
     text: '哎一古~刷完了'
 }, {
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_124lgj5ji1h9f3ci0bdbe5k4gf1kk_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/c80df0350aa803f7aa9081181f55f46e.png',
     text: '没有了呢'
 }, {
-    icon: 'https://s10.mogucdn.com/p2/161213/upload_1122hdalb10h08kbiehd344fj6j1k_44x44.png',
+    icon: 'https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/acb5127d66512e7e4655c0f633eeced2.png',
     text: '汪~木有啦'
 }];
 

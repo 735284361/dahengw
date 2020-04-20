@@ -13,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setStorageSync('is_navigate_login', true)
   },
 
   /**
@@ -34,14 +34,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    wx.removeStorageSync('is_navigate_login')
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    wx.removeStorageSync('is_navigate_login')
   },
 
   /**
@@ -78,25 +78,6 @@ Page({
   },
   login: function () {
     let that = this;
-    let token = wx.getStorageSync('token');
-    // if (token) {
-    //   wx.request({
-    //     url: app.globalData.domain + app.globalData.subDomain + '/user/check-token',
-    //     data: {
-    //       token: token
-    //     },
-    //     success: function (res) {
-    //       if (res.data.code != 0) {
-    //         wx.removeStorageSync('token')
-    //         that.login();
-    //       } else {
-    //         // 回到原来的地方放
-    //         wx.navigateBack();
-    //       }
-    //     }
-    //   })
-    //   return;
-    // }
     wx.login({
       success: function (res) {
         wx.request({

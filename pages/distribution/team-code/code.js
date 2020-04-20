@@ -92,11 +92,13 @@ Page({
   getCode: function () {
     var that = this;
     request.$get({
-      url: 'agent/qrcode',
+      url: 'agentTeam/teamQrCode',
       success: (res) => {
-        that.setData({
-          imgSrc: res.data
-        });
+        if (res.data.code == 0) {
+          that.setData({
+            imgSrc: res.data.data
+          });
+        }
         this.setData({
           loadingStatus: false
         });

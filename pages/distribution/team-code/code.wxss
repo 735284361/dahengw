@@ -10,22 +10,21 @@ page {
 .saveBtn {
   width: 80%;
   height: 80rpx;
-  position: absolute;
   line-height: 80rpx;
   text-align: center;
-  bottom:100rpx; 
+  margin-top:30rpx; 
   border-radius: 6rpx;
   box-sizing: border-box;
 }
 
 .main .img-box {
-  margin-top: 20rpx;
+  margin-top: 250rpx;
   align-items: center;
   justify-content: center;
 }
 .main .img {
-  width: 640rpx;
-  height: 1000rpx;
+  width: 650rpx;
+  height: 650rpx;
 }
 .tip {
   margin: 200rpx auto;

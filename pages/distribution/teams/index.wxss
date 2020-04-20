@@ -1,0 +1,170 @@
+page {
+  height: 100%;
+  background: rgb(240, 240, 240);
+}
+
+.container {
+  width: 100%;
+  font-size: 30rpx;
+  color:#333;
+  font-weight: 350;
+}
+.main {
+  width: 100%;
+  height: 100%;
+}
+.box {
+  padding: 0 35rpx;
+  background: rgb(255, 255, 255);
+}
+.mbr-item {
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+.mbr-item .main-box {
+  display: flex;
+}
+.left-img {
+  width: 120rpx;
+  height: 120rpx;
+  padding-right:20rpx;
+  border-right: 1rpx solid rgb(245, 245, 245);
+}
+.pic{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+}
+.right-info {
+  display: flex;
+  flex-direction: column;
+  margin-left:20rpx;
+  width: 100%;
+  height: inherit;
+  justify-content: center;
+  font-size: 24rpx;
+}
+.right-info .top {
+  margin-bottom: 10rpx;
+}
+.main-btm {
+  height: 30rpx;
+  padding:10rpx 20rpx;
+  line-height: 30rpx;
+  font-size: 28rpx;
+}
+.btm-left, .btm-right{
+  display: inline-block;
+  width:50%;
+}
+.btm{
+  font-size: 26rpx;
+  color: rgb(150, 150, 150);
+}
+.btm-left {
+  text-align: left;
+  font-size: 26rpx;
+  color: rgb(150, 150, 150);
+}
+.btm-right {
+  text-align: right;
+}
+
+.no-order {
+  margin-left: auto;
+}
+
+.none-data {
+  margin-top:250rpx;
+  text-align: center;
+}
+
+.none-img {
+  width: 288rpx;
+  height:192rpx;
+}
+.none-tips {
+  display: block;
+  width: 100%;
+  margin-top: 28rpx;
+  font-size: 26rpx;
+  color: #d1cece;
+}
+.tips{
+  font-size: 30rpx;
+  color: #555555;
+}
+.amount {
+  font-size: 28rpx;
+  margin-left: 5px;
+  color: rgb(255, 0, 0);
+}
+
+.nickname {
+  font-size: 32rpx;
+}
+
+.apply_btn {
+  min-width: 228rpx;
+  height: 66rpx;
+  margin: 80rpx auto;
+  padding: 0 30rpx;
+  background-color: #ff5777;
+  border: 0 none;
+  border-radius: 2rpx;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  overflow: hidden;
+  line-height: 66rpx;
+  width:40%;
+}
+
+.team{
+  padding-top: 35rpx;
+}
+.team-title, .user-list-title{
+  font-size: 22rpx;
+  color: rgb(150, 150, 150);
+}
+.team-leader{
+  font-size: 60rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  padding-bottom: 20rpx;
+  font-weight: 800;
+  color: rgb(80, 80, 80);
+  border-bottom: 1rpx solid rgb(245, 245, 245);
+}
+.join-time{
+  text-align: center;
+  padding: 25rpx;
+  font-size: 26rpx;
+  color: rgb(100, 100, 100);
+}
+.sales{
+  padding: 20rpx 0;
+  text-align: left;
+  font-size: 26rpx;
+  color: rgb(100, 100, 100);
+  border-top: 1rpx solid rgb(245, 245, 245);
+}
+.sales-ampount{
+  margin-bottom: 20rpx;
+}
+.user-list-title{
+  padding-left: 35rpx;
+  background: rgb(245, 245, 245);
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.list-bar{
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.team-invite-code{
+  text-align: center;
+}
+.invite-tip{
+  margin-bottom: 10rpx;
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "团队邀请码",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "wxc-mask": "../../dist/packages/@minui/wxc-mask/dist/index",
+    "wxc-loading": "../../../dist/packages/@minui/wxc-loading/dist/index"
+  }
+}

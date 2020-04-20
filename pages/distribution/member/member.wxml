@@ -24,11 +24,12 @@
       <view class='none-data'>
         <image src="../../../images/none.png" class="none-img"></image>
         <view class="none-tips">您还没有成员~</view>
+        <view class="apply_btn" bindtap="inviteUser">立即邀请</view>
       </view>
     </view>
     <view wx:if="{{distribMemberList.length > 0}}">
       <!-- <wxc-loadmore is-end="{{true}}" text="到底了～" icon="{{true}}"></wxc-loadmore> -->
     </view>
-    <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://s10.mogucdn.com/mlcdn/c45406/171018_8gj08gbl9fj6igb380dec9k1ifhe2_32x32.png"></wxc-loadmore>
+    <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/e3237288946fff99293a5f712ee228c7.png"></wxc-loadmore>
   </view>
 </view>

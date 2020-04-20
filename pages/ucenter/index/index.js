@@ -12,6 +12,7 @@ Page({
     score_sign_continuous: 0,
     iconSize: 45,
     iconColor: '#999999',
+    canViewAgent: 0,
     shopLogo:null
   },
   onPullDownRefresh: function () {
@@ -46,6 +47,7 @@ Page({
     // that.checkScoreSign();
     that.getAboutUs();
     that.getservicePhoneNumber();
+    that.setViewAgentRight()
 
     var userInfo = wx.getStorageSync('userInfo')
     if (userInfo) {
@@ -53,7 +55,53 @@ Page({
         userInfo: userInfo,
       })
     }
-    
+  },
+
+  onReady() {
+    var that = this
+  },
+
+  setViewAgentRight:function()
+  {
+    var that = this
+    request.$get({
+      url: 'agent/viewAgentRight',
+      success: function (res) {
+        if (res.statusCode != 401) {
+          that.setData({
+            canViewAgent: res.data
+          })
+          var modelTips = wx.getStorageSync('apply_model_tips')
+          if (!modelTips && res.data == 2) {
+            wx.showModal({
+              cancelText: '取消',
+              complete: (res) => {},
+              confirmText: '立即加入',
+              content: '尊敬的顾客您好，您目前可以加入大亨家的代理，现邀请您的加入',
+              fail: (res) => {},
+              showCancel: true,
+              success: (res) => {
+                wx.setStorage({
+                  data: true,
+                  key: 'apply_model_tips'
+                })
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: '/pages/apply-agent/index'
+                  })
+                }
+              },
+              title: '代理邀请',
+            })
+          }
+        }
+      }
+    })
+  },
+  navigateToJoin: function() {
+    wx.navigateTo({
+      url: '/pages/distribution/accept/index?id=100000'
+    })
   },
   aboutUs: function () {
     var that = this
@@ -149,6 +197,7 @@ Page({
     })
 
   },
+
   getAboutUs: function () {
     var that = this
     //  获取关于我们Title
@@ -251,7 +300,7 @@ Page({
     })
   },
   switchBar: function () {
-    wx.switchTab({
+    wx.navigateTo({
       url: '/pages/distribution/index/index'
     });
   }

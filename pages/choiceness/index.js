@@ -33,7 +33,6 @@ Page({
   onLoad: function () {
     var that = this
     that.setData({
-      goodsList: app.globalData.goodsList,
       pageSize: app.globalData.pageSize,
       page: app.globalData.page,
       recommendGoodsShow: [],
@@ -48,8 +47,8 @@ Page({
     })
     that.getBanners();
     // that.getNotice();
-    that.getAppRecommendGoodsList()
-    that.getRGshow()
+    that.getCurrentGoodsList()
+    // that.getRGshow()
     try {
       var res = wx.getSystemInfoSync()
       console.log('system information', res)
@@ -80,17 +79,17 @@ Page({
     var that = this
 
   },
-  onPullDownRefresh: function () {
-    var that = this
-    that.setData({
-      loadingMore: true,
-      isEnd: false
-    })
-    wx.showNavigationBarLoading()
-    that.onLoad()
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
-  },
+  // onPullDownRefresh: function () {
+  //   var that = this
+  //   that.setData({
+  //     loadingMore: true,
+  //     isEnd: false
+  //   })
+  //   wx.showNavigationBarLoading()
+  //   that.onLoad()
+  //   wx.hideNavigationBarLoading() //完成停止加载
+  //   wx.stopPullDownRefresh() //停止下拉刷新
+  // },
   onShareAppMessage: function () {
     return {
       title: wx.getStorageSync('mallName') + '——' + app.globalData.shareProfile,
@@ -105,7 +104,7 @@ Page({
   },
   onReachBottom: function(){
     var that = this
-    that.getRGshow()
+    // that.getRGshow()
   },
 
   //事件处理函数
@@ -115,6 +114,39 @@ Page({
       swiperCurrent: e.detail.current
     })
   },
+
+  getCurrentGoodsList: function () {
+    var that = this;
+    request.$get({
+      url: 'shop/goods/list',
+      data: {
+        page: that.data.page,
+        per_page: that.data.pageSize,
+        recommend: true
+      },
+      success: function (res) {
+        var goods = [];
+        for (var i = 0; i < res.data.data.length; i++) {
+          goods.push(res.data.data[i]);
+        }
+        // 计算评分
+        for (let i = 0; i < goods.length; i++) {
+          goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
+          goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
+          goods[i].starpic = starscore.picStr(goods[i].starscore)
+        }
+        that.setData({
+          recommendGoodsShow: goods,
+        })
+      },
+      complete: function(res) {
+        that.setData({
+          loadingMore: false,
+        })
+      }
+    })
+  },
+
   toDetailsTap: function (e) {
     wx.navigateTo({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
@@ -153,7 +185,7 @@ Page({
   // 从app页面的goodsList中获取推荐商品
   getAppRecommendGoodsList: function () {
     var that = this
-    var goods = app.globalData.goods
+    var goods = app.globalData.goodsList
     var recommendGoods = []
     for (let i = 0; i < goods.length; i++) {
       if (goods[i].recommend_status === 10) {

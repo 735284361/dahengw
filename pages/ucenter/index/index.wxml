@@ -121,17 +121,21 @@
         <text class="txt">意见反馈</text>
       </navigator>
     </view>
-    <view class="item">
-      <view class="a" bindtap="switchBar">
-        <view class="iconfont .icon-agent" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
-        <text class="txt">代理</text>
+    <view wx:if="{{canViewAgent && canViewAgent != 0}}">
+      <view class="item">
+        <view class="a" bindtap="switchBar">
+          <view class="iconfont .icon-agent" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
+          <text class="txt">代理</text>
+        </view>
+      </view>
+      <view class="item">
       </view>
     </view>
-    <view class="item no-border-bottom">
-      <!-- <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
-        <wxc-icon type='comment' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">意见反馈</text>
-      </navigator> -->
+    <view wx:else>
+      <view class="item">
+      </view>
+      <view class="item">
+      </view>
     </view>
   </view>
   <view style="height:20rpx;width:100%;"></view>

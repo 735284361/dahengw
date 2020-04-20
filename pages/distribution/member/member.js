@@ -27,6 +27,12 @@ Page({
     });
     this.getMembersData();
   },
+
+  inviteUser: function() {
+    wx.navigateTo({
+      url: '/pages/distribution/code/code',
+    })
+  },
   /**
    * 获取分销成员
    */

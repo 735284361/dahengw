@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'min-icon';
-    src: url('https://s10.mogucdn.com/mlcdn/c45406/180410_33hdc107f9a74c5545ha14cbil4ci.ttf') format('truetype');
+    src: url('https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/c88ea0e4ad72d14504d299da1c4b841a.ttf') format('truetype');
   }
   .icon {
     display: inline;

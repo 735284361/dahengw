@@ -27,17 +27,23 @@ function request(url, method, data, complete, success, fail) {
         complete: res => {
           switch (res.statusCode) {
             case 400:
-              wx.showModal({
-                title: '提示',
-                content: '请求错误',
-                showCancel: false
+              wx.showToast({
+                title: '400 请求出错',
+                duration:2000,
               })
               break
             case 401:
               // 401 清除token信息并跳转到登录页面
-              wx.navigateTo({
-                url: '/pages/authorize/index',
-              })
+              // 检查用户当前是否在登录页面
+              // 如果在登录页面则不跳转
+              if (wx.getStorageSync('is_navigate_login')) {
+                return;
+              } else {
+                wx.setStorageSync('is_navigate_login', true)
+                wx.navigateTo({
+                  url: '/pages/authorize/index',
+                })
+              }
               break
             case 403:
               wx.showToast({
@@ -45,10 +51,9 @@ function request(url, method, data, complete, success, fail) {
               })
               break
             case 404:
-              wx.showModal({
-                title: '提示',
-                content: '404 请求地址出错',
-                showCancel: false
+              wx.showToast({
+                title: '404 地址错误',
+                duration:2000,
               })
               break
             case 422:
@@ -75,10 +80,9 @@ function request(url, method, data, complete, success, fail) {
               })
               break
             case 500:
-              wx.showModal({
-                title: '提示',
-                content: '500 服务器内部错误',
-                showCancel: false
+              wx.showToast({
+                title: '500 服务器错误',
+                duration: 2000,
               })
               break
             case 501:

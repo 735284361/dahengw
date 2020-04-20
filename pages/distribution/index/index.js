@@ -12,6 +12,7 @@ Page({
     iconSize: 45,
     iconColor: '#999999',
     shopLogo: null,
+    isLeader: true,
   },
 
   onLoad: function () {

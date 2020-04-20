@@ -1,0 +1,58 @@
+
+<view class="container">
+  <view class="main">
+    <!-- 团队信息 -->
+    <view wx:if="{{team.length !== 0}}">
+      <view wx:if="{{team.status == 1}}">
+        <view class="box team">
+          <view class="team-title">我所在的团队</view>
+          <view class="team-leader">{{team['user_info']['nickname']}}</view>
+          <!-- 只有队长能看的数据 -->
+          <view wx:if="{{isTeamLeader}}" >
+            <!-- <view class="join-time team-invite-code">
+              <navigator url="/pages/distribution/team-code/code" hover-class="none" class="a">
+                <view class="invite-tip">邀请成员</view>
+                <view class="iconfont icon-code icon-style"></view>
+              </navigator>
+            </view> -->
+            <view class="sales">
+              <view class="sales-amount">本月销售总额：{{sales_total.amount}}元</view>
+              <view class="sales-amount" >团队预计奖金：{{sales_total.divide}}元</view>
+            </view>
+          </view>
+          <view class="join-time" wx:else>欢迎您加入本团队</view>
+        </view>
+        <!-- 标题 -->
+        <view class="user-list-title">团队成员列表</view>
+        <!-- 人员盒子 -->
+        <view class="mbr-item box" wx:for="{{users}}" wx:key="id" wx:for-item="item" data-id="{{item.id}}">
+          <!-- 主要信息 -->
+          <view class="main-box">
+            <view class="left-img">
+              <image class="pic" src="{{item.user_info.avatar}}"></image>
+            </view>
+            <view class="right-info">
+              <view class="top"><text class="nickname">{{item.user_info.nickname}}</text></view>
+              <!-- <view class="btm">加入时间：{{item.created_at}}</view> -->
+              <view class="btm">本月销售额:<text class="amount">{{item.sales_volume}}</text>元</view>
+              <view class="btm-left">预计提成：<text class="amount">{{item.divide}}</text>元</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class='none-data'>
+          <image src="../../../images/none.png" class="none-img"></image>
+          <view class="none-tips tips">{{team.statusDes}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class='none-data'>
+        <image src="../../../images/none.png" class="none-img"></image>
+        <view class="none-tips">您还没有团队~</view>
+        <!-- <view class="apply_btn" bindtap="applyTeam" wx:if="{{!loadingStatus}}">申请团队</view> -->
+      </view>
+    </view>
+  </view>
+</view>

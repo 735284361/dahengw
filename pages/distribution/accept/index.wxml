@@ -1,12 +1,12 @@
 <view class="container">
-  <form>
-    <view class="form-box">
-    <!-- 图标 -->
-      <view class="aplay-icon">
-        <view  class="iconfont icon-apply" style="color:#7bcbcc;"></view>
-      </view>
-      <!-- 按钮 -->
-      <text class="tip">加载中...</text>
+  <!-- 图标 -->
+  <view>
+    <view class="aplay-icon">
+      <image class="pic" src="{{agent.user.avatar}}"></image>
+      <view class="invite-msg"><text class="nickname">{{agent.user.nickname}}</text> 邀请您加入团队</view>
     </view>
-  </form>
+    <!-- 按钮 -->
+    <button type="primary" class="btn" bindtap="joinAgent">确认加入</button>
+    <view class="back" bindtap="redirectBack">暂不加入，返回主页</view>
+  </view>
 </view>

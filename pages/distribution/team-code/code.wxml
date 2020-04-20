@@ -2,10 +2,11 @@
   <wxc-loading wx:if="{{loadingStatus}}" is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
   <view class="main" wx:if="{{imgSrc != ''}}">
     <view class="img-box">
+      <text class="saveBtn" wx:if="{{showSaveTip}}" bindtap="saveOrShare">保存并分享</text>
       <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
     </view>
     <view class="tip">
-    <button wx:if="{{!loadingStatus}}" type="primary" class="save-btn" bindtap="saveOrShare">保存</button>
+    <button type="primary" class="save-btn" bindtap="saveOrShare">保存</button>
     </view>
   </view>
   <!-- <wxc-mask status="{{maskStatus}}" ></wxc-mask> -->

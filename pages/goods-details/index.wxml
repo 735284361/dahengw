@@ -24,7 +24,7 @@
     <wxc-price style="padding-left:25rpx;color: #e64340;font-weight: bold;float: left;width: 20%;height:60rpx;line-height:40rpx;" value='{{selectSizePrice}}'></wxc-price>
     <!--<view class="goods-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view>-->
     <view class="goods-price" style="color:#999;font-size:24rpx;">购买{{goodsDetail.number_sells}}次</view>
-    <view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.number_reputation}} 次好评</view>
+    <view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.reputation.length}} 次好评</view>
     <!-- <view class="goods-info-fx" >
       <wxc-icon type='share' size='60' color='#e64340'></wxc-icon>
       <button open-type="share">分享</button>

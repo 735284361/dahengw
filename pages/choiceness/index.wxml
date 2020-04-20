@@ -54,10 +54,10 @@
           <template is="recommend-goods-item" data="{{item}}"> </template>
         </view>
       </view>
-      <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://s10.mogucdn.com/mlcdn/c45406/171018_8gj08gbl9fj6igb380dec9k1ifhe2_32x32.png"></wxc-loadmore>
+      <wxc-loadmore wx:if="{{loadingMore}}" text="正在努力加载中..." icon="https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/5a09390ab03e4821703cb0b1d490f7be.png"></wxc-loadmore>
     </view>
 
-    <wxc-loadmore wx:if="{{isEnd}}" is-end="{{isEnd}}" text="到底啦" icon="https://s10.mogucdn.com/mlcdn/c45406/171016_47j96cl3hdhhdf7ajg8hg2kd13gdc_400x400.png"></wxc-loadmore>
+    <wxc-loadmore wx:if="{{isEnd}}" is-end="{{isEnd}}" text="到底啦" icon="https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/e3237288946fff99293a5f712ee228c7.png"></wxc-loadmore>
   </scroll-view>
 
 </view>

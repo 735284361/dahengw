@@ -92,12 +92,6 @@
 					"name": "购物车",
 					"pathName": "pages/shop-cart/index",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "pages/start/start",
-					"pathName": "pages/start/start",
-					"scene": null
 				}
 			]
 		}

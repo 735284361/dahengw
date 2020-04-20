@@ -31,21 +31,17 @@ Page({
     request.$get({
       url: 'agent/detail',
       success: function (res) {
-        if (res.data.msg) {
-          that.setData({
-            code: res.data.code,
-            msg: res.data.msg
-          })
-        }
+        that.setData({
+          code: res.data.code,
+          msg: res.data.msg
+        })
       }
     });
   },
 
   // 返回首页
   goBack: function () {
-    wx.reLaunch({
-      url: "/pages/classification/index"
-    });
+    wx.navigateBack()
   },
 
   applyAgent: function () {
@@ -58,8 +54,15 @@ Page({
             title: '申请成功',
           })
         } else {
-          wx.showToast({
-            title: '申请失败',
+          wx.showModal({
+            complete: (res) => {},
+            content: res.data.msg,
+            fail: (res) => {},
+            showCancel: false,
+            success: (result) => {
+              that.goBack()
+            },
+            title: '提示',
           })
         }
         that.onShow()

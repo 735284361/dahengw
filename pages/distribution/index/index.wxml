@@ -22,7 +22,7 @@
         <view class="num">{{amount}}元</view>
       </view>
       <view class="s-box no-border-right">
-        <view style="color: #e0a121;font-size: 28rpx;font-weight: bold;">本月销售提成</view>
+        <view style="color: #e0a121;font-size: 28rpx;font-weight: bold;">预计销售奖金</view>
         <view class="num">{{commission}}元</view>
       </view>
     </view>
@@ -42,6 +42,7 @@
         
       </navigator>
     </view>
+    
     <view class="item">
       <navigator url="/pages/distribution/code/code" hover-class="none" class="a">
       <view class="iconfont icon-code icon-style"></view>
@@ -51,17 +52,19 @@
     
     <view class="item" >
       <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
-        <view class="iconfont icon-member icon-style"></view>
-        <text class="txt">我的客户</text>
+        <view class="iconfont icon-customer icon-style"></view>
+        <text class="txt">我的顾客</text>
       </navigator>
     </view>
-
-    <view class="item" >
-      <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
-        <view class="iconfont icon-coustomer icon-style"></view>
+    
+    <view class="item" wx:if="{{isLeader}}">
+      <navigator url="/pages/distribution/teams/index" hover-class="none" class="a">
+        <view class="iconfont icon-member icon-style"></view>
         <text class="txt">我的团队</text>
       </navigator>
     </view>
     
+    <view class="item" wx:else></view>
+    <view class="item"></view>
   </view>
 </view>

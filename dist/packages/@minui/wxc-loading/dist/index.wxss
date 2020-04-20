@@ -23,19 +23,19 @@
     pointer-events: auto;
 }
   .loading__image--mgj {
-    background-image: url(https://s10.mogucdn.com/mlcdn/c45406/170607_5241335cb37ka3ab7781ddh504ggh_200x200.png);
+    background-image: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/e9530a4e726fa4b4e765319b7ff041f1.png);
 }
   .loading__image--mall {
-    background-image: url(https://s10.mogucdn.com/mlcdn/c45406/171023_625g128f20b5k0aace38jgghe737b_200x200.png);
+    background-image: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/6765219f1f5f7650654cf88ed874c30e.png);
 }
   .loading__slip {
     animation: loadingRotate 1050ms infinite;
 }
   .loading__slip--mgj {
-    background-image: url(http://s10.mogucdn.com/p1/160715/upload_ifrgmmzwmyydknldhezdambqmeyde_200x200.png);
+    background-image: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/98b2f2d0690e3959a1460ae68f101624.png);
 }
   .loading__slip--mall {
-    background-image: url(https://s10.mogucdn.com/mlcdn/c45406/170810_6la1hibih5861b4i2j0j5e4jgl3ee_200x200.png);
+    background-image: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/897de520a680ffe3092926e1de238c6a.png);
 }
   .loading__box {
     width: 200rpx;

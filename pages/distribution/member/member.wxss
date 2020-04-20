@@ -90,3 +90,19 @@ page {
   font-size: 28rpx;
   font-weight: 50;
 }
+
+.apply_btn {
+  min-width: 228rpx;
+  height: 66rpx;
+  margin: 80rpx auto;
+  padding: 0 30rpx;
+  background-color: #ff5777;
+  border: 0 none;
+  border-radius: 2rpx;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  overflow: hidden;
+  line-height: 66rpx;
+  width:40%;
+}

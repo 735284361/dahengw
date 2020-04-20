@@ -33,20 +33,20 @@
     <scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
       <view data="{{goodsListCurrent}}">
         <view class="title">
-          {{goodsListCurrent.name}}
+          {{currentCateName}}
         </view>
         <view style='text-align:center; font-size:28rpx; font-weight:bold;'>
-          <wxc-elip wx:if='{{goodsListCurrent.goods.length != 0}}'>{{goodsListCurrent.type}}</wxc-elip>
+          <wxc-elip wx:if='{{goodsListCurrent.length != 0}}'>{{goodsListCurrent.type}}</wxc-elip>
         </view>
         <view>
-          <view class="goods" wx:for="{{goodsListCurrent.goods}}" wx:key="id" wx:for-item="item" data-id='{{item.id}}' bindtap="toDetailsTap">
+          <view class="goods" wx:for="{{goodsListCurrent}}" wx:key="id" wx:for-item="item" data-id='{{item.id}}' bindtap="toDetailsTap">
             <image class="pic" src="{{item.pic_url}}">
               <!-- <image class='fresh-tag' src="/images/goodsDescription/fresh.png"></image> -->
             </image>
             <view class="name ellipsis">{{item.name}}</view>
             <view class='soldInfo'>
               <view class='good-price-box'>
-                <wxc-price class='price' value='{{item.minPrice}}'></wxc-price>
+                <wxc-price class='price' value='{{item.price}}'></wxc-price>
               </view>
             </view>
             <view class='soldInfo'>
@@ -62,12 +62,11 @@
             </view>
           </view>
 
-          <wxc-abnor type="SHOP" wx:if='{{goodsListCurrent.goods.length === 0}}' title='还没有添加' tip='稍后再来试试吧~' bind:abnortap="reLoad"></wxc-abnor>
+          <wxc-abnor type="SHOP" wx:if='{{goodsListCurrent.length === 0}}' title='还没有添加' tip='稍后再来试试吧~' bind:abnortap="reLoad"></wxc-abnor>
           <wxc-loadmore is-end="{{true}}" icon="{{true}}" style="position: relative; bottom: 0rpx;"></wxc-loadmore>
 
         </view>
       </view>
     </scroll-view>
   </view>
-
 </view>

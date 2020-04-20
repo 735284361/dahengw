@@ -52,7 +52,7 @@ Page({
       url: 'shop/goods/detail',
       data: {
         id: e.id
-        // id:2
+        // id:3
       },
       success: function (res) {
         var selectSizeTemp = "";
@@ -204,16 +204,15 @@ Page({
             propertyChildIds: res.data.id,
             propertyChildNames: propertyChildNames,
             buyNumMax: sku.stock,
-            buyNumber: (sku.stock > 0) ? 1 : 0
+            buyNumber: (sku.stock > 0) ? 1 : 0,
+            canSubmit: canSubmit
           });
         }
       })
     }
 
-
     this.setData({
       goodsDetail: that.data.goodsDetail,
-      canSubmit: canSubmit
     })
   },
   /**
@@ -320,7 +319,6 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.id;
     shopCarMap.pic = this.data.goodsDetail.pic_url;
     shopCarMap.name = this.data.goodsDetail.name;
-    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸 
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -365,7 +363,6 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.id;
     shopCarMap.pic = this.data.goodsDetail.pic_url;
     shopCarMap.name = this.data.goodsDetail.name;
-    // shopCarMap.label=this.data.goodsDetail.id; 规格尺寸 
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -383,22 +380,6 @@ Page({
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
     }
-    /*    var hasSameGoodsIndex = -1;
-        for (var i = 0; i < toBuyInfo.shopList.length; i++) {
-          var tmpShopCarMap = toBuyInfo.shopList[i];
-          if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.propertyChildIds == shopCarMap.propertyChildIds) {
-            hasSameGoodsIndex = i;
-            shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
-            break;
-          }
-        }
-        toBuyInfo.shopNum = toBuyInfo.shopNum + this.data.buyNumber;
-        if (hasSameGoodsIndex > -1) {
-          toBuyInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
-        } else {
-          toBuyInfo.shopList.push(shopCarMap);
-        }*/
-
     buyNowInfo.shopList.push(shopCarMap);
     buyNowInfo.kjId = this.data.kjId;
     return buyNowInfo;

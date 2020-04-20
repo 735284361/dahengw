@@ -14,6 +14,8 @@ Page(Object.assign({},{
     swiperCurrent: 0,
     selectCurrent: 0,
     categories: [],
+    currentCateName:'',
+    activeCategoryId:'',
     activeCategoryId: null,
     goods: [],
     goodsList: [],
@@ -28,43 +30,27 @@ Page(Object.assign({},{
       text: '                                                                           '
     },
   },
-  onPullDownRefresh: function () {
-    var that = this
-    wx.showNavigationBarLoading()
-    that.reLoad()
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
-  },
+  // onPullDownRefresh: function () {
+  //   var that = this
+  //   wx.showNavigationBarLoading()
+  //   that.reLoad()
+  //   wx.hideNavigationBarLoading() //完成停止加载
+  //   wx.stopPullDownRefresh() //停止下拉刷新
+  // },
   onShow: function (options) {
     var that = this
-    
+    // 页面标题
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
     })
+
     that.setData({
-      picDomain: app.globalData.picDomain,
-      categories: app.globalData.categories,
-      goods: app.globalData.goods,
-      goodsList: app.globalData.goodsList,
-      onLoadStatus: app.globalData.onLoadStatus,
-      activeCategoryId: app.globalData.activeCategoryId,
       background_color: app.globalData.globalBGColor,
       bgRed: app.globalData.bgRed,
       bgGreen: app.globalData.bgGreen,
-      bgBlue: app.globalData.bgBlue,
-      shopLogo: app.globalData.shopLogo
+      bgBlue: app.globalData.bgBlue
     })
-    for (var i = 0; i < that.data.categories.length; i++) {
-      if (that.data.activeCategoryId === that.data.categories[i].id) {
-        that.setData({
-          classifyViewed: that.data.categories[i].id,
-          scrolltop: 0,
-          goodsListCurrent: that.data.goodsList[i],
-          
-        })
-      }
-    }
-
+    
     //获取系统信息  
     wx.getSystemInfo({
       //获取系统信息成功，将系统窗口的宽高赋给页面的宽高  
@@ -80,8 +66,8 @@ Page(Object.assign({},{
     if (!that.data.onLoadStatus) {
       that.showDialog('.onLoad-err')
     }
-    
   },
+
   onShareAppMessage: function () {
     return {
       title: wx.getStorageSync('mallName') + app.globalData.shareProfile,
@@ -100,6 +86,8 @@ Page(Object.assign({},{
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {
     //调用canvasClock函数  
+    this.getCategories()
+    this.getShopLogo()
     this.canvasClock()
     //对canvasClock函数循环调用  
     this.interval = setInterval(this.canvasClock, 1000)
@@ -115,73 +103,86 @@ Page(Object.assign({},{
       that.setData({
         classifyViewed: id,
       });
-      console.log('id:', that.data.classifyViewed)
       for (var i = 0; i < that.data.categories.length; i++) {
         if (id === that.data.categories[i].id) {
           that.setData({
             page: 1,
             scrolltop: 0,
-            goodsListCurrent: that.data.goodsList[i]
           })
         }
       }
+      this.getCurrentGoodsList(id)
     }
-    /*for (let i = 0; i < that.data.categories.length; i++) {
-      if (id === that.data.categories[i].key) {
-        that.setData({
-          activeCategoryId: that.data.categories[i].id,
-          page: 1,
-          scrolltop: 0,
-        });
-      }
-    }*/
-
   },
+
   //事件处理函数
   toDetailsTap: function (e) {
     wx.navigateTo({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
-  reLoad: function () {
+  
+  getShopLogo: function() {
+    //  获取商城LOGO
     var that = this
-    that.setData({
-      loadingStatus: true
-    })
-    /*wx.showLoading({
-      title: '努力加载中···',
-      mask: true,
-    });*/
     request.$get({
-      url: 'category/all',
-      success: function (res) {
-        var categories = []; //{ id: 0, name: "全品类" }
-        if (res.data.code == 0) {
-          for (var i = 0; i < res.data.data.length; i++) {
-            categories.push(res.data.data[i]);
-          }
-        }
-        that.setData({
-          categories: categories,
-          page: 1,
-        });
-        that.getGoods(0);//获取全品类商品
+      url: 'config/value',
+      data: {
+        key: 'shopLogo'
       },
-      fail: function () {
-        that.setData({
-          onLoadStatus: false,
-        })
-        wx.hideLoading()
-        console.log('11')
+      success: function (res) {
+        if (res.data.code == 0) {
+          that.setData({
+            shopLogo: res.data.data.value
+          })
+        }
       }
     })
   },
-  getGoods: function (categoryId) {
-    if (categoryId == 0) {
-      categoryId = "";
-    }
-    console.log(categoryId)
+
+  // 获取商品分类
+  getCategories: function() {
+    var that = this
+    request.$get({
+      url: 'shop/category/list',
+      success: function (res) {
+        var categories = res.data.data; //{ id: 0, name: "全品类" }
+        if (res.data.code == 0) {
+          var categoryId = 0;
+          if (categories.length > 0) {
+            categoryId = categories[0]['id']
+            that.getCurrentGoodsList(categoryId)
+          }
+          that.setData({
+            categories: categories,
+            classifyViewed: categoryId,
+            scrolltop: 0,
+          })
+        }
+        console.log(categories)
+      },
+      fail: function () {
+        that.globalData.onLoadStatus = false
+        wx.hideLoading()
+      }
+    })
+  },
+
+  getCurrentGoodsList: function (categoryId) {
     var that = this;
+    var categories = that.data.categories
+    // 当前分类名
+    var currentCateName = '';
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i]['id'] == categoryId) {
+        currentCateName = categories[i]['name'];
+      }
+    }
+    that.setData({
+      goodsListCurrent: [],
+      currentCateName: currentCateName
+    })
+
     request.$get({
       url: 'shop/goods/list',
       data: {
@@ -190,115 +191,26 @@ Page(Object.assign({},{
         categoryId: categoryId
       },
       success: function (res) {
-        that.setData({
-          goods: [],
-        });
         var goods = [];
-
-        if (res.data.code != 0 || res.data.data.length == 0) {
-          that.setData({
-            prePageBtn: false,
-            nextPageBtn: true,
-            toBottom: true
-          });
-          return;
-        }
-
         for (var i = 0; i < res.data.data.length; i++) {
           goods.push(res.data.data[i]);
         }
-
-
-        console.log('getGoods----------------------')
-        console.log(goods)
-
-        var page = that.data.page;
-        var pageSize = that.data.pageSize;
+        // 计算评分
         for (let i = 0; i < goods.length; i++) {
           goods[i].starscore = (goods[i].number_score / goods[i].number_reputation)
           goods[i].starscore = Math.ceil(goods[i].starscore / 0.5) * 0.5
           goods[i].starpic = starscore.picStr(goods[i].starscore)
         }
         that.setData({
-          goods: goods,
-        });
-        console.log('getGoodsReputation----------------------')
-        console.log(goods)
-
-        request.$get({
-          url: 'shop/goods/list',
-          data: {
-            page: that.data.page,
-            per_page: that.data.pageSize,
-            categoryId: categoryId
-          },
-          success: function (res) {
-            var categories = that.data.categories
-            var goodsList = [],
-              id,
-              key,
-              name,
-              goodsTemp = []
-            for (let i = 0; i < categories.length; i++) {
-              id = categories[i].id;
-              key = categories[i].key;
-              name = categories[i].name;
-              goodsTemp = [];
-              for (let j = 0; j < goods.length; j++) {
-                if (goods[j].categoryId === id) {
-                  goodsTemp.push(goods[j])
-                }
-              }
-              goodsList.push({ 'id': id, 'key': key, 'name': name, 'goods': goodsTemp })
-              console.log("你好," + categories[i].name)
-            }
-
-            console.log(goodsList, 'womendeshijie')
-            for (var i = 0; i < goodsList.length; i++) {
-              if (goodsList[i].goods.length === 0) {
-                continue;
-              } else {
-                that.setData({
-                  goodsList: goodsList,
-                  onLoadStatus: true,
-                  activeCategoryId: categories[i].id,
-                  classifyViewed: categories[i].id
-                })
-                for (var j = 0; j < that.data.categories.length; j++) {
-                  if (categories[i].id === that.data.categories[j].id) {
-                    that.setData({
-                      scrolltop: 0,
-                      goodsListCurrent: that.data.goodsList[j],
-                    })
-                  }
-                }
-                break;
-              }
-            }
-
-            console.log('getGoodsList----------------------')
-            console.log(that.data.goodsList)
-            that.setData({
-              loadingStatus: false,
-              loadingFinish: true
-            })
-            setTimeout(() => {
-              that.setData({
-                loadingFinish: false
-              })
-            }, 1500)
-
-          },
-          fail: function () {
-            that.setData({
-              onLoadStatus: false,
-            })
-            console.log('33')
-          }
+          goodsListCurrent: goods,
+          classifyViewed: categoryId,
+          scrolltop: 0,
         })
+        console.log(goods)
       }
     })
   },
+
   getPrompt: function () {
     var that = this
     //  获取关于我们Title
