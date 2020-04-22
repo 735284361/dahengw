@@ -38,10 +38,10 @@ App({
     goodsName: [],
     onLoadStatus: true,
     shopLogo: null,
-    globalBGColor: '#00afb4',
-    bgRed: 0,
-    bgGreen: 175,
-    bgBlue: 180,
+    globalBGColor: '#f7cb46',
+    bgRed: 247,
+    bgGreen: 203,
+    bgBlue: 70,
     userInfo: null,
     // domain: "https://daheng.raohouhai.com/api/v1/",// 正式商城后台域名
     // domain: "http://daheng.test/api/v1/",// 本地商城后台域名

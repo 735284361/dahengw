@@ -51,8 +51,8 @@ Page({
     request.$get({
       url: 'shop/goods/detail',
       data: {
-        id: e.id
-        // id:3
+        // id: e.id
+        id:2
       },
       success: function (res) {
         var selectSizeTemp = "";

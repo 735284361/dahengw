@@ -25,12 +25,12 @@
     <wxc-toast is-show="{{loadingFinish}}" icon="yes" icon-color="#FF0077" text="所有商品加载完成"> </wxc-toast>
 
     <scroll-view class="classify-container" scroll-y="true" scroll-with-animation="true">
-      <view class="classify {{classifyViewed==classify.id?'active':''}}" wx:for="{{categories}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
-        <view class="name {{classifyViewed==classify.id?'active':''}}">{{classify.name}}</view>
+      <view class="classify {{categoryId==classify.id?'active':''}}" wx:for="{{categories}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
+        <view class="name {{categoryId==classify.id?'active':''}}">{{classify.name}}</view>
       </view>
     </scroll-view>
 
-    <scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
+    <view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
       <view data="{{goodsListCurrent}}">
         <view class="title">
           {{currentCateName}}
@@ -67,6 +67,6 @@
 
         </view>
       </view>
-    </scroll-view>
+    </view>
   </view>
 </view>

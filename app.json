@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/distribution/code/code",
+    "pages/home/index",
     "pages/start/start",
+    "pages/goods-details/index",
+    "pages/classification/index",
     "pages/share/index",
     "pages/ucenter/index/index",
     "pages/shop-cart/index",
@@ -12,8 +14,6 @@
     "pages/to-pay-order/index",
     "pages/select-address/index",
     "pages/address-add/index",
-    "pages/classification/index",
-    "pages/goods-details/index",
     "pages/choiceness/index",
     "pages/finder/index",
     "pages/search/index",
@@ -37,6 +37,7 @@
     "pages/distribution/member/member",
     "pages/distribution/teams/index",
     "pages/distribution/team-code/code",
+    "pages/distribution/code/code",
     "pages/distribution/team-accept/index"
   ],
   "permission": {
@@ -48,21 +49,21 @@
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#00afb4",
-    "backgroundColor": "#00afb4"
+    "navigationBarBackgroundColor": "#f7cb46",
+    "backgroundColor": "#f7cb46"
   },
   "tabBar": {
     "color": "#929292",
-    "selectedColor": "#00afb4",
+    "selectedColor": "#f7cb46",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "box-shadow": "0 0 4px 0",
     "list": [
       {
-        "pagePath": "pages/choiceness/index",
-        "iconPath": "images/nav/select-off.png",
-        "selectedIconPath": "images/nav/select-on.png",
-        "text": "精选"
+        "pagePath": "pages/home/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/classification/index",

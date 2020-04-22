@@ -23,7 +23,7 @@ Page(Object.assign({},{
     scrollTop: 0,
     page: 1,
     pageSize: 5000,
-    classifyViewed: null,
+    categoryId: null,
     width: 0,
     height: 0,
     movable: {
@@ -92,16 +92,39 @@ Page(Object.assign({},{
     //对canvasClock函数循环调用  
     this.interval = setInterval(this.canvasClock, 1000)
   },
-  tapClassify: function (e) {
+  
+  tapClassify2: function (id) {
     var that = this;
-    var id = e.target.dataset.id;
-    if (id === that.data.classifyViewed){
+    if (id === that.data.categoryId){
       that.setData({
         scrolltop: 0,
       })
     }else{
       that.setData({
-        classifyViewed: id,
+        categoryId: id,
+      });
+      for (var i = 0; i < that.data.categories.length; i++) {
+        if (id === that.data.categories[i].id) {
+          that.setData({
+            page: 1,
+            scrolltop: 0,
+          })
+        }
+      }
+      this.getCurrentGoodsList(id)
+    }
+  },
+
+  tapClassify: function (e) {
+    var that = this;
+    var id = e.target.dataset.id;
+    if (id === that.data.categoryId){
+      that.setData({
+        scrolltop: 0,
+      })
+    }else{
+      that.setData({
+        categoryId: id,
       });
       for (var i = 0; i < that.data.categories.length; i++) {
         if (id === that.data.categories[i].id) {
@@ -155,7 +178,7 @@ Page(Object.assign({},{
           }
           that.setData({
             categories: categories,
-            classifyViewed: categoryId,
+            categoryId: categoryId,
             scrolltop: 0,
           })
         }
@@ -203,7 +226,7 @@ Page(Object.assign({},{
         }
         that.setData({
           goodsListCurrent: goods,
-          classifyViewed: categoryId,
+          categoryId: categoryId,
           scrolltop: 0,
         })
         console.log(goods)
