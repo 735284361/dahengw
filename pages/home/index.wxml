@@ -1,31 +1,7 @@
 <import src="../../templates/recommend-goods-item/recommend-goods-item.wxml" />
 
-<view wx:if="{{noticeList}}" style="height: 100rpx;"></view>
-
-<view class="container" style="height:{{height}}rpx;" scroll-y="true" scroll-with-animation="true" bindscrolltolower="getRGshow">
-
-  <view wx:if="{{noticeList}}" class="notice" style='background: -webkit-linear-gradient(top, rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 1), rgba({{bgRed}},{{bgGreen}},{{bgBlue}}, 0.7));'>
-
-    <wxc-icon size='40' type="{{'notice'}}" style='margin-right:10rpx;'> </wxc-icon>
-    <wxc-elip style='width: 150rpx; color:#FF0077;text-align: center;'>大亨快报</wxc-elip>
-    <wxc-icon size='40' type="{{'minus'}}" style='transform:rotate(90deg); margin-right:10rpx;'> </wxc-icon>
-
-    <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
-      <navigator wx:for-items="{{noticeList.dataList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
-        <swiper-item>
-          <wxc-elip class="notice_item">{{item.title}}</wxc-elip>
-        </swiper-item>
-      </navigator>
-    </swiper>
-
-    <wxc-icon size="40" type="{{'arrow-right'}}"></wxc-icon>
-  </view>
-
-  <view scroll-y="true" style="width:100%;min-height:100%;">
-    <wxc-popup class="banners_warn_Popup" animation-mode="top" align="top">
-      <view class="popup__content">请求轮播图数据出错，请联系管理员</view>
-    </wxc-popup>
-
+<view class="container" scroll-y="true" scroll-with-animation="true">
+  <scroll-view style="width:100%;min-height:100%;">
     <view wx:if="{{!showNoBanners}}" class="swiper-container">
       <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current='swiperCurrent' bindchange="swiperchange">
         <!--<block wx:for="{{banners}}" wx:key="id">-->
@@ -50,7 +26,7 @@
     <!-- icon -->
     <view>
       <view class="icon-container">
-        <view class="icon-box" wx:for="{{icons}}" wx:key="id" wx:for-item="icon" bindtap="toClassifyTap" data-id="{{item.id}}">
+        <view class="icon-box" wx:for="{{icons}}" wx:key="id" wx:for-item="icon" bindtap="toClassifyTap" data-id="{{icon.category_id}}">
           <image src="{{icon.icon_img}}" class="icon-img"></image>
           <view class="icon-title">{{icon.title}}</view>
         </view>
@@ -60,13 +36,13 @@
     <!-- 商品 -->
     <view class="nav-box">
       <view class="iconfont icon-list icon-style">热销推荐</view>
-      <view class="nav-more">更多></view>
+      <!-- <view class="nav-more">更多></view> -->
     </view>
     <view class="goods-container">
       <view class="goods-box" wx:for="{{recommendGoodsShow}}" wx:key="id" wx:for-item="item" data-id="{{item.id}}" bindtap="toDetailsTap">
         <template is="recommend-goods-item" data="{{item}}"> </template>
       </view>
     </view>
-  </view>
+  </scroll-view>
 
 </view>

@@ -39,6 +39,17 @@ Page(Object.assign({},{
   // },
   onShow: function (options) {
     var that = this
+
+    // 判断是否是全局的分类id
+    var categoryId = null;
+    var globalCategoryId = app.globalData.globalCategoryId
+    if (globalCategoryId) {
+      categoryId = globalCategoryId
+      app.globalData.globalCategoryId = null // 全局分类 用过销毁
+    } else {
+      categoryId = that.data.categoryId 
+    }
+    that.setCategories(categoryId)
     // 页面标题
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
@@ -80,62 +91,19 @@ Page(Object.assign({},{
       }
     }
   },
-  // onShow: function () {
-  //   var that = this
-  // },
+  
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {
     //调用canvasClock函数  
-    this.getCategories()
     this.getShopLogo()
     this.canvasClock()
     //对canvasClock函数循环调用  
     this.interval = setInterval(this.canvasClock, 1000)
   },
-  
-  tapClassify2: function (id) {
-    var that = this;
-    if (id === that.data.categoryId){
-      that.setData({
-        scrolltop: 0,
-      })
-    }else{
-      that.setData({
-        categoryId: id,
-      });
-      for (var i = 0; i < that.data.categories.length; i++) {
-        if (id === that.data.categories[i].id) {
-          that.setData({
-            page: 1,
-            scrolltop: 0,
-          })
-        }
-      }
-      this.getCurrentGoodsList(id)
-    }
-  },
 
   tapClassify: function (e) {
-    var that = this;
     var id = e.target.dataset.id;
-    if (id === that.data.categoryId){
-      that.setData({
-        scrolltop: 0,
-      })
-    }else{
-      that.setData({
-        categoryId: id,
-      });
-      for (var i = 0; i < that.data.categories.length; i++) {
-        if (id === that.data.categories[i].id) {
-          that.setData({
-            page: 1,
-            scrolltop: 0,
-          })
-        }
-      }
-      this.getCurrentGoodsList(id)
-    }
+    this.setCategories(id)
   },
 
   //事件处理函数
@@ -164,35 +132,43 @@ Page(Object.assign({},{
   },
 
   // 获取商品分类
-  getCategories: function() {
+  setCategories: function(categoryId) {
     var that = this
-    request.$get({
-      url: 'shop/category/list',
-      success: function (res) {
-        var categories = res.data.data; //{ id: 0, name: "全品类" }
-        if (res.data.code == 0) {
-          var categoryId = 0;
-          if (categories.length > 0) {
-            categoryId = categories[0]['id']
+    // 分类存在 直接获取分类对应商品
+    if (that.data.categories.length > 0) {
+      that.getCurrentGoodsList(categoryId)
+    } else {
+      // 分类不存在 则先获取分类
+      request.$get({
+        url: 'shop/category/list',
+        success: function (res) {
+          var categories = res.data.data; //{ id: 0, name: "全品类" }
+          if (res.data.code == 0) {
+            if (!categoryId && categories.length > 0) {
+              categoryId = categories[0]['id']
+            }
+            that.setData({
+              categories: categories,
+            })
             that.getCurrentGoodsList(categoryId)
           }
-          that.setData({
-            categories: categories,
-            categoryId: categoryId,
-            scrolltop: 0,
-          })
+        },
+        fail: function () {
+          that.globalData.onLoadStatus = false
+          wx.hideLoading()
         }
-        console.log(categories)
-      },
-      fail: function () {
-        that.globalData.onLoadStatus = false
-        wx.hideLoading()
-      }
-    })
+      })
+    }
   },
 
   getCurrentGoodsList: function (categoryId) {
     var that = this;
+    if (categoryId === that.data.categoryId){
+      that.setData({
+        scrolltop: 0,
+      })
+      return
+    }
     var categories = that.data.categories
     // 当前分类名
     var currentCateName = '';
@@ -203,7 +179,8 @@ Page(Object.assign({},{
     }
     that.setData({
       goodsListCurrent: [],
-      currentCateName: currentCateName
+      currentCateName: currentCateName,
+      categoryId: categoryId,
     })
 
     request.$get({
@@ -226,9 +203,9 @@ Page(Object.assign({},{
         }
         that.setData({
           goodsListCurrent: goods,
-          categoryId: categoryId,
           scrolltop: 0,
         })
+        console.log('获取商品列表')
         console.log(goods)
       }
     })
