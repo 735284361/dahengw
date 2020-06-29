@@ -9,7 +9,7 @@
           {{item.province}} {{item.city}} {{item.county}} {{item.detail_info}}
         </view>
       </view>
-      <wxc-icon class="right-edit" type='edit' size='35' color='#999999' bindtap="editAddess" data-id="{{item.id}}"></wxc-icon>
+      <view class="iconfont .icon-post" style="font-size:40rpx;color:#999999;margin-right:30rpx;font-weight:600" bindtap="editAddess" data-id="{{item.id}}"></view>
       <!--<view class="right-edit" bindtap="editAddess" data-id="{{item.id}}"></view>-->
     </view>
   </view>

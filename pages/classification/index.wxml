@@ -30,7 +30,7 @@
       </view>
     </scroll-view>
 
-    <view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
+    <scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if='{{onLoadStatus}}'>
       <view data="{{goodsListCurrent}}">
         <view class="title">
           {{currentCateName}}
@@ -67,6 +67,6 @@
 
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </view>

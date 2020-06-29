@@ -1,0 +1,75 @@
+<import src="/dist/packages/@zanui/steps/index.wxml" />
+<view class="container">
+  <view class="sec-wrap">
+    <view class="zan-cell__bd" style='padding: 30rpx 30rpx;'>
+      <template is="zan-steps" data="{{ type: 'horizon', hasDesc: true, steps: statusSteps }}"></template>
+    </view>
+    <block wx:if="{{orderDetail.address}}">
+      <view wx:if="{{orderDetail.address.delivery_company}}" class="wuliu-box">
+        <view class="icon-box">
+          <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
+        </view>
+        <view class="right-text">
+          <view class="order-number">快递公司：{{orderDetail.address.delivery_company}}</view>
+          <view class="wuliu-text">快递单号：{{orderDetail.address.delivery_number}}</view>
+        </view>
+      </view>
+      <view class="address-sec">
+        <view class="icon-box">
+          <image class="icon" src="/images/order-details/icon-address.png"></image>
+        </view>
+        <view class="right-box">
+          <view class="name-tel">{{orderDetail.address.name}} {{orderDetail.phone}}</view>
+          <view class="text">
+            {{orderDetail.address.province}} {{orderDetail.address.city}} {{orderDetail.address.county}} {{orderDetail.address.detail_info}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="goods-list">
+    <view class="list-title">商品信息</view>
+    <form bindsubmit="submitReputation">
+      <block wx:for="{{orderDetail.goods}}" wx:key="{{index}}">
+        <view class="a-goods">
+          <view class="img-box">
+            <image src="{{item.pic_url}}" class="img" />
+          </view>
+          <view class="text-box">
+            <view class="arow arow01">
+              <view class="goods-name">{{item.name}}</view>
+              <view class="goods-price">¥ {{item.pivot.product_price}}</view>
+            </view>
+            <view class="arow">
+              <view class="goods-label">{{item.pivot.sku}}</view>
+              <view class="goods-num">x {{item.pivot.product_count}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </form>
+
+  </view>
+  <view class="goods-info">
+    <view class="row-box">
+      <view class="row-label">支付总额</view>
+      <view class="right-text">¥ {{orderDetail.order_amount_total}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">商品金额</view>
+      <view class="right-text">¥ {{orderDetail.product_amount_total}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">运费</view>
+      <view class="right-text"><view wx:if="{{orderDetail.logistics_fee > 0}}">+ ¥ {{orderDetail.logistics_fee}}</view><view wx:else>包邮</view></view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">提成</view>
+      <view class="right-text">¥ {{orderDetail.commission_fee}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">销售业绩</view>
+      <view class="right-text">¥ {{orderDetail.commission_remain_fee}}</view>
+    </view>
+  </view>
+</view>

@@ -36,13 +36,20 @@
                 <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="{{index}}">
                   <view class="order-date">
                     <view class="date-box">下单时间：{{item.created_at}}</view>
+                    <view wx:if="{{item.status == 1}}">已付款，待发货</view>
+                    <view wx:elif="{{item.status == 2}}">已发货，待确认收货</view>
+                    <view wx:elif="{{item.status == 3}}">已确认收货，待评价</view>
+                    <view wx:elif="{{item.status == 4}}">已完成</view>
+                  </view>
+                  <view class="order-date">
+                    <view class="date-box">姓名：{{item.address.name}}  电话：{{item.address.phone}}</view>
                   </view>
                   <view class="goods-info">
                     <view class="goods-des">
                       <view class='order-info'>
-                        <view>订单号：{{item.order_no}} </view>
+                        <view>订单号：{{item.order_no}}</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}">订单详情</view>
                       </view>
-                      <!-- <view style='padding-top:15rpx;' wx:if="{{item.remark && item.remark != ''}}">备注： {{item.remark}}</view> -->
                     </view>
                   </view>
                   <view>
@@ -53,8 +60,12 @@
                     </scroll-view>
                   </view>
                   <view class="price-box">
-                    <view class="total-price"  wx:if="{{item.status == 1 }}">预计佣金：{{item.commission}} 元</view>
-                    <view class="total-price"  wx:if="{{item.status == 4 }}">已得佣金： {{item.commission}} 元</view>
+                    <view class="total-price date-box">
+                      金额：{{item.order_amount_total}}元（
+                      <text wx:if="{{item.logistics_fee == 0}}">包邮</text>
+                      <text wx:else> 含{{item.logistics_fee}}元运费</text>)</view>
+                    <view class="total-price"  wx:if="{{item.status == 1 || item.status == 2}}">预计佣金：{{item.commission}} 元</view>
+                    <view class="total-price"  wx:if="{{item.status == 3 || item.status == 4}}">已得佣金： {{item.commission}} 元</view>
                   </view>
                 </view>
               </view>

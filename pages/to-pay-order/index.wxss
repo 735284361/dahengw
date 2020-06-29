@@ -4,8 +4,8 @@
 
 .address-box {
   width: 100%;
-  background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 705rpx center,
-                url(https://cdn.it120.cc/images/weappshop/addr-line.png) no-repeat center bottom;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/2edbe7b223794b95d566b3d1797ec08d.png) no-repeat 705rpx center,
+                url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/439af4c379705e8cd029dc6f0901ff3c.png) no-repeat center bottom;
   background-size: 16rpx auto, 750rpx auto;
   background-color: #fff;
   margin: 20rpx 0;
@@ -19,7 +19,7 @@
   font-size: 28rpx;
   color: #000;
   margin-left: 30rpx;
-  background: url(https://cdn.it120.cc/images/weappshop/ico-add-addr.png) no-repeat left center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/9eeec5805218fcfae14d2bbf25dbe1e2.png) no-repeat left center;
   background-size: 60rpx auto;
   padding: 40rpx 0 40rpx 90rpx;
 }

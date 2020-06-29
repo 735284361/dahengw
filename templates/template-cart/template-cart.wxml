@@ -1,6 +1,6 @@
 <template name="no-goods">
   <view class='text-highlight'>
-    ◉24小时极速发货 　◉品质保障 　◉满额免运费
+    ◉新鲜食材 　◉品质保障 　◉满额免运费
   </view>
 
   <view class="shop-cart-empty">

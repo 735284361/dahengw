@@ -6,15 +6,7 @@
       <view class='userinfo-text'>
         <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
         <view style='height:10rpx;'></view>
-        <!-- 部分未通过认证的开发者无权限获得用户绑定电话信息，故暂时隐藏此功能。具体可见微信官方https://developers.weixin.qq.com/miniprogram/dev/api/getPhoneNumber.html -->
-        <!--<wxc-label wx:if="{{userMobile}}" class="phoneNumber" type='fill' type-color="#747ba1">
-            {{userMobile}}
-          </wxc-label>
-          <button wx:else class="pin-phoneNumber" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size='min'>
-            点击绑定手机号码
-          </button>-->
       </view>
-
     </view>
     <view wx:else class="userinfo">
       <wxc-avatar class="userinfo-avatar-no" mold="square" src="{{ shopLogo }}" bindtap="relogin"> </wxc-avatar>
@@ -24,27 +16,25 @@
       </view>
     </view>
     <view class='userInfoMask'></view>
-    <!-- <wxc-button class='my-sign' wx:if="{{score_sign_continuous == 0}}" size="small" type="beauty" value="每日签到" bindclick="scoresign"></wxc-button>
-    <wxc-button class='my-sign' wx:if="{{score_sign_continuous > 0}}" size="small" type="secondary" value="已连续签到 {{score_sign_continuous}} 天" bindclick="scoresign"></wxc-button> -->
   </view>
 
   <view class='h-contents'>
     <view class='a-item'>
-      <wxc-icon type='purse' size='{{iconSize-10}}' color='#69C3AA' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+      <view class="iconfont .icon-pay" size='{{iconSize-10}}' style='color: #69C3AA;margin:15rpx 0 10rpx 0;'></view>
       <view class='my'>
         余额:
         <view style='padding:0 10rpx;color: #69C3AA;font-weight: bold;'> {{balance}} </view>
       </view>
     </view>
     <view class='a-item'>
-      <wxc-icon type='yen' size='{{iconSize-10}}' color='#666666' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+      <view class="iconfont .icon-moneybag" size='{{iconSize-10}}' style='color:#666666;margin:15rpx 0 10rpx 0;'></view>
       <view class='my'>
         已提现:
         <view style='padding: 0 10rpx;color: #666666;font-weight: bold;'> {{withdrawn}} </view>
       </view>
     </view>
     <view class='a-item'>
-      <wxc-icon type='after-sales' size='{{iconSize-10}}' color='#FF5777' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
+      <view class="iconfont .icon-sponsor" size='{{iconSize-10}}' style='color:#FF5777;margin:15rpx 0 10rpx 0;'></view>
       <view class='my'>
         提现中:
         <view style='padding: 0 10rpx;color: #FF5777;font-weight: bold;'> {{cash_in}} </view>
@@ -60,72 +50,54 @@
   <view class="user-menu">
     <view class="item">
       <navigator url="/pages/ucenter/order-list/index" hover-class="none" class="a">
-        <wxc-icon type='feedback' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">订单管理</text>
+        <view class="iconfont .icon-list" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">订单管理</text>
       </navigator>
     </view>
     <view class="item">
       <navigator url="/pages/select-address/index" hover-class="none" class="a">
-        <wxc-icon type='address' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">收货地址</text>
+        <view class="iconfont .icon-location" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">收货地址</text>
       </navigator>
     </view>
     <view class="item no-border-right">
       <navigator url="/pages/distribution/financial-detail/financialDetail" hover-class="none" class="a">
-      <view class="iconfont icon-money" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
-      <text class="txt">资金流水</text>
+        <view class="iconfont .icon-moneybag" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">资金流水</text>
       </navigator>
     </view>
-    <!-- <view class="item">
-      <navigator url="/pages/ucenter/mycoupons/index" hover-class="none" class="a">
-        <wxc-icon type='coupon' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">优惠券</text>
-      </navigator>
-    </view> -->
-    <!-- <view class="item">
-      <navigator url="" hover-class="none" class="a">
-        <wxc-icon type='rate' size='{{iconSize}}' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt" style='color:lightgray;text-decoration: line-through;'>积分兑换</text>
-      </navigator>
-    </view> -->
-    <!-- <view class="item no-border-right">
-      <navigator url="/pages/target/index" hover-class="none" class="a">
-        <wxc-icon type='footprint' size='{{iconSize}}' color='lightgray' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt" style='color:lightgray;text-decoration: line-through;'>足迹</text>
-      </navigator>
-    </view> -->
     <view class="item" bindtap='makePhoneCall'>
       <view hover-class="none" class="a">
-        <wxc-icon type='group' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">电话客服</text>
+        <view class="iconfont .icon-phone" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">电话客服</text>
       </view>
     </view>
     
     <view class="item">
       <button session-from="weapp" id="contact-btn" open-type="contact" bindtap="makeContact">
         <view hover-class="none" class="a">
-          <wxc-icon type='message' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-          <text class="txt">在线客服</text>
+          <view class="iconfont .icon-weixin1" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">在线客服</text>
         </view>
       </button>
     </view>
     <view class="item no-border-right" bindtap="aboutUs">
       <view hover-class="none" class="a">
-        <wxc-icon type='help' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">关于我们</text>
+        <view class="iconfont .icon-question" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">关于我们</text>
       </view>
     </view>
     <view class="item">
       <navigator url="/pages/ucenter/feedback/feedback" hover-class="none" class="a">
-        <wxc-icon type='comment' size='{{iconSize}}' color='{{iconColor}}' style='margin:15rpx 0 10rpx 0;'></wxc-icon>
-        <text class="txt">意见反馈</text>
+        <view class="iconfont .icon-comment" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">意见反馈</text>
       </navigator>
     </view>
     <view wx:if="{{canViewAgent && canViewAgent != 0}}">
       <view class="item">
         <view class="a" bindtap="switchBar">
-          <view class="iconfont .icon-agent" style="color:{{iconColor}};margin:15rpx 0 10rpx 0;"></view>
-          <text class="txt">代理</text>
+          <view class="iconfont .icon-group" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">代理</text>
         </view>
       </view>
       <view class="item">
@@ -140,7 +112,8 @@
   </view>
   <view style="height:20rpx;width:100%;"></view>
   <view class="my-item" style='border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;'>
-    <wxc-button type="danger" value="重新授权登录" bindclick="relogin"></wxc-button>
+    <wxc-button type="success" value="绑定手机" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="float:left;margin-right:20rpx"></wxc-button>
+    <wxc-button type="danger" value="重新登录" bindclick="relogin" style="float:left"></wxc-button>
   </view>
 
   <view style="height:12rpx;width:100%;"></view>

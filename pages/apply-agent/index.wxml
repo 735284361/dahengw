@@ -2,17 +2,19 @@
   <form>
     <view class="form-box">
     <!-- 图标 -->
-      <view class="aplay-icon">
-        <view  class="iconfont icon-apply" style="color:#7bcbcc;"></view>
-      </view>
+      <view  class="iconfont .icon-shenqingguanli" style="font-size:240rpx;color:{{background_color1}}"></view>
       <!-- 按钮 -->
       <view wx:if="{{code == 1}}">
-        <button class='btn' bindtap="applyAgent">申请代理</button>
-        <text class="tip">请点击申请代理</text>
+        <wxc-button class="confirm-btn" size='large' btnStyle="margin-top:50rpx;width: 282rpx;background: {{background_color}};border-radius: 66rpx;color: #fff;" bindtap="applyAgent">
+            申请代理
+          </wxc-button>
+        <text class="tip" style="color:{{globalGrayFont}}">请点击申请代理</text>
       </view>
       <view wx:else>
-          <text class="msg">{{msg}}</text>
-          <button class='btn' bindtap="goBack">返回</button>
+          <text class="msg" style="color:{{globalGrayFont}}">{{msg}}</text>
+          <wxc-button class="confirm-btn" size='large' btnStyle="margin-top:50rpx;width: 282rpx;background: {{background_color}};border-radius: 66rpx;color: #fff;" bindtap="goBack">
+            返回
+          </wxc-button>
       </view>
     </view>
   </form>

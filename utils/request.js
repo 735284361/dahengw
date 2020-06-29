@@ -36,7 +36,8 @@ function request(url, method, data, complete, success, fail) {
               // 401 清除token信息并跳转到登录页面
               // 检查用户当前是否在登录页面
               // 如果在登录页面则不跳转
-              if (wx.getStorageSync('is_navigate_login')) {
+              var is_login = wx.getStorageSync('is_navigate_login')
+              if (is_login) {
                 return;
               } else {
                 wx.setStorageSync('is_navigate_login', true)
@@ -63,12 +64,14 @@ function request(url, method, data, complete, success, fail) {
               //   showCancel: false
               // })
 
+              console.log(res)
               wx.showToast({
-                title: '请求超时',
+                title: '参数错误',
                 duration: 2000,
               })
               break;
             case 408:
+              console.log(res)
               wx.showToast({
                 title: '请求超时',
                 duration:2000,

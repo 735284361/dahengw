@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "用户信息授权",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "wxc-button": "../../../dist/packages/@minui/wxc-button/dist/index",
-    "wxc-list": "../../../dist/packages/@minui/wxc-list/dist/index"
-  }
-}

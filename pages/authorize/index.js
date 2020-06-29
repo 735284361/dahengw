@@ -65,8 +65,8 @@ Page({
   
   },
   rejectLogin: function (e){
-    wx.navigateBack({
-      
+    wx.switchTab({
+      url: '/pages/home/index',
     })
   },
   bindGetUserInfo: function (e) {
@@ -78,12 +78,15 @@ Page({
   },
   login: function () {
     let that = this;
+    let userInfo = wx.getStorageSync('userInfo')
     wx.login({
       success: function (res) {
         wx.request({
           url: app.globalData.domain + 'wechat/login',
           data: {
-            code: res.code
+            code: res.code,
+            nickName: userInfo.nickName,
+            avatarUrl: userInfo.avatarUrl
           },
           success: function (res) {
             console.log(res.data.code)

@@ -30,13 +30,13 @@ Page(Object.assign({},{
       text: '                                                                           '
     },
   },
-  // onPullDownRefresh: function () {
-  //   var that = this
-  //   wx.showNavigationBarLoading()
-  //   that.reLoad()
-  //   wx.hideNavigationBarLoading() //完成停止加载
-  //   wx.stopPullDownRefresh() //停止下拉刷新
-  // },
+  onPullDownRefresh: function () {
+    var that = this
+    wx.showNavigationBarLoading()
+    that.reLoad()
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
   onShow: function (options) {
     var that = this
 
@@ -50,6 +50,9 @@ Page(Object.assign({},{
       categoryId = that.data.categoryId 
     }
     that.setCategories(categoryId)
+    that.getPrompt();
+    that.getDelivery();
+    this.getShopLogo()
     // 页面标题
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
@@ -71,9 +74,6 @@ Page(Object.assign({},{
         that.height = res.windowWidth / 2.9  //2.6
       }
     })
-    //console.log(this.width, this.height)
-    that.getPrompt();
-    that.getDelivery();
     if (!that.data.onLoadStatus) {
       that.showDialog('.onLoad-err')
     }
@@ -81,7 +81,7 @@ Page(Object.assign({},{
 
   onShareAppMessage: function () {
     return {
-      title: wx.getStorageSync('mallName') + app.globalData.shareProfile,
+      title: wx.getStorageSync('mallName') + ':' + app.globalData.shareProfile,
       path: '/pages/classification/index',
       success: function (res) {
         // 转发成功
@@ -95,7 +95,6 @@ Page(Object.assign({},{
   //onReady生命周期函数，监听页面初次渲染完成  
   onReady: function () {
     //调用canvasClock函数  
-    this.getShopLogo()
     this.canvasClock()
     //对canvasClock函数循环调用  
     this.interval = setInterval(this.canvasClock, 1000)
@@ -155,7 +154,8 @@ Page(Object.assign({},{
         },
         fail: function () {
           that.globalData.onLoadStatus = false
-          wx.hideLoading()
+        },
+        complete: function() {
         }
       })
     }
@@ -183,6 +183,13 @@ Page(Object.assign({},{
       categoryId: categoryId,
     })
 
+    wx.showLoading({
+      title: '加载中...',
+      complete: (res) => {},
+      fail: (res) => {},
+      mask: true,
+      success: (res) => {},
+    })
     request.$get({
       url: 'shop/goods/list',
       data: {
@@ -207,6 +214,13 @@ Page(Object.assign({},{
         })
         console.log('获取商品列表')
         console.log(goods)
+      },
+      complete: function() {
+        wx.hideLoading({
+          complete: (res) => {},
+          fail: (res) => {},
+          success: (res) => {},
+        })
       }
     })
   },

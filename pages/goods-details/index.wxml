@@ -27,14 +27,9 @@
     <!--<view class="goods-price" style="padding-left:35rpx;">¥ {{selectSizePrice}}</view>-->
     <view class="goods-price" style="color:#999;font-size:24rpx;">购买{{goodsDetail.number_sells}}次</view>
     <view class="goods-price" style="color:#999;font-size:24rpx;">共收到 {{goodsDetail.reputation.length}} 次好评</view>
-    <!-- <view class="goods-info-fx" >
-      <wxc-icon type='share' size='60' color='#e64340'></wxc-icon>
-      <button open-type="share">分享</button>
-      <text>分享</text>
-    </view> -->
-    
+
     <button open-type="share" class="goods-info-fx">
-      <wxc-icon type='share' size='40' color='#e64340'></wxc-icon>
+      <view class="iconfont .icon-share1" style='font-size:40;color:#e64340'></view>
       <text> 分享 </text>
     </button>
   </view>
@@ -71,7 +66,7 @@
       <view style='position:absolute;bottom:10rpx;'> 客服 </view> -->
       
       <!-- <view class="shop-num">({{shopNum}})</view> -->
-      <wxc-icon type='weixin' size='44' color='#4cacb2'></wxc-icon>
+      <view class="iconfont .icon-weixin" style='font-size:44;color:#f7cb46'></view>
       <text class="txt"> 客服 </text>
     </button>
     <view class="shop-cart-btn" bindtap="goShopCar">

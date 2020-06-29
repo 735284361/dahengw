@@ -4,9 +4,9 @@
     <view class="img-box">
       <image class="img" src="{{imgSrc}}" data-url="{{imgSrc}}" bindlongtap="longTap"></image>
     </view>
-    <view class="tip">
+  </view>
+  <view class="tip">
     <button wx:if="{{!loadingStatus}}" type="primary" class="save-btn" bindtap="saveOrShare">保存</button>
-    </view>
   </view>
   <!-- <wxc-mask status="{{maskStatus}}" ></wxc-mask> -->
 </view>

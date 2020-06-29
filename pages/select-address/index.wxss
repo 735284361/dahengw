@@ -26,7 +26,7 @@
 }
 
 .a-address .left-text.active {
-  background: url(https://cdn.it120.cc/images/weappshop/addr-active.png) no-repeat left center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/07185eb535ecb77710475a8d5f2e0763.png) no-repeat left center;
   background-size: 28rpx auto;
 }
 
@@ -45,7 +45,7 @@
   height: 100%;*/
   padding: 30rpx 50rpx 30rpx 58rpx;
   box-sizing: border-box;
-  /*background: url(https://cdn.it120.cc/images/weappshop/addr-edit.png) no-repeat 43rpx center;
+  /*background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/0c44daedcdbf9e3e0fb95b699d254fba.png) no-repeat 43rpx center;
   background-size: 35rpx auto;*/
 }
 
@@ -62,13 +62,13 @@
 }
 
 .bottom-box .arrow-right {
-  background: url(https://cdn.it120.cc/images/weappshop/arrow-right.png) no-repeat 705rpx center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/2edbe7b223794b95d566b3d1797ec08d.png) no-repeat 705rpx center;
   background-size: 15rpx auto;
 }
 
 .bottom-box .arrow-right .add-btn {
   margin-left: 30rpx;
   padding-left: 70rpx;
-  background: url(https://cdn.it120.cc/images/weappshop/add-addr.png) no-repeat left center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/5dc4238113deed8b474977381b0b8394.png) no-repeat left center;
   background-size: 40rpx auto;
 }

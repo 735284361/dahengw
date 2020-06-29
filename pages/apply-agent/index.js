@@ -8,6 +8,9 @@ Page({
    */
   data: {
     code:0,
+    background_color1: null,
+    background_color2: null,
+    globalGrayFont: null,
     msg:'加载中...',
   },
 
@@ -22,7 +25,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getAgentInfo()
+    var that = this
+    that.setData({
+      background_color: app.globalData.globalBGColor,
+      background_color1: app.globalData.globalBGColor1,
+      globalGrayFont: app.globalData.globalGrayFont,
+      bgRed: app.globalData.bgRed,
+      bgGreen: app.globalData.bgGreen,
+      bgBlue: app.globalData.bgBlue
+    })
+    that.getAgentInfo()
   },
 
   // 获取代理商信息

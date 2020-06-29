@@ -40,13 +40,15 @@ App({
     globalCategoryId: null,
     shopLogo: null,
     globalBGColor: '#f7cb46',
+    globalBGColor1: '#f7e2a2',
+    globalGrayFont: '#666666',
     bgRed: 247,
     bgGreen: 203,
     bgBlue: 70,
     userInfo: null,
-    domain: "https://daheng.raohouhai.com/api/v1/",// 正式商城后台域名
+    // domain: "https://daheng.raohouhai.com/api/v1/",// 正式商城后台域名
     // domain: "http://daheng.test/api/v1/",// 本地商城后台域名
-    // domain: "https://dh.raohouhai.com/api/v1/",// 测试商城后台域名
+    domain: "https://dh.raohouhai.com/api/v1/",// 测试商城后台域名
     picDomain: "https://yuanludaheng.oss-cn-beijing.aliyuncs.com/",
     // subDomain: "raohouhai",// 商城后台个性域名tgg
     // vDomain: "api/v1",// 商城后台个性域名tgg

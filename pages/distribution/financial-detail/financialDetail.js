@@ -109,6 +109,7 @@ Page({
     showEndTime: false,
     statusMask: "hide",
     startBottom: true,
+    background_color:null,
     loadingStatus: false
   },
 
@@ -145,7 +146,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this
+    that.setData({
+      background_color: app.globalData.globalBGColor,
+      bgRed: app.globalData.bgRed,
+      bgGreen: app.globalData.bgGreen,
+      bgBlue: app.globalData.bgBlue
+    })
   },
   /**
    * 页面上拉触底事件的处理函数

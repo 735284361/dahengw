@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "申请代理"
+  "navigationBarTitleText": "申请代理",
+  "usingComponents": {
+    "wxc-button": "../../dist/packages/@minui/wxc-button/dist/index"
+  }
 }

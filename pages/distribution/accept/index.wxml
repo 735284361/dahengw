@@ -3,10 +3,10 @@
   <view>
     <view class="aplay-icon">
       <image class="pic" src="{{agent.user.avatar}}"></image>
-      <view class="invite-msg"><text class="nickname">{{agent.user.nickname}}</text> 邀请您加入团队</view>
+      <view class="invite-msg"><text class="nickname">{{agent.user.nickname}}</text> 欢迎您选购</view>
     </view>
     <!-- 按钮 -->
-    <button type="primary" class="btn" bindtap="joinAgent">确认加入</button>
-    <view class="back" bindtap="redirectBack">暂不加入，返回主页</view>
+    <button type="primary" class="btn" bindtap="enterShop" wx:if="{{loadingStatus}}">进入商城</button>
+    <!-- <view class="back" bindtap="redirectBack">返回主页</view> -->
   </view>
 </view>

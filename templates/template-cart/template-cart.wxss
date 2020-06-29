@@ -23,7 +23,7 @@
   padding: 0 30rpx;
   font-size: 28rpx;
   align-items: center;
-  background: rgba(105, 195, 170, 0.3);
+  background: #f7e2a2;
 }
 
 .list-top .label {
@@ -68,12 +68,12 @@
 
 .selector{
   width: 80rpx;
-  background: url(https://cdn.it120.cc/images/weappshop/gou.png) no-repeat 30rpx center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/59c54e6b43e60e2cb5c484eeaede3552.png) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
 .selector.active{
-  background: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat 30rpx center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/c35a412fc0ea5bc915c2075f5d32e45f.png) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
@@ -227,12 +227,12 @@
 .jiesuan-box .all-selected {
   padding-left: 90rpx;
   color: #000;
-  background: url(https://cdn.it120.cc/images/weappshop/gou.png) no-repeat 30rpx center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/59c54e6b43e60e2cb5c484eeaede3552.png) no-repeat 30rpx center;
   background-size: 40rpx auto;
 }
 
 .jiesuan-box .all-selected.active {
-  background: url(https://cdn.it120.cc/images/weappshop/gou-red.png) no-repeat 30rpx center;
+  background: url(https://cqyldh.oss-cn-chengdu.aliyuncs.com/files/c35a412fc0ea5bc915c2075f5d32e45f.png) no-repeat 30rpx center;
   background-size: 40rpx auto;
 }
 

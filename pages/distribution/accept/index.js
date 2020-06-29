@@ -11,6 +11,7 @@ Page({
     code:0,
     id: '',
     msg:'',
+    loadingStatus: false,
   },
 
   /**
@@ -27,6 +28,7 @@ Page({
    */
   onShow: function (e) {
     this.getAgentInfo();
+    this.joinAgent();
   },
 
   getAgentInfo: function () {
@@ -38,6 +40,7 @@ Page({
       url: 'agent/getAgentUserInfo',
       data: {
         id:that.data.id
+        // id:100000
       },
       success: function (res) {
         if (res.data) {
@@ -46,7 +49,7 @@ Page({
           })
         } else {
           wx.showModal({
-            content: '该团队暂不支持加入',
+            content: '暂不支持加入',
             showCancel: false,
             success: (result) => {
               wx.switchTab({
@@ -77,6 +80,12 @@ Page({
     })
   },
 
+  enterShop: function() {
+    wx.reLaunch({
+      url: "/pages/classification/index"
+    });
+  },
+
   joinAgent: function() {
     var that = this
     wx.showLoading({
@@ -85,20 +94,23 @@ Page({
     request.$get({
       url: 'agent/inviteMember',
       data: {
-        id:that.data.agent.user_id
+        id:that.data.id
       },
       success: function (res) {
-        wx.showModal({
-          content: res.data.msg,
-          fail: (res) => {},
-          showCancel: false,
-          success: (result) => {
-            wx.reLaunch({
-              url: "/pages/classification/index"
-            });
-          },
-          title: '提示',
+        that.setData({
+          loadingStatus: true
         })
+        // wx.showModal({
+        //   content: res.data.msg,
+        //   fail: (res) => {},
+        //   showCancel: false,
+        //   success: (result) => {
+        //     wx.reLaunch({
+        //       url: "/pages/classification/index"
+        //     });
+        //   },
+        //   title: '提示',
+        // })
       },
       complete: function () {
         wx.hideLoading()

@@ -4,7 +4,7 @@ var request = require("../../../utils/request.js");
 var app = getApp()
 Page({
   data: {
-    tabs: ["全部", "已付款", "已完成"],
+    tabs: ["全部", "进行中", "已完成"],
     tabClass: ["", "", ""],
     stv: {
       windowWidth: 0,
@@ -49,14 +49,14 @@ Page({
               orderList.push({ 'status': 0, 'isnull': tempList.length === 0, 'orderList': tempList })
             } else if (i == 1) {
               for (let j = 0; j < res.data.data.length; j++) {
-                if (res.data.data[j].status == 1) {
+                if (res.data.data[j].status == 1 || res.data.data[j].status == 2) {
                   tempList.push(res.data.data[j]);
                 }
               }
               orderList.push({ 'status': 1, 'isnull': tempList.length === 0, 'orderList': tempList })
             } else if (i == 2) {
               for (let j = 0; j < res.data.data.length; j++) {
-                if (res.data.data[j].status == 4) {
+                if (res.data.data[j].status == 3 || res.data.data[j].status == 4) {
                   tempList.push(res.data.data[j]);
                 }
               }
@@ -86,7 +86,7 @@ Page({
   orderDetail: function (e) {
     var orderId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: "/pages/order-details/index?id=" + orderId
+      url: "/pages/distribution/order-details/index?id=" + orderId
     })
   },
   handlerStart(e) {

@@ -30,37 +30,37 @@
   <view class="user-menu">
     <view class="item">
       <navigator url="/pages/distribution/financial-detail/financialDetail" hover-class="none" class="a">
-      <view class="iconfont icon-money icon-style"></view>
-        <text class="txt">资金流水</text>
+        <view class="iconfont .icon-moneybag" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">资金流水</text>
       </navigator>
     </view>
 
     <view class="item">
       <navigator url="/pages/distribution/order/order" hover-class="none" class="a">
-        <view class="iconfont icon-order1 icon-style"></view>
-        <text class="txt">分销订单</text>
+        <view class="iconfont .icon-list" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">顾客订单</text>
         
       </navigator>
     </view>
     
     <view class="item">
       <navigator url="/pages/distribution/code/code" hover-class="none" class="a">
-      <view class="iconfont icon-code icon-style"></view>
-        <text class="txt">推广二维码</text>
+        <view class="iconfont .icon-qrcode" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">推广二维码</text>
       </navigator>
     </view>
     
     <view class="item" >
       <navigator url="/pages/distribution/member/member" hover-class="none" class="a">
-        <view class="iconfont icon-customer icon-style"></view>
-        <text class="txt">我的顾客</text>
+        <view class="iconfont .icon-friend" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">我的顾客</text>
       </navigator>
     </view>
     
     <view class="item" wx:if="{{isLeader}}">
       <navigator url="/pages/distribution/teams/index" hover-class="none" class="a">
-        <view class="iconfont icon-member icon-style"></view>
-        <text class="txt">我的团队</text>
+        <view class="iconfont .icon-group" style='font-size:{{iconSize}};color:{{iconColor}};margin:15rpx 0 10rpx 0;'></view>
+        <text class="txt" style="color:{{iconColor}};">我的团队</text>
       </navigator>
     </view>
     

@@ -20,22 +20,20 @@
 
     <!-- tips -->
     <view class='text-highlight'>
-      ◉ 健康美味 　◉ 品质保证 　◉ 急速发货
+      ◉ 健康美味 　◉ 品质保证 　◉ 极速发货
     </view>
 
     <!-- icon -->
-    <view>
-      <view class="icon-container">
-        <view class="icon-box" wx:for="{{icons}}" wx:key="id" wx:for-item="icon" bindtap="toClassifyTap" data-id="{{icon.category_id}}">
-          <image src="{{icon.icon_img}}" class="icon-img"></image>
-          <view class="icon-title">{{icon.title}}</view>
-        </view>
+    <view class="icon-container">
+      <view class="icon-box" wx:for="{{icons}}" wx:key="id" wx:for-item="icon" bindtap="toClassifyTap" data-id="{{icon.category_id}}">
+        <image src="{{icon.icon_img}}" class="icon-img"></image>
+        <view class="icon-title">{{icon.title}}</view>
       </view>
     </view>
 
     <!-- 商品 -->
     <view class="nav-box">
-      <view class="iconfont icon-list icon-style">热销推荐</view>
+      <view class="iconfont .icon-rexiao icon-style">热销推荐</view>
       <!-- <view class="nav-more">更多></view> -->
     </view>
     <view class="goods-container">

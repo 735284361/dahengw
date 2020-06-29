@@ -9,12 +9,6 @@
           <view class="team-leader">{{team['user_info']['nickname']}}</view>
           <!-- 只有队长能看的数据 -->
           <view wx:if="{{isTeamLeader}}" >
-            <!-- <view class="join-time team-invite-code">
-              <navigator url="/pages/distribution/team-code/code" hover-class="none" class="a">
-                <view class="invite-tip">邀请成员</view>
-                <view class="iconfont icon-code icon-style"></view>
-              </navigator>
-            </view> -->
             <view class="sales">
               <view class="sales-amount">本月销售总额：{{sales_total.amount}}元</view>
               <view class="sales-amount" >团队预计奖金：{{sales_total.divide}}元</view>

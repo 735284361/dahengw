@@ -1,4 +1,4 @@
-var request = require('../../utils/request.js');
+var request = require('../../../utils/request.js');
 var app = getApp();
 Page({
   data: {
@@ -85,89 +85,6 @@ Page({
     wx.navigateTo({
       url: "/pages/wuliu/index?id=" + orderId
     })
-  },
-  confirmBtnTap: function (e) {
-    var that = this;
-    var orderId = e.currentTarget.dataset.id;
-    wx.showModal({
-      title: '确认您已收到商品？',
-      content: '',
-      success: function (res) {
-        if (res.confirm) {
-          wx.showLoading();
-          debugger
-          request.$get({
-            url: 'order/confirm',
-            data: {
-              orderId: orderId
-            },
-            success: (res) => {
-              if (res.data.code == 0) {
-                that.onShow();
-              }
-            },
-            complete: function() {
-              wx.hideLoading({
-                complete: (res) => {},
-                fail: (res) => {},
-                success: (res) => {},
-              })
-            }
-          })
-        }
-      }
-    })
-  },
-  submitReputation: function (e) {
-    var that = this;
-    var postJsonString = {};
-    postJsonString.orderId = this.data.orderId;
-    var reputations = [];
-    var i = 0;
-    while (e.detail.value["orderGoodsId" + i]) {
-      var orderGoodsId = e.detail.value["orderGoodsId" + i];
-      var orderGoodsName = e.detail.value["orderGoodsName" + i];
-      var goodReputation = that.data.score[i];
-      var goodReputationRemark = e.detail.value["goodReputationRemark" + i];
-      if (!goodReputation || goodReputation <= 0) {
-        wx.showModal({
-          title: '评分不能为空',
-          content: '请对"' + orderGoodsName + '"进行评分',
-        })
-        return
-      }
-
-      var reputations_json = {};
-      reputations_json.id = orderGoodsId;
-      reputations_json.reputation = goodReputation;
-      reputations_json.remark = goodReputationRemark;
-
-      reputations.push(reputations_json);
-      i++;
-    }
-    postJsonString.reputations = reputations;
-    wx.showLoading();
-    request.$post({
-      url: 'order/reputation',
-      method: 'POST',
-      data: {
-        postJsonString: JSON.stringify(postJsonString)
-      },
-      success: (res) => {
-        wx.hideLoading();
-        if (res.data.code == 0) {
-          that.onShow();
-        }
-      }
-    })
-  },
-  setScore: function(event){
-    var score = event.currentTarget.dataset.score
-    var id = event.currentTarget.dataset.id
-    let data = this.data.score
-    data[id] = score
-    this.setData({ score: data})
-    console.log(this.data.score)
   },
   updateStatusSteps: function (orderDetail) {
     var that = this

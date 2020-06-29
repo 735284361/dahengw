@@ -85,10 +85,6 @@ Page({
     });
   },
 
-  onShareAppMessage: function () {
-    
-  },
-
   getCode: function () {
     var that = this;
     request.$get({

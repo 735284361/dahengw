@@ -27,7 +27,7 @@ page {
   position: absolute;
 }
 .search .gren-color {
-  color:#7bcbcc;
+  color:#f7e2a2;
 }
 .search .asc {
   top: 19rpx;
@@ -57,12 +57,9 @@ page {
 }
 .wxc-btn {
   display: flex;
-  height: 50rpx;
-  width:119rpx;
   background: #fff;
-  border:1px solid #ccc;
-  border-radius: 10rpx;
-  padding:5rpx 10rpx;
+  border-radius: 25rpx;
+  padding:0rpx 20rpx;
   margin-left:10rpx;
   align-items: center;
   justify-content: left;
@@ -165,7 +162,7 @@ page {
   opacity: 0.7;
 }
 .search-box .label._isSelected {
-  background: #7bcbcc;
+  background: #f7e2a2;
 }
 .search-box .label .triange {
   position: absolute;
@@ -177,7 +174,7 @@ page {
   border-width: 26rpx;
   font-size: 28rpx;
   color: #000;
-  border-color:transparent #057678 #057678 transparent;
+  border-color:transparent #f7e2a2 #f7e2a2 transparent;
 }
 .search-box .label .label-icon {
   position: absolute;
@@ -201,7 +198,7 @@ page {
   color: rgb(77, 76, 76);
 }
 .ser-bottom .confirm {
-  background: #7bcbcc;
+  background: #f7e2a2;
   color: #fff;
 }
 .picker-box {
@@ -222,7 +219,7 @@ page {
   text-align: left;
 }
 .picker-box .confir{
-  color:#7bcbcc;
+  color:#f7e2a2;
   text-align: right;
 }
 .picker-box .picker-top {
@@ -239,7 +236,7 @@ page {
   border-bottom: 1px solid #ccc;
 }
 .border-bottom {
-  border-bottom: 1px solid #7bcbcc;
+  border-bottom: 1px solid #f7e2a2;
 }
 .picker-box .picker-top .text {
   margin: 0 38rpx;
@@ -271,8 +268,19 @@ page {
   font-size: 26rpx;
   color: #d1cece;
 }
+
 .date-tip {
-  font-size: 26rpx;
-  margin: 10rpx 0 10rpx 10rpx;
-  color: rgb(128, 128, 128);
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+
+.saixuan-txt {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+
+.saixuan-icon {
+  font-size:28rpx;
+  margin-left:8rpx;
+  line-height: 60rpx;
 }

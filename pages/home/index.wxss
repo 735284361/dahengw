@@ -125,8 +125,9 @@ page {
 }
 
 .icon-container {
-  height: 400rpx;
   padding:0rpx 30rpx;
+  width: 100%;
+  overflow: hidden;
 }
 
 .icon-box view:nth-child(5n) {
@@ -134,7 +135,8 @@ page {
 }
 
 .icon-box {
-  margin: 30rpx 15rpx 5rpx 15rpx;
+  text-align: center;
+  margin: 20rpx 15rpx 0rpx 15rpx;
   float: left;
 }
 
@@ -152,16 +154,19 @@ page {
 }
 
 .nav-box {
+  float: none;
   padding: 20rpx;
   height: 50rpx;
   line-height: 50rpx;
   background: #fff;
+  margin-top: 20rpx;
 }
 
 .icon-style{
   float: left;
   display: block;
   font-size: 28rpx;
+  color: #d81e06;
 }
 
 .nav-more {

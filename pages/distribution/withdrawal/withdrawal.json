@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "申请提现",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "wxc-icon": "../../../dist/packages/@minui/wxc-icon/dist/index",
-    "wxc-label": "../../../dist/packages/@minui/wxc-label/dist/index",
-    "wxc-input": "../../../dist/packages/@minui/wxc-input/dist/index"
-  }
-}

@@ -54,8 +54,8 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: wx.getStorageSync('mallName') + '——' + app.globalData.shareProfile,
-      path: '/pages/finder/index',
+      title: wx.getStorageSync('mallName') + ':' + app.globalData.shareProfile,
+      path: '/pages/home/index',
       success: function (res) {
         // 转发成功
       },
@@ -69,6 +69,13 @@ Page({
     // that.getRGshow()
   },
 
+  onPullDownRefresh: function() {
+    var that = this
+    wx.showNavigationBarLoading()
+    that.onLoad()
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
   //事件处理函数
   swiperchange: function (e) {
     //console.log(e.detail.current)
@@ -79,6 +86,13 @@ Page({
 
   getCurrentGoodsList: function () {
     var that = this;
+    wx.showLoading({
+      title: '加载中...',
+      complete: (res) => {},
+      fail: (res) => {},
+      mask: true,
+      success: (res) => {},
+    })
     request.$get({
       url: 'shop/goods/list',
       data: {
@@ -105,6 +119,7 @@ Page({
         that.setData({
           loadingMore: false,
         })
+        wx.hideLoading()
       }
     })
   },

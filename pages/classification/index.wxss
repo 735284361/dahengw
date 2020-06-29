@@ -151,7 +151,7 @@ page {
   color: grey;
   font-size: 22rpx;
   line-height: 30rpx;
-  background: rgba(105, 195, 170, 0.3);
+  background: #f7e2a2;
 }
 
 .goods-container .goods {

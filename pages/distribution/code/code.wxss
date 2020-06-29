@@ -7,34 +7,27 @@ page {
   height: 100%;
   /* background: #ccc; */
 }
-.saveBtn {
-  width: 80%;
-  height: 80rpx;
-  position: absolute;
-  line-height: 80rpx;
-  text-align: center;
-  bottom:100rpx; 
-  border-radius: 6rpx;
-  box-sizing: border-box;
+.save-btn {
+  width: 60%;
 }
 
 .main .img-box {
-  margin-top: 20rpx;
+  margin-top: 100rpx;
   align-items: center;
   justify-content: center;
 }
 .main .img {
   width: 640rpx;
-  height: 1000rpx;
+  height: 640rpx;
 }
+
 .tip {
-  margin: 200rpx auto;
-  width: 60%;
+  margin: 180rpx auto;
   text-align: center;
   font-size: 35rpx;
-}
-.tip .margin-20 {
-  display: block;
-  margin: 20rpx;
-  padding: 0 30rpx;
+  position:fixed;
+  bottom:0;
+  display:flex;
+  width:100%;
+  justify-content:center;
 }

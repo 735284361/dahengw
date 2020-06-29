@@ -11,7 +11,7 @@ Page({
     cash_in: 0,
     score_sign_continuous: 0,
     iconSize: 45,
-    iconColor: '#999999',
+    iconColor: '#666666',
     canViewAgent: 0,
     shopLogo:null
   },
@@ -130,42 +130,49 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
-  // getPhoneNumber: function (e) {
-  //   if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
-  //     console.log(e.detail.errMsg)
-  //     wx.showModal({
-  //       title: '提示',
-  //       content: '无法获取手机号码',
-  //       showCancel: false
-  //     })
-  //     return;
-  //   }
-  //   var that = this;
-  //   wx.request({
-  //     url: '' + app.globalData.subDomain + '/user/wxapp/bindMobile',
-  //     data: {
-  //       token: wx.getStorageSync('token'),
-  //       encryptedData: e.detail.encryptedData,
-  //       iv: e.detail.iv
-  //     },
-  //     success: function (res) {
-  //       if (res.data.code == 0) {
-  //         wx.showToast({
-  //           title: '绑定成功',
-  //           icon: 'success',
-  //           duration: 2000
-  //         })
-  //         that.getUserApiInfo();
-  //       } else {
-  //         wx.showModal({
-  //           title: '提示',
-  //           content: '绑定失败',
-  //           showCancel: false
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
+
+  
+  getPhoneNumber (e) {
+    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
+      console.log(e.detail.errMsg)
+      wx.showModal({
+        title: '提示',
+        content: '无法获取手机号码',
+        showCancel: false
+      })
+      return;
+    }
+    var that = this;
+    let iv = e.detail.iv
+    let encryptedData = e.detail.encryptedData
+    wx.login({
+      success: function (res) {
+        let code = res.code; 
+        request.$get({
+          url: 'wechat/bindPhone',
+          data: { code: code, encryptedData: encryptedData, iv: iv }, // 设置请求的 参数
+          success: (res) => {
+            console.log(res)
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '绑定成功',
+                icon: 'success',
+                duration: 2000
+              })
+              that.getUserApiInfo();
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: res.data.msg,
+                showCancel: false
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  
   // getUserApiInfo: function () {
   //   var that = this;
   //   request.$get({

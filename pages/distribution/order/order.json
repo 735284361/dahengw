@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "分销订单",
+  "navigationBarTitleText": "顾客订单",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "wxc-abnor": "../../../dist/packages/@minui/wxc-abnor/dist/index",
